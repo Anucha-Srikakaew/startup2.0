@@ -28,7 +28,7 @@
                 <div style="background:transparent !important" class="jumbotron">
                     <a class="text-dark" href="http://43.72.52.52/startup2.0/visual.php?BIZ=AC">
                         <h1><b>AC</b></h1>
-                        <h6>AUTOMOTIVE CAMERA</h6>
+                        <h4>AUTOMOTIVE CAMERA</h4>
                     </a>
                 </div>
 
@@ -37,7 +37,7 @@
                 <div style="background:transparent !important" class="jumbotron">
                     <a class="text-dark" href="http://43.72.52.52/startup2.0/visual.php?BIZ=AU">
                         <h1><b>AU</b></h1>
-                        <h6>AUDIO PRODUCTION</h6>
+                        <h4>AUDIO PRODUCTION</h4>
                     </a>
                 </div>
             </div>
@@ -56,17 +56,30 @@
                 <div style="background:transparent !important" class="jumbotron">
                     <a class="text-dark" href="http://43.72.52.56/startup2.0/visual.php?BIZ=LENS">
                         <h1><b>LENS</b></h1>
-                        <h6>LENS PRODUCTION</h6>
+                        <h4>LENS PRODUCTION</h4>
                     </a>
                 </div>
 
                 <br><br>
 
                 <div style="background:transparent !important" class="jumbotron">
-                    <a class="text-dark" href="http://43.72.52.51/startup2.0/visual.php?BIZ=IM">
-                        <h1><b>IM</b></h1>
-                        <h6>IM PRODUCTION</h6>
-                    </a>
+                    <div class="row justify-content-lg-center">
+                        <div class="col">
+                            <a class="text-dark" href="visual.html?COUNTRY=TH&FACTORY=STTC&BIZ=IM">
+                                <h1><b>STTC</b></h1>
+                            </a>
+                        </div>
+                        <div class="col">
+                            <a class="text-dark" href="visual.html?COUNTRY=TH&FACTORY=STTB&BIZ=IM">
+                                <h1><b>STTB</b></h1>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg">
+                            <h4>IM PRODUCTION</h4>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -98,7 +111,7 @@
             <div class="row">
 
                 <div class="col-sm-4 mx-auto">
-                    <h6>VERSION 2.00 (target version)</h6>
+                    <h4>VERSION 2.00 (target version)</h4>
                 </div>
                 <div class="col-sm-8 mx-auto">
                     <p>
@@ -107,7 +120,7 @@
                 </div>
 
                 <div class="col-sm-4 mx-auto">
-                    <h6>VERSION 1.18</h6>
+                    <h4>VERSION 1.18</h4>
                 </div>
                 <div class="col-sm-8 mx-auto">
                     <p>
@@ -117,7 +130,7 @@
                 </div>
 
                 <div class="col-sm-4 mx-auto">
-                    <h6>VERSION 1.15</h6>
+                    <h4>VERSION 1.15</h4>
                 </div>
                 <div class="col-sm-8 mx-auto">
                     <p>
@@ -126,7 +139,7 @@
                 </div>
 
                 <div class="col-sm-4 mx-auto">
-                    <h6>VERSION 1.14</h6>
+                    <h4>VERSION 1.14</h4>
                 </div>
                 <div class="col-sm-8 mx-auto">
                     <p>
@@ -136,7 +149,7 @@
                 </div>
 
                 <div class="col-sm-4 mx-auto">
-                    <h6>VERSION 1.13</h6>
+                    <h4>VERSION 1.13</h4>
                 </div>
                 <div class="col-sm-8 mx-auto">
                     <p>
@@ -147,7 +160,7 @@
                 </div>
 
                 <div class="col-sm-4 mx-auto">
-                    <h6>VERSION 1.12</h6>
+                    <h4>VERSION 1.12</h4>
                 </div>
                 <div class="col-sm-8 mx-auto">
                     <p>
@@ -156,7 +169,7 @@
                 </div>
 
                 <div class="col-sm-4 mx-auto">
-                    <h6>VERSION 1.11</h6>
+                    <h4>VERSION 1.11</h4>
                 </div>
                 <div class="col-sm-8 mx-auto">
                     <p>
@@ -166,7 +179,7 @@
                 </div>
 
                 <div class="col-sm-4 mx-auto">
-                    <h6><a class="text-dark" href="http://43.72.52.52/startup">VERSION 1.0</a></h6>
+                    <h4><a class="text-dark" href="http://43.72.52.52/startup">VERSION 1.0</a></h4>
                 </div>
                 <div class="col-sm-8 mx-auto">
                     <p>
@@ -187,7 +200,7 @@
                     <div class="text-center">
                         <div style="background:transparent !important" class="jumbotron">
                             <h2>
-                            <a class="text-dark" href="http://43.72.52.52/system">MORE PROJECT</a>
+                                <a class="text-dark" href="http://43.72.52.52/system">MORE PROJECT</a>
                             </h2>
                         </div>
                     </div>
@@ -202,7 +215,6 @@
     <section>
         <div class="footer">
             <p class="m-0 text-center text-dark">STARTUP 2.0 | ATPE Department | <a class="text-dark" href="http://43.72.52.52/system">SYSTEM TEAM</a> &copy; COPYRIGHT (C) Sony Technology (Thailand) Co., Ltd. </p>
-
         </div>
     </section>
 

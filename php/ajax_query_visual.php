@@ -20,44 +20,14 @@ function getStartAndEndDate($year, $week)
     return $return;
 }
 
-function searchForIdCon1($id, $array)
+function searchForId($id, $array, $masterKey)
 {
     foreach ($array as $key => $val) {
-        if ($val['CONFIRM1'] === $id) {
+        if ($val[$masterKey] === $id) {
             return $key;
         }
     }
-    return null;
-}
-
-function searchForIdCon2($id, $array)
-{
-    foreach ($array as $key => $val) {
-        if ($val['CONFIRM2'] === $id) {
-            return $key;
-        }
-    }
-    return null;
-}
-
-function searchForIdCon3($id, $array)
-{
-    foreach ($array as $key => $val) {
-        if ($val['CONFIRM3'] === $id) {
-            return $key;
-        }
-    }
-    return null;
-}
-
-function searchForIdStatus($id, $array)
-{
-    foreach ($array as $key => $val) {
-        if ($val['STATUS'] === $id) {
-            return $key;
-        }
-    }
-    return null;
+    return '';
 }
 
 $response = array(
@@ -108,47 +78,69 @@ FROM `startup_line`
 WHERE `COUNTRY` = '$COUNTRY' AND `FACTORY` = '$FACTORY' AND `BIZ` = '$BIZ'
 ORDER BY `LINE` ASC ";
 $objQuery = mysqli_query($con, $strSQL);
-while ($objResult = mysqli_fetch_array($objQuery)) {
-    $LINE = $objResult["LINE"];
-    $TYPE = $objResult["TYPE"];
-    $WHERE_STARTUP = "AND `PERIOD` = '$PERIOD' AND `LINE` = '$LINE' AND `SHIFT_DATE` BETWEEN '$start_date' AND '$end_date'";
-    $WHERE_STARTUP2 = "`PERIOD` = '$PERIOD' AND `LINE` = '$LINE' AND `SHIFT_DATE` BETWEEN '$start_date' AND '$end_date'";
-    $sql = "SELECT `LINE`,`LastUpdate`,`SHIFT_DATE`,`VALUE1`,
-            (SELECT COUNT(`ID`) FROM `$tbl_item` WHERE `JUDGEMENT` LIKE 'PASS' $WHERE_STARTUP) AS PASS,
-            (SELECT COUNT(`ID`) FROM `$tbl_item` WHERE `JUDGEMENT` LIKE 'FAIL' $WHERE_STARTUP) AS FAIL,
-            (SELECT COUNT(`ID`) FROM `$tbl_item` WHERE `JUDGEMENT` LIKE 'BLANK' $WHERE_STARTUP) AS BLANK,
-            (SELECT COUNT(`ID`) FROM `$tbl_item` WHERE `JUDGEMENT` LIKE '' $WHERE_STARTUP) AS 'NULL',
-            COUNT(`ID`) AS TOTAL
+$arrQueryLineName = mysqli_fetch_all($objQuery, MYSQLI_ASSOC);
+
+$WHERE_STARTUP = "`PERIOD` = '$PERIOD' AND `SHIFT_DATE` BETWEEN '$start_date' AND '$end_date'";
+
+$sql = "SELECT `$tbl_item`.`LINE`,`$tbl_item`.`LastUpdate`,`$tbl_item`.`SHIFT_DATE`,`$tbl_item`.`VALUE1`,Tbl1.`PASS`,Tbl2.`FAIL`,Tbl3.`BLANK`,Tbl4.`NULL`, COUNT(`ID`) AS TOTAL
             FROM `$tbl_item`
-            WHERE $WHERE_STARTUP2
+                LEFT JOIN (SELECT `LINE`, COUNT(`ID`) AS `PASS` FROM `$tbl_item` WHERE `JUDGEMENT` LIKE 'PASS' AND $WHERE_STARTUP GROUP BY `LINE`) AS Tbl1 ON `$tbl_item`.`LINE` = Tbl1.`LINE`
+                LEFT JOIN  (SELECT `LINE`, COUNT(`ID`) AS `FAIL` FROM `$tbl_item` WHERE `JUDGEMENT` LIKE 'FAIL' AND $WHERE_STARTUP GROUP BY `LINE`) AS Tbl2 ON `$tbl_item`.`LINE` = Tbl2.`LINE`
+                LEFT JOIN  (SELECT `LINE`, COUNT(`ID`) AS `BLANK` FROM `$tbl_item` WHERE `JUDGEMENT` LIKE 'BLANK' AND $WHERE_STARTUP GROUP BY `LINE`) AS Tbl3 ON `$tbl_item`.`LINE` = Tbl3.`LINE`
+                LEFT JOIN (SELECT `LINE`, COUNT(`ID`) AS `NULL` FROM `$tbl_item` WHERE `JUDGEMENT` LIKE '' AND $WHERE_STARTUP GROUP BY `LINE`) AS Tbl4 ON `$tbl_item`.`LINE` = Tbl4.`LINE`
+            WHERE $WHERE_STARTUP
             GROUP BY `LINE`
             ORDER BY `SHIFT_DATE` DESC";
-    $query = mysqli_query($con, $sql);
-    $row = mysqli_fetch_array($query, MYSQLI_ASSOC);
+$query = mysqli_query($con, $sql);
+$rowItem = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
-    $PASS = intval($row['PASS']);
-    $TOTAL = intval($row['TOTAL']);
+$sql = "SELECT `LINE`, `CONFIRM1`,`CONFIRM2`,`CONFIRM3`, `STATUS`
+            FROM `$tbl_time` 
+            WHERE $WHERE_STARTUP
+            ORDER BY ID DESC";
+$query = mysqli_query($con, $sql);
+$rowTime = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
-    if ($TYPE == 'PRODUCTION') {
-        $link = '<a href="visual_line.php?LINE=' . $LINE . '&DATE=' . $SHIFT_DATE . '&SHIFT=' . $SHIFT . '&DATE_SHIFT=' . $SHIFT_DATE . '&BIZ=' . $BIZ . '&PERIOD=' . $PERIOD . '" class="text-dark"><h4><b>' . $LINE . '</b></h4></a>';
+$sql = "SELECT DISTINCT `LINE`
+        FROM `item` 
+        WHERE `PERIOD` = '$PERIOD'
+        ORDER BY ID DESC";
+$query = mysqli_query($con, $sql);
+$rowItemMaster = mysqli_fetch_all($query, MYSQLI_ASSOC);
+
+foreach ($arrQueryLineName as $objResult) {
+    $LINE = $objResult["LINE"];
+    $TYPE = $objResult["TYPE"];
+    $keyItem = searchForId($LINE, $rowItem, 'LINE');
+    $keyTime = searchForId($LINE, $rowTime, 'LINE');
+
+    if ($keyTime != '') {
+        $arrDataTime = $rowTime[$keyTime];
     } else {
-        $link = '<a href="visual_center.php?CENTER=' . $LINE . '&BIZ=' . $BIZ . '&PERIOD=' . $PERIOD . '" class="text-dark"><h4><b>' . $LINE . '</b></h4></a>';
+        $arrDataTime = array('LINE' => '', 'CONFIRM1' => '', 'CONFIRM2' => '', 'CONFIRM3' => '', 'STATUS' => '');
     }
 
-    $sql = "SELECT `CONFIRM1`,`CONFIRM2`,`CONFIRM3`, `STATUS`
-            FROM `$tbl_time` 
-            WHERE $WHERE_STARTUP2
-            ORDER BY ID DESC";
-    $query = mysqli_query($con, $sql);
-    $row = mysqli_fetch_all($query, MYSQLI_ASSOC);
+    if ($keyItem != '') {
+        $PASS = intval($rowItem[$keyItem]['PASS']);
+        $TOTAL = intval($rowItem[$keyItem]['TOTAL']);
+    } else {
+        $PASS = 0;
+        $TOTAL = 0;
+    }
 
-    if (searchForIdStatus('NO PRODUCTION', $row) === null) {
+    if ($TYPE == 'PRODUCTION') {
+        $link = '<a href="visual_line.php?COUNTRY=' . $COUNTRY . '&FACTORY=' . $FACTORY . '&BIZ=' . $BIZ . '&CENTER=&LINE=' . $LINE . '&START_DATE=' . $start_date . '&END_DATE=' . $end_date . '&SHIFT=' . $SHIFT . '&PERIOD=' . $PERIOD . '"><h4><b>' . $LINE . '</b></h4></a>';
+    } else {
+        $link = '<a href="visual_center.php?CENTER=' . $LINE . '&BIZ=' . $BIZ . '&PERIOD=' . $PERIOD . '"><h4><b>' . $LINE . '</b></h4></a>';
+    }
+
+    if ($arrDataTime['STATUS'] != "NO PRODUCTION") {
         if ($TOTAL != 0) {
-            if (searchForIdCon1("", $row) === null && $PASS == $TOTAL) {
+            if ($arrDataTime['CONFIRM1'] != '' && $PASS == $TOTAL) {
                 $status = '<p><img src="framework/img/Glight.png" width="50"></p>';
-                if (searchForIdCon2("", $row) === null) {
+                if ($arrDataTime['CONFIRM2'] != '') {
                     $status = '<p><img src="framework/img/Glight.png" width="50"></p>';
-                    if (searchForIdCon3("", $row) === null) {
+                    if ($arrDataTime['CONFIRM3'] != '') {
                         $status = '<p><img src="framework/img/Glight.png" width="50"></p>';
                         $status .= '<p>GOOD</p>';
                     } else {
@@ -160,42 +152,29 @@ while ($objResult = mysqli_fetch_array($objQuery)) {
                     $status .= '<p>SUPERVISIOR</p>';
                 }
             } else {
-                $sql = "SELECT `CONFIRM1`,`CONFIRM2`,`CONFIRM3`, `STATUS`
-                FROM `$tbl_time` 
-                WHERE $WHERE_STARTUP2
-                ORDER BY ID DESC";
-                $query = mysqli_query($con, $sql);
-                $row = mysqli_fetch_all($query, MYSQLI_ASSOC);
-
                 $status = '<p><img src="framework/img/Ylight.png" width="50"></p>';
                 $status .= '<p>TECHNICIAN</p>';
             }
         } else {
-            $sql = "SELECT `ID`
-                    FROM `item` 
-                    WHERE `LINE` = '$LINE' AND `PERIOD` = '$PERIOD'
-                    ORDER BY ID DESC";
-            $query = mysqli_query($con, $sql);
-            $row = mysqli_fetch_array($query, MYSQLI_ASSOC);
 
-            if (isset($row)) {
-                $PASS = '-';
-                $TOTAL = '-';
+            if (searchForId($LINE, $rowItemMaster, 'LINE') != '') {
+                $PASS = '--';
+                $TOTAL = '--';
                 $status = '<p><img src="framework/img/Rlight.png" width="50"></p>';
                 $status .= '<p>****</p>';
-                $TOTAL = '<b class="text-secondary">NO STARTUP</b>';
+                $TOTAL = '<h4 class="text-secondary">NO STARTUP</h4>';
             } else {
-                $PASS = '-';
-                $TOTAL = '-';
+                $PASS = '--';
+                $TOTAL = '--';
                 $status = '<p><img src="framework/img/Rlight.png" width="50"></p>';
                 $status .= '<p>****</p>';
-                $TOTAL = '<b class="text-secondary">NO ITEM</b>';
+                $TOTAL = '<h4 class="text-secondary">NO ITEM</h4>';
             }
         }
     } else {
         $status = '<p><img src="framework/img/Wlight.png" width="50"></p>';
         $status .= '<p>****</p>';
-        $TOTAL = '<b class="text-secondary">NO PRODUCTION</b>';
+        $TOTAL = '<h4 class="text-secondary">NO PRODUCTION</h4>';
     }
 
     if ($i % 2 == 0 && $i > 0) {

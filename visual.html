@@ -3,61 +3,23 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible"
-        content="IE=edge">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
 
     <title>STARTUP CHECK</title>
+    <link rel="icon" href="framework/img/SMART_LOGO.png" type="image/png" sizes="16x16">
 
-    <!-- datatable -->
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet"
-        href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="framework/newVersion/dataTables/css/bootstrap.min.css">
+    <link rel="stylesheet" href="framework/newVersion/dataTables/css/dataTables.bootstrap5.min.css">
 
-    <link rel="icon"
-        href="framework/img/SMART_LOGO.png"
-        type="image/png"
-        sizes="16x16">
+    <!-- Bootstrap5 -->
+    <link href="framework/newVersion/Bootstrap5/css/bootstrap.min.css">
 
-    <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
-
-    <script src="framework/js/a076d05399.js"></script>
-
-    <style>
-        html,
-        body {
-            background-color: #f2f2f2;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        .se-pre-con {
-            position: fixed;
-            left: 0px;
-            top: 0px;
-            width: 100%;
-            height: 100%;
-            z-index: 9999;
-            background: url(framework/img/Preloader.gif) center no-repeat #fff;
-        }
-
-        td,
-        th {
-            text-align: center;
-            vertical-align: middle
-        }
-    </style>
+    <link rel="stylesheet" href="css/visual.css">
+    <link rel="stylesheet" href="css/main.css">
 
 </head>
 
@@ -67,40 +29,25 @@
     <section>
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark shadow">
             <div class="container-fluid">
-                <a class="navbar-brand"
-                    href="http://43.72.52.52/system/">SONY</a>
-                <button class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
+                <a class="navbar-brand" href="http://43.72.52.52/system/">SONY</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse"
-                    id="navbarSupportedContent">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active"
-                                aria-current="page"
-                                href="index.php">Home</a>
+                            <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                         </li>
                     </ul>
                     <form class="d-flex">
-                        <a class="text-light me-2"
-                            href="#"
-                            id="login">
+                        <a class="text-light me-2" href="#" id="login">
                         </a>
-                        <img src="http://43.72.228.147/attend/img_opt/22164429.jpg"
-                                alt=""
-                                class="rounded-circle"
-                                width="35"
-                                height="35">&nbsp; &nbsp;
-                        <img src="http://43.72.228.147/smart/pages/assets/media/internal/internal3.png"
-                                alt=""
-                                width="110"
-                                height="25">
+                        <img src="http://43.72.228.147/attend/img_opt/22164429.jpg" alt="" class="rounded-circle"
+                            width="35" height="35">&nbsp; &nbsp;
+                        <img src="http://43.72.228.147/smart/pages/assets/media/internal/internal3.png" alt=""
+                            width="110" height="25">
                     </form>
                 </div>
             </div>
@@ -112,8 +59,8 @@
     <section>
         <div class="container-fluid">
             <div class="text-center">
-                <h1><b class="animated fadeInDown"><a style="color:black;"
-                            href="index.php">SMART STARTUP CHECK</a></b></h1>
+                <h1><b class="animated fadeInDown"><a href="index.php">SMART STARTUP CHECK</a></b>
+                </h1>
                 <p class="lead">startup result update.</p>
 
                 <div class="container">
@@ -123,70 +70,48 @@
                                 <div class="col-12">
                                     <div class="row">
                                         <div class="col">
-                                            <div class="btn-group form-control shadow-sm border-light"
-                                                role="group"
+                                            <div class="btn-group form-control shadow-sm border-light" role="group"
                                                 aria-label="Basic radio toggle button group">
-                                                <input id="partPeriodSHIFT"
-                                                    value="SHIFT"
-                                                    type="radio"
-                                                    class="btn-check"
-                                                    name="btnradio"
-                                                    autocomplete="off">
+                                                <input id="partPeriodSHIFT" value="SHIFT" type="radio" class="btn-check"
+                                                    name="btnradio" autocomplete="off">
                                                 <label class="btn btn-outline-primary border-light"
                                                     for="partPeriodSHIFT">SHIFT</label>
 
-                                                <input id="partPeriodDAY"
-                                                    value="DAY"
-                                                    type="radio"
-                                                    class="btn-check"
-                                                    name="btnradio"
-                                                    autocomplete="off">
+                                                <input id="partPeriodDAY" value="DAY" type="radio" class="btn-check"
+                                                    name="btnradio" autocomplete="off">
                                                 <label class="btn btn-outline-primary border-light"
                                                     for="partPeriodDAY">DAILY</label>
 
-                                                <input id="partPeriodWEEK"
-                                                    value="WEEK"
-                                                    type="radio"
-                                                    class="btn-check"
-                                                    name="btnradio"
-                                                    autocomplete="off">
+                                                <input id="partPeriodWEEK" value="WEEK" type="radio" class="btn-check"
+                                                    name="btnradio" autocomplete="off">
                                                 <label class="btn btn-outline-primary border-light"
                                                     for="partPeriodWEEK">WEEKLY</label>
                                             </div>
                                         </div>
                                         <div class="col">
-                                            <div id="boxShift"
-                                                class="btn-group form-control border-light shadow-sm"
-                                                role="group"
-                                                aria-label="Basic radio toggle button group">
-                                                <input name="SHIFT_DATE"
-                                                    id="SHIFT_DATE"
-                                                    type="date"
-                                                    class="form-control text-center border-light">
-                                                <select name="SHIFT"
-                                                    id="SHIFT"
-                                                    class="form-control text-center border-light">
+                                            <div id="boxShift" class="btn-group form-control border-light shadow-sm"
+                                                role="group" aria-label="Basic radio toggle button group">
+                                                <input name="SHIFT_DATE" id="SHIFT_DATE" type="date"
+                                                    class="form-control text-center border-light"
+                                                    aria-labelledby="boxShift">
+                                                <select name="SHIFT" id="SHIFT"
+                                                    class="form-control text-center border-light"
+                                                    aria-labelledby="boxShift">
                                                     <option value="DAY">DAY</option>
                                                     <option value="NIGHT">NIGHT</option>
                                                 </select>
                                             </div>
-                                            <div id="boxDaily"
-                                                class="btn-group form-control border-light shadow-sm"
-                                                role="group"
-                                                aria-label="Basic radio toggle button group">
-                                                <input name="DAY"
-                                                    id="DAY"
-                                                    type="date"
-                                                    class="form-control text-center border-light">
+                                            <div id="boxDaily" class="btn-group form-control border-light shadow-sm"
+                                                role="group" aria-label="Basic radio toggle button group">
+                                                <input name="DAY" id="DAY" type="date"
+                                                    class="form-control text-center border-light"
+                                                    aria-labelledby="boxDaily">
                                             </div>
-                                            <div id="boxWeekly"
-                                                class="btn-group form-control border-light shadow-sm"
-                                                role="group"
-                                                aria-label="Basic radio toggle button group">
-                                                <input name="WEEK"
-                                                    id="WEEK"
-                                                    type="week"
-                                                    class="form-control text-center border-light">
+                                            <div id="boxWeekly" class="btn-group form-control border-light shadow-sm"
+                                                role="group" aria-label="Basic radio toggle button group">
+                                                <input name="WEEK" id="WEEK" type="week"
+                                                    class="form-control text-center border-light"
+                                                    aria-labelledby="boxWeekly">
                                             </div>
                                         </div>
                                     </div>
@@ -204,27 +129,17 @@
     <section>
         <div class="container bg-light shadow-sm"><br>
             <div class="table-responsive">
-                <table id="example"
-                    class="table table-striped table-bordered table-hover"
-                    style="width:100%">
+                <table id="example" class="table table-hover table-bordered" style="width:100%">
                     <thead class="table-dark text-light">
                         <tr>
-                            <th width="20%"
-                                class="text-center">LINE</th>
-                            <th width="10%"
-                                class="text-center">PASS</th>
-                            <th width="10%"
-                                class="text-center">TOTAL</th>
-                            <th width="10%"
-                                class="text-center">STATUS</th>
-                            <th width="20%"
-                                class="text-center">LINE</th>
-                            <th width="10%"
-                                class="text-center">PASS</th>
-                            <th width="10%"
-                                class="text-center">TOTAL</th>
-                            <th width="10%"
-                                class="text-center">STATUS</th>
+                            <th width="20%" class="text-center">LINE</th>
+                            <th width="10%" class="text-center">PASS</th>
+                            <th width="10%" class="text-center">TOTAL</th>
+                            <th width="10%" class="text-center">STATUS</th>
+                            <th width="20%" class="text-center">LINE</th>
+                            <th width="10%" class="text-center">PASS</th>
+                            <th width="10%" class="text-center">TOTAL</th>
+                            <th width="10%" class="text-center">STATUS</th>
                         </tr>
                     </thead>
                 </table>
@@ -232,194 +147,24 @@
         </div>
     </section>
     <br><br>
-    <input type="hidden"
-        id="First">
+    <input type="hidden" id="First">
 </body>
 
 </html>
+<!-- datatable -->
+<script src="framework/newVersion/dataTables/js/jquery-3.5.1.js"></script>
+<script src="framework/newVersion/dataTables/js/jquery.dataTables.min.js"></script>
+<script src="framework/newVersion/dataTables/js/dataTables.bootstrap5.min.js"></script>
 
-<script>
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    var COUNTRY = urlParams.get('COUNTRY')
-    var FACTORY = urlParams.get('FACTORY')
-    var BIZ = urlParams.get('BIZ')
-    var PERIOD = urlParams.get('PERIOD')
-    var SHIFT_DATE = urlParams.get('SHIFT_DATE')
-    var SHIFT = urlParams.get('SHIFT')
-    var DAY = urlParams.get('DAY')
-    var WEEK = urlParams.get('WEEK')
+<!-- Bootstrap5 -->
+<script src="framework/newVersion/Bootstrap5/js/bootstrap.bundle.min.js"></script>
+<script src="framework/newVersion/Bootstrap5/js/popper.min.js"></script>
+<script src="framework/newVersion/Bootstrap5/js/bootstrap.min.js"></script>
 
+<!-- icon -->
+<script src="framework/js/a076d05399.js"></script>
 
-    if (COUNTRY == '' || COUNTRY == null) {
-        COUNTRY = 'TH'
-    }
-
-    if (FACTORY == '' || FACTORY == null) {
-        FACTORY = 'STTC'
-    }
-
-    if (BIZ == '' || BIZ == null) {
-        BIZ = 'IM'
-    }
-
-    if (PERIOD == '' || PERIOD == null) {
-        PERIOD = 'SHIFT'
-    }
-
-    if (SHIFT_DATE == '' || SHIFT_DATE == null) {
-        SHIFT_DATE = formatDate()
-    }
-
-    if (SHIFT == '' || SHIFT == null) {
-        SHIFT = 'DAY'
-    }
-
-    if (DAY == '' || DAY == null) {
-        DAY = formatDate()
-    }
-
-    if (WEEK == '' || WEEK == null) {
-        currentDate = new Date();
-        startDate = new Date(currentDate.getFullYear(), 0, 1);
-        var days = Math.floor((currentDate - startDate) / (24 * 60 * 60 * 1000));
-        var weekNumber = Math.ceil(days / 7);
-        var year = DAY.split('-')[0]
-        var month = DAY.split('-')[1]
-
-        WEEK = year + "-W" + weekNumber
-    }
-
-    $("#boxShift").hide()
-    $("#boxDaily").hide()
-    $("#boxWeekly").hide()
-
-    var dataSearch = {
-        'COUNTRY': COUNTRY,
-        'FACTORY': FACTORY,
-        'BIZ': BIZ,
-        'PERIOD': PERIOD,
-        'SHIFT_DATE': SHIFT_DATE,
-        'SHIFT': SHIFT,
-        'DAY': DAY,
-        'WEEK': WEEK
-    }
-
-    if (dataSearch.PERIOD == "SHIFT") {
-        $("#boxShift").show()
-    } else if (dataSearch.PERIOD == "DAY") {
-        $("#boxDaily").show()
-    } else if (dataSearch.PERIOD == "WEEK") {
-        $("#boxWeekly").show()
-    }
-
-    var table = $('#example').DataTable({
-        paging: false,
-        searching: false,
-        createdRow: function (row, data, dataIndex) {
-            if ((typeof data[6]) == 'string') {
-                $('td:eq(6)', row).attr('colspan', 2);
-                $('td:eq(5)', row).css('display', 'none');
-            }
-
-            if ((typeof data[2]) == 'string') {
-                $('td:eq(2)', row).attr('colspan', 2);
-                $('td:eq(1)', row).css('display', 'none');
-            }
-        }
-    });
-
-    $('#First, input, select').change(function () {
-        console.log(this.id)
-        if (this.type == 'radio') {
-            dataSearch.PERIOD = this.value
-            if (this.value == "SHIFT") {
-                $("#boxShift").show('slow')
-                $("#boxDaily").hide()
-                $("#boxWeekly").hide()
-            } else if (this.value == "DAY") {
-                $("#boxShift").hide()
-                $("#boxDaily").show('slow')
-                $("#boxWeekly").hide()
-            } else if (this.value == "WEEK") {
-                $("#boxShift").hide()
-                $("#boxDaily").hide()
-                $("#boxWeekly").show('slow')
-            }
-        }
-
-        dataSearch[this.id] = this.value
-
-        $("#partPeriod" + dataSearch.PERIOD).attr('checked', 'checked')
-        $("#SHIFT_DATE").val(dataSearch.SHIFT_DATE)
-        $("#SHIFT").val(dataSearch.SHIFT)
-        $("#DAY").val(dataSearch.DAY)
-        $("#WEEK").val(dataSearch.WEEK)
-
-        LoadData(dataSearch)
-    })
-
-    $("#First").change()
-
-    function LoadData(dataSearch) {
-        console.log(dataSearch)
-        $(".se-pre-con").fadeIn()
-        $.ajax({
-            url: "ajax/ajax_query_visual.php",
-            type: "POST",
-            dataType: "json",
-            data: dataSearch,
-            success: function (result) {
-                table.clear().draw();
-                table.rows.add(result).draw().nodes().to$().addClass("border-light text-center");
-
-                window.history.pushState("object or string", "Title",
-                    "visual.html?COUNTRY=" + dataSearch.COUNTRY +
-                    "&FACTORY=" + dataSearch.FACTORY +
-                    "&BIZ=" + dataSearch.BIZ +
-                    "&PERIOD=" + dataSearch.PERIOD +
-                    "&SHIFT_DATE=" + dataSearch.SHIFT_DATE +
-                    "&SHIFT=" + dataSearch.SHIFT +
-                    "&DAY=" + dataSearch.DAY +
-                    "&WEEK=" + dataSearch.WEEK
-                );
-                $(".se-pre-con").fadeOut()
-            }
-        })
-    }
-
-    $.ajax({
-        url: "ajax/ajax_checklogin.php",
-        type: "POST",
-        dataType: "json",
-        data: dataSearch,
-        success: function (result) {
-            console.log(result)
-            if (result.length != 0 && result.STARTUP_USER_NAME != null && result.STARTUP_USER_NAME == '') {
-                $('#login').attr('href', "logout.php")
-                $('#login').text('')
-            } else {
-                $('#login').attr('href', "login.php")
-                $('#login').text('ANUCHA ')
-            }
-        }
-    })
-
-    // ✅ Or create a reusable function
-    function padTo2Digits(num) {
-        return num.toString().padStart(2, '0');
-    }
-
-    function formatDate(date = new Date()) {
-        return [
-            date.getFullYear(),
-            padTo2Digits(date.getMonth() + 1),
-            padTo2Digits(date.getDate()),
-        ].join('-');
-    }
-    // 👇️ 20220119 (get today's date) (yyyymmdd)
-    // console.log(formatDate());
-
-    // //  👇️️ 20250509 (yyyymmdd)
-    // console.log(formatDate(new Date("2025.05.09")));
-</script>
+<!-- mycode -->
+<script src="js/mainFunction.js"></script>
+<script src="js/visual.js"></script>
+<script src="js/login.js"></script>
