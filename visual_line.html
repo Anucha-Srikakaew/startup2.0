@@ -3,50 +3,114 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible"
+        content="IE=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description"
+        content="">
+    <meta name="author"
+        content="">
 
     <title>STARTUP CHECK</title>
-    <link rel="icon" href="framework/img/SMART_LOGO.png" type="image/png" sizes="16x16">
+    <link rel="icon"
+        href="framework/img/SMART_LOGO.png"
+        type="image/png"
+        sizes="16x16">
 
-    <link rel="stylesheet" href="framework/newVersion/dataTables/css/bootstrap.min.css">
-    <link rel="stylesheet" href="framework/newVersion/dataTables/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet"
+        href="framework/newVersion/dataTables/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="framework/newVersion/dataTables/css/dataTables.bootstrap5.min.css">
 
     <!-- Bootstrap5 -->
     <link href="framework/newVersion/Bootstrap5/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="css/main.css">
-
+    <link rel="stylesheet"
+        href="css/main.css">
 </head>
 
 <body>
+    <style>
+        .imgMain {
+            position: relative;
+        }
+
+        .absolute {
+            position: absolute;
+            transition-property: all;
+            transition-duration: 1s;
+        }
+
+        /* .img2 {
+            top: 3px;
+            right: 28%;
+        }
+
+        .img3 {
+            top: 6px;
+            right: 31%;
+        }
+
+        .img4 {
+            top: 9px;
+            right: 34%;
+        }
+
+        .img5 {
+            top: 12px;
+            right: 37%;
+        }
+
+        .img6 {
+            top: 15px;
+            right: 40%;
+        } */
+
+        .imgMain:hover .absolute {
+            position: static;
+        }
+    </style>
     <!-- <div class="se-pre-con"></div> -->
     <!-- Navbar -->
     <section>
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark shadow">
             <div class="container-fluid">
-                <a class="navbar-brand" href="http://43.72.52.52/system/">SONY</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand"
+                    href="http://43.72.52.52/system/">SONY</a>
+                <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse"
+                    id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                            <a class="nav-link active"
+                                aria-current="page"
+                                href="index.php">Home</a>
                         </li>
                     </ul>
                     <form class="d-flex">
-                        <a class="text-light me-2" href="#" id="login">
+                        <a class="text-light me-2"
+                            href="#"
+                            id="login">
                         </a>
-                        <img src="http://43.72.228.147/attend/img_opt/22164429.jpg" alt="" class="rounded-circle"
-                            width="35" height="35">&nbsp; &nbsp;
-                        <img src="http://43.72.228.147/smart/pages/assets/media/internal/internal3.png" alt=""
-                            width="110" height="25">
+                        <img src="http://43.72.228.147/attend/img_opt/22164429.jpg"
+                            alt=""
+                            class="rounded-circle"
+                            width="35"
+                            height="35">&nbsp; &nbsp;
+                        <img src="http://43.72.228.147/smart/pages/assets/media/internal/internal3.png"
+                            alt=""
+                            width="110"
+                            height="25">
                     </form>
                 </div>
             </div>
@@ -60,9 +124,11 @@
             <div class="text-center">
                 <div class="container">
                     <h1><b class="animated fadeInDown"><a href="index.php">SMART STARTUP CHECK</a></b></h1>
-                    <p class="lead" id="txtMain"><b>COUNTRY : TH / FACTORY : STTC / BIZ : IM</b></p>
+                    <p class="lead"
+                        id="txtMain"><b>COUNTRY : TH / FACTORY : STTC / BIZ : IM</b></p>
                     <hr>
-                    <p class="lead" id="txtSub"><b>LINE : HEA / MODEL : CX622XX_TI,CX622XX_TI,CX622XX_TI,CX622XX_TI</b>
+                    <p class="lead"
+                        id="txtSub"><b>LINE : HEA / MODEL : CX622XX_TI,CX622XX_TI,CX622XX_TI,CX622XX_TI</b>
                     </p>
                 </div>
 
@@ -72,46 +138,21 @@
                     <div class="row">
                         <div class="col-md">
                             <h4><b>TECHNICIAN</b></h4>
-                            <div class="row" id="index1">
-                                <div class="col-4"><br>
-                                    <h5>JIG</h5>
-                                    <h6>CX622XX_TI</h6>
-                                    <img src="http://43.72.52.159/ATTENd/IMG_opt/22210273.JPG" width="50%" aria-label="For screen readers">
-                                    <h6>Somrak Ladprama</h6>
-                                    <h6>5 MIN.</h6>
-                                    <h6>19-Dec-2022 02:06:42</h6>
-                                </div>
-                                <div class="col-4"><br>
-                                    <h5>Torque</h5>
-                                    <h6>CX622XX_TI</h6>
-                                    <img src="http://43.72.52.159/ATTENd/IMG_opt/20003107.JPG" width="50%" aria-label="For screen readers">
-                                    <h6>Mr.Ongard Phomhak</h6>
-                                    <h6>0 MIN.</h6>
-                                    <h6>19-Dec-2022 01:39:17</h6>
-                                </div>
-                                <div class="col-4"><br>
-                                    <h5>Screw Feed</h5>
-                                    <h6>CX622XX_TI</h6>
-                                    <img src="http://43.72.52.159/ATTENd/IMG_opt/20003107.JPG" width="50%" aria-label="For screen readers">
-                                    <h6>Mr.Ongard Phomhak</h6>
-                                    <h6>1 MIN.</h6>
-                                    <h6>19-Dec-2022 01:38:34</h6>
-                                </div>
-                                <div class="col-4"><br>
-                                    <h5>ADJUST</h5>
-                                    <h6>CX622XX_TI</h6>
-                                    <img src="http://43.72.52.159/ATTENd/IMG_opt/22121795.JPG" width="50%" aria-label="For screen readers">
-                                    <h6>Mr.Pairord Marai</h6>
-                                    <h6>381 MIN.</h6>
-                                    <h6>19-Dec-2022 03:01:43</h6>
-                                </div>
+                            <div class="row justify-content-md-center imgMain"
+                                id="TECHNICIAN">
                             </div>
                         </div>
                         <div class="col-md">
                             <h4><b>MFE SUPERVISIOR</b></h4>
+                            <div class="row justify-content-md-center imgMain"
+                                id="MFE">
+                            </div>
                         </div>
                         <div class="col-md">
                             <h4><b>PRODUCTION LEADER</b></h4>
+                            <div class="row justify-content-md-center imgMain"
+                                id="PRODUCTION">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -119,12 +160,13 @@
         </div>
     </section>
 
-    <br>
-
+    <br><br><br>
     <section>
         <div class="container bg-light shadow-sm"><br>
             <div class="table-responsive">
-                <table id="example" class="table table-hover table-bordered" style="width:100%">
+                <table id="example"
+                    class="table table-hover table-bordered"
+                    style="width:100%">
                     <thead class="table-dark text-light">
                         <tr>
                             <th class="text-center">PROCESS</th>
@@ -142,7 +184,8 @@
     </section>
 
     <br><br>
-    <input type="hidden" id="First">
+    <input type="hidden"
+        id="First">
 </body>
 
 </html>

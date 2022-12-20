@@ -146,6 +146,7 @@ function LoadData(dataSearch) {
         dataType: "json",
         data: dataSearch,
         success: function (result) {
+            console.log(result)
             table.clear().draw();
             table.rows.add(result).draw().nodes().to$().addClass("text-center");
 

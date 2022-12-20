@@ -64,7 +64,7 @@ if ($PERIOD == "WEEK") {
     $query_shift_date = "AND SHIFT_DATE LIKE '$DATE_SHIFT%' AND SHIFT = '$SHIFT'";
 }
 
-$strSQL = "SELECT DISTINCT TYPE,MODEL
+$strSQL = "SELECT DISTINCT TYPE, MODEL
     FROM `$tbl_item` 
     WHERE `PERIOD` = '$PERIOD' AND LINE = '$LINE' $query_shift_date ORDER BY LastUpdate DESC";
 $objQuery = mysqli_query($con, $strSQL);
@@ -85,7 +85,6 @@ while ($objResult = mysqli_fetch_array($objQuery)) {
     // }
     $objQuery2 = mysqli_query($con, $strSQL2);
     while ($objResult2 = mysqli_fetch_array($objQuery2)) {
-
         $PASS = $objResult2['PASS'];
         $FAIL = $objResult2['FAIL'];
         $BLANK = $objResult2['BLANK'];
