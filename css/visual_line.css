@@ -1,0 +1,26 @@
+.imgMain {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+    transition-property: all;
+    transition-duration: 1s;
+}
+
+.imgMain:focus .absolute {
+    position: static;
+}
+
+button {
+    width: 100%;
+    height: 100%;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.modal-backdrop {
+    background-color: transparent;
+}

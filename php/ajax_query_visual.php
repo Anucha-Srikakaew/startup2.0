@@ -73,7 +73,7 @@ if ($PERIOD == 'SHIFT' || $PERIOD == 'DAY') {
 $output = array();
 $i = 0;
 $data = array();
-$strSQL = "SELECT `LINE`,`TYPE` 
+$strSQL = "SELECT `LINE`,`TYPE`
 FROM `startup_line` 
 WHERE `COUNTRY` = '$COUNTRY' AND `FACTORY` = '$FACTORY' AND `BIZ` = '$BIZ'
 ORDER BY `LINE` ASC ";
@@ -129,7 +129,7 @@ foreach ($arrQueryLineName as $objResult) {
     }
 
     if ($TYPE == 'PRODUCTION') {
-        $link = '<a href="visual_line.php?COUNTRY=' . $COUNTRY . '&FACTORY=' . $FACTORY . '&BIZ=' . $BIZ . '&CENTER=&LINE=' . $LINE . '&START_DATE=' . $start_date . '&END_DATE=' . $end_date . '&SHIFT=' . $SHIFT . '&PERIOD=' . $PERIOD . '"><h4><b>' . $LINE . '</b></h4></a>';
+        $link = '<a href="visual_line.html?COUNTRY=' . $COUNTRY . '&FACTORY=' . $FACTORY . '&BIZ=' . $BIZ . '&CENTER=&LINE=' . $LINE . '&START_DATE=' . $start_date . '&END_DATE=' . $end_date . '&SHIFT=' . $SHIFT . '&PERIOD=' . $PERIOD . '"><h4><b>' . $LINE . '</b></h4></a>';
     } else {
         $link = '<a href="visual_center.php?CENTER=' . $LINE . '&BIZ=' . $BIZ . '&PERIOD=' . $PERIOD . '"><h4><b>' . $LINE . '</b></h4></a>';
     }

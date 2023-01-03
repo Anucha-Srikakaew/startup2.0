@@ -45,7 +45,6 @@ if (WEEK == '' || WEEK == null) {
     var weekNumber = Math.ceil(days / 7);
     var year = DAY.split('-')[0]
     var month = DAY.split('-')[1]
-
     WEEK = year + "-W" + weekNumber
 }
 
@@ -76,29 +75,23 @@ var table = $('#example').DataTable({
     paging: false,
     searching: false,
     createdRow: function (row, data, dataIndex) {
-        // console.log(row)
-
         $('td:eq(1)', row).css('font-weight', 'bold');
         $('td:eq(2)', row).css('font-weight', 'bold');
         $('td:eq(5)', row).css('font-weight', 'bold');
         $('td:eq(6)', row).css('font-weight', 'bold');
-
         if ((typeof data[6]) == 'string') {
             $('td:eq(4)', row).addClass('table-active')
             $('td:eq(5)', row).addClass('table-active')
             $('td:eq(6)', row).addClass('table-active')
             $('td:eq(7)', row).addClass('table-active')
-
             $('td:eq(6)', row).attr('colspan', 2);
             $('td:eq(5)', row).css('display', 'none');
         }
-
         if ((typeof data[2]) == 'string') {
             $('td:eq(0)', row).addClass('table-active')
             $('td:eq(1)', row).addClass('table-active')
             $('td:eq(2)', row).addClass('table-active')
             $('td:eq(3)', row).addClass('table-active')
-
             $('td:eq(2)', row).attr('colspan', 2);
             $('td:eq(1)', row).css('display', 'none');
         }
@@ -106,7 +99,6 @@ var table = $('#example').DataTable({
 });
 
 $('#First, input, select').change(function () {
-    // console.log(this.id)
     if (this.type == 'radio') {
         dataSearch.PERIOD = this.value
         if (this.value == "SHIFT") {
@@ -123,22 +115,18 @@ $('#First, input, select').change(function () {
             $("#boxWeekly").show('slow')
         }
     }
-
     dataSearch[this.id] = this.value
-
     $("#partPeriod" + dataSearch.PERIOD).attr('checked', 'checked')
     $("#SHIFT_DATE").val(dataSearch.SHIFT_DATE)
     $("#SHIFT").val(dataSearch.SHIFT)
     $("#DAY").val(dataSearch.DAY)
     $("#WEEK").val(dataSearch.WEEK)
-
     LoadData(dataSearch)
 })
 
 $("#First").change()
 
 function LoadData(dataSearch) {
-    // console.log(dataSearch)
     $(".se-pre-con").fadeIn()
     $.ajax({
         url: "php/ajax_query_visual.php",
@@ -146,10 +134,8 @@ function LoadData(dataSearch) {
         dataType: "json",
         data: dataSearch,
         success: function (result) {
-            console.log(result)
             table.clear().draw();
             table.rows.add(result).draw().nodes().to$().addClass("text-center");
-
             window.history.pushState("object or string", "Title",
                 "visual.html?COUNTRY=" + dataSearch.COUNTRY +
                 "&FACTORY=" + dataSearch.FACTORY +
@@ -159,7 +145,7 @@ function LoadData(dataSearch) {
                 "&SHIFT=" + dataSearch.SHIFT +
                 "&DAY=" + dataSearch.DAY +
                 "&WEEK=" + dataSearch.WEEK
-            );
+            )
             $(".se-pre-con").fadeOut()
         }
     })

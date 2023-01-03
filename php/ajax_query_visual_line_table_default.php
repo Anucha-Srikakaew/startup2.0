@@ -50,7 +50,7 @@ if ($PERIOD == 'SHIFT' || $PERIOD == 'DAY') {
     }
 }
 
-$WHERE = "AND `COUNTRY` = 'TH' AND `FACTORY` = 'STTC' AND `BIZ` = 'IM' AND `LINE` = 'HEB' AND `SHIFT_DATE` BETWEEN '2022-12-19' AND '2022-12-19'";
+$WHERE = "AND `COUNTRY` = '$COUNTRY' AND `FACTORY` = '$FACTORY' AND `BIZ` = '$BIZ' AND `LINE` = '$LINE' AND `PERIOD` = '$PERIOD' AND `SHIFT_DATE` BETWEEN '$START_DATE' AND '$END_DATE'";
 $sql = "SELECT 
         tblMain.TYPE,
         tblMain.MODEL,
@@ -59,38 +59,34 @@ $sql = "SELECT
         tblBLANK.BLANK,
         tblTOTAL.TOTAL,
         'STATUS'
-        FROM (SELECT DISTINCT `TYPE`, `MODEL` FROM `startup_item` WHERE `COUNTRY` = 'TH' $WHERE) AS tblMain
+        FROM (SELECT DISTINCT `TYPE`, `MODEL` FROM `$tbl_item` WHERE `COUNTRY` = '$COUNTRY' $WHERE) AS tblMain
         LEFT JOIN  (
-            SELECT `TYPE`, COUNT(`ID`) AS PASS 
-            FROM `startup_item` 
-            WHERE `JUDGEMENT` = 'PASS' $WHERE GROUP BY `TYPE`) AS tblPASS
-        ON tblMain.`TYPE` = tblPASS.`TYPE`
+            SELECT `TYPE`,`MODEL`, COUNT(`ID`) AS PASS 
+            FROM `$tbl_item` 
+            WHERE `JUDGEMENT` = 'PASS' $WHERE GROUP BY `TYPE`,`MODEL`) AS tblPASS
+        ON tblMain.`TYPE` = `tblPASS`.`TYPE` AND tblMain.`MODEL` = `tblPASS`.`MODEL`
         LEFT JOIN  (
-            SELECT `TYPE`, COUNT(`ID`) AS FAIL 
-            FROM `startup_item` 
-            WHERE `JUDGEMENT` = 'FAIL' $WHERE GROUP BY `TYPE`) AS tblFAIL
-        ON tblMain.`TYPE` = tblFAIL.`TYPE`
+            SELECT `TYPE`, `MODEL`, COUNT(`ID`) AS FAIL 
+            FROM `$tbl_item` 
+            WHERE `JUDGEMENT` = 'FAIL' $WHERE GROUP BY `TYPE`,`MODEL`) AS tblFAIL
+        ON tblMain.`TYPE` = `tblFAIL`.`TYPE` AND tblMain.`MODEL` = `tblFAIL`.`MODEL`
         LEFT JOIN  (
-            SELECT `TYPE`, COUNT(`ID`) AS BLANK 
-            FROM `startup_item` 
-            WHERE `JUDGEMENT` = 'BLANK' $WHERE GROUP BY `TYPE`) AS tblBLANK
-        ON tblMain.`TYPE` = tblBLANK.`TYPE`
+            SELECT `TYPE`, `MODEL`, COUNT(`ID`) AS BLANK
+            FROM `$tbl_item` 
+            WHERE `JUDGEMENT` = 'BLANK' $WHERE GROUP BY `TYPE`,`MODEL`) AS tblBLANK
+        ON tblMain.`TYPE` = `tblBLANK`.`TYPE` AND tblMain.`MODEL` = `tblBLANK`.`MODEL`
         LEFT JOIN  (
-            SELECT `TYPE`, COUNT(`ID`) AS `NULL`
-            FROM `startup_item` 
-            WHERE `JUDGEMENT` = '' $WHERE GROUP BY `TYPE`) AS tblNULL
-        ON tblMain.`TYPE` = tblNULL.`TYPE`
+            SELECT `TYPE`, `MODEL`, COUNT(`ID`) AS `NULL`
+            FROM `$tbl_item` 
+            WHERE `JUDGEMENT` = '' $WHERE GROUP BY `TYPE`,`MODEL`) AS tblNULL
+        ON tblMain.`TYPE` = `tblNULL`.`TYPE` AND tblMain.`MODEL` = `tblNULL`.`MODEL`
         LEFT JOIN  (
-            SELECT `TYPE`, COUNT(`ID`) AS `TOTAL`
-            FROM `startup_item` 
-            WHERE `JUDGEMENT` LIKE '%%' $WHERE GROUP BY `TYPE`) AS tblTOTAL
-        ON tblMain.`TYPE` = tblTOTAL.`TYPE`
+            SELECT `TYPE`, `MODEL`, COUNT(`ID`) AS `TOTAL`
+            FROM `$tbl_item` 
+            WHERE `JUDGEMENT` LIKE '%%' $WHERE GROUP BY `TYPE`,`MODEL`) AS tblTOTAL
+        ON tblMain.`TYPE` = `tblTOTAL`.`TYPE` AND tblMain.`MODEL` = `tblTOTAL`.`MODEL`
         ";
 $query = mysqli_query($con, $sql);
 $rowObj = mysqli_fetch_all($query, MYSQLI_ASSOC);
-
-// foreach($rowObj as $rowArr){
-//     print_r($rowArr);
-// }
 
 echo json_encode($rowObj);
