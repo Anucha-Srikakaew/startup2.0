@@ -16,4 +16,14 @@
 		echo "Database Connect Failed : " . mysqli_connect_error();
 		exit();
 	}
-?>
+
+	// MSSQL MEMBER STTC
+$servername158 = "43.72.52.158";
+$connectionInfo158 = array(
+    "Database" => "STTC_HUMAN_RESOURCE",
+    "UID" => "mfe",
+    "PWD" => "mfeP@ssw0rd",
+    "MultipleActiveResultSets" => true,
+    "CharacterSet"  => 'UTF-8'
+);
+$con158 = sqlsrv_connect($servername158, $connectionInfo158);

@@ -107,72 +107,70 @@ function loadDatatableDefault() {
         dataType: "json",
         data: dataSearch,
         success: function (obj) {
-            // console.log(obj)
             showDataMemberTxT(obj)
-        }
-    })
 
-    $.ajax({
-        url: "php/ajax_query_visual_line_table_default.php",
-        type: "POST",
-        dataType: "json",
-        data: dataSearch,
-        success: function (obj) {
-            console.log(obj)
-            var TYPE = '', MODEL = '', strClass
-            table.clear().draw();
-            table.column(1).visible(true);
-            $(table.column(0).header()).text('TYPE');
-            $.each(obj, function (key, value) {
-                var row = '';
-                var TYPE = value.TYPE
-                var MODEL = value.MODEL
-                var PASS = +value.PASS
-                var FAIL = +value.FAIL
-                var BLANK = +value.BLANK
-                var TOTAL = +value.TOTAL
-                var MODEL = value.MODEL
-                var STATUS = '';
-                if (FAIL > 0) {
-                    STATUS = 'FAIL'
-                    strClass = 'text-center table-danger'
-                } else {
-                    if (BLANK > 0) {
-                        STATUS = 'BLANK'
-                        strClass = 'text-center table-warning'
-                    } else {
-                        STATUS = 'PASS'
-                        strClass = 'text-center table-success'
-                    }
+            $.ajax({
+                url: "php/ajax_query_visual_line_table_default.php",
+                type: "POST",
+                dataType: "json",
+                data: dataSearch,
+                success: function (obj) {
+                    var TYPE = '', MODEL = '', strClass
+                    table.clear().draw();
+                    table.column(1).visible(true);
+                    $(table.column(0).header()).text('TYPE');
+                    $.each(obj, function (key, value) {
+                        var row = '';
+                        var TYPE = value.TYPE
+                        var MODEL = value.MODEL
+                        var PASS = +value.PASS
+                        var FAIL = +value.FAIL
+                        var BLANK = +value.BLANK
+                        var TOTAL = +value.TOTAL
+                        var MODEL = value.MODEL
+                        var STATUS = '';
+                        if (FAIL > 0) {
+                            STATUS = 'FAIL'
+                            strClass = 'text-center table-danger'
+                        } else {
+                            if (BLANK > 0) {
+                                STATUS = 'BLANK'
+                                strClass = 'text-center table-warning'
+                            } else {
+                                STATUS = 'PASS'
+                                strClass = 'text-center table-success'
+                            }
+                        }
+                        var row = [
+                            '<a href="#" onclick="loadDatatable(this.name, this.id)" name="' + TYPE + '" id="' + MODEL + '"><h5><b class="text-primary">' + TYPE + '</b></h5></a>',
+                            MODEL,
+                            PASS,
+                            FAIL,
+                            BLANK,
+                            TOTAL,
+                            STATUS_CONFIRM[TYPE],
+                        ];
+                        table.row.add(row).draw().nodes().to$().addClass(strClass);
+                    })
+                    window.history.pushState(
+                        "object or string",
+                        "Title",
+                        "visual_line.html?" +
+                        "COUNTRY=" + COUNTRY +
+                        "&FACTORY=" + FACTORY +
+                        "&BIZ=" + BIZ +
+                        "&CENTER=" + CENTER +
+                        "&LINE=" + LINE +
+                        "&START_DATE=" + START_DATE +
+                        "&END_DATE=" + END_DATE +
+                        "&SHIFT=" + SHIFT +
+                        "&PERIOD=" + PERIOD +
+                        "&TYPE=" + TYPE +
+                        "&MODEL=" + MODEL +
+                        "&dataFunc=" + dataFunc
+                    );
                 }
-                var row = [
-                    '<a href="#" onclick="loadDatatable(this.name, this.id)" name="' + TYPE + '" id="' + MODEL + '"><h5><b class="text-primary">' + TYPE + '</b></h5></a>',
-                    MODEL,
-                    PASS,
-                    FAIL,
-                    BLANK,
-                    TOTAL,
-                    STATUS_CONFIRM[TYPE],
-                ];
-                table.row.add(row).draw().nodes().to$().addClass(strClass);
             })
-            window.history.pushState(
-                "object or string",
-                "Title",
-                "visual_line.html?" +
-                "COUNTRY=" + COUNTRY +
-                "&FACTORY=" + FACTORY +
-                "&BIZ=" + BIZ +
-                "&CENTER=" + CENTER +
-                "&LINE=" + LINE +
-                "&START_DATE=" + START_DATE +
-                "&END_DATE=" + END_DATE +
-                "&SHIFT=" + SHIFT +
-                "&PERIOD=" + PERIOD +
-                "&TYPE=" + TYPE +
-                "&MODEL=" + MODEL +
-                "&dataFunc=" + dataFunc
-            );
         }
     })
 }
@@ -192,75 +190,87 @@ function loadDatatable(type, model) {
             MODEL: model
         },
         success: function (obj) {
-            // console.log(obj)
             showDataMemberTxT(obj)
-        }
-    })
 
-    $.ajax({
-        url: "php/ajax_query_visual_line_table_process.php",
-        type: "POST",
-        dataType: "json",
-        data: {
-            MAIN: dataSearch,
-            TYPE: type,
-            MODEL: model
-        },
-        success: function (obj) {
-            // console.log(obj)
-            var strClass
-            table.clear().draw()
-            $(table.column(0).header()).text('PROCESS')
-            $(table.column(6).header()).text('PROCESS')
-            table.column(1).visible(false)
-            $.each(obj, function (key, value) {
-                var row = '';
-                var PROCESS = value.PROCESS
-                var MODEL = value.MODEL
-                var PASS = +value.PASS
-                var FAIL = +value.FAIL
-                var BLANK = +value.BLANK
-                var TOTAL = +value.TOTAL
-                var MODEL = value.MODEL
-                var STATUS = '';
-                if (FAIL > 0) {
-                    STATUS = 'FAIL'
-                    strClass = 'text-center table-danger'
-                } else {
-                    if (BLANK > 0) {
-                        STATUS = 'BLANK'
-                        strClass = 'text-center table-warning'
+            var STATUS_CONFIRM_BTN = true
+            $.ajax({
+                url: "php/ajax_query_visual_line_table_process.php",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    MAIN: dataSearch,
+                    TYPE: type,
+                    MODEL: model
+                },
+                success: function (obj) {
+                    var strClass
+                    table.clear().draw()
+                    $(table.column(0).header()).text('PROCESS')
+                    $(table.column(6).header()).text('PROCESS')
+                    table.column(1).visible(false)
+                    $.each(obj, function (key, value) {
+
+                        var row = '';
+                        var PROCESS = value.PROCESS
+                        var MODEL = value.MODEL
+                        var PASS = +value.PASS
+                        var FAIL = +value.FAIL
+                        var BLANK = +value.BLANK
+                        var TOTAL = +value.TOTAL
+                        var MODEL = value.MODEL
+                        var STATUS = '';
+
+                        if (FAIL > 0) {
+                            STATUS = 'FAIL'
+                            strClass = 'text-center table-danger'
+                            STATUS_CONFIRM_BTN = false
+                        } else {
+                            if (BLANK > 0) {
+                                STATUS_CONFIRM_BTN = false
+                                STATUS = 'BLANK'
+                                strClass = 'text-center table-warning'
+                            } else {
+                                STATUS = 'PASS'
+                                strClass = 'text-center table-success'
+                            }
+                        }
+
+                        var row = [
+                            '<a href="visual_item.html?' +
+                            'COUNTRY=' + COUNTRY +
+                            '&FACTORY=' + FACTORY +
+                            '&BIZ=' + BIZ +
+                            '&CENTER=' + CENTER +
+                            '&LINE=' + LINE +
+                            '&START_DATE=' + START_DATE +
+                            '&END_DATE=' + END_DATE +
+                            '&SHIFT=' + SHIFT +
+                            '&PERIOD=' + PERIOD +
+                            '&TYPE=' + type +
+                            '&MODEL=' + model +
+                            '&PROCESS=' + PROCESS +
+                            '&dataFunc=' + dataFunc + '"><h5 class="text-primary">' + PROCESS + '</h5></a>',
+                            MODEL,
+                            PASS,
+                            FAIL,
+                            BLANK,
+                            TOTAL,
+                            STATUS,
+                        ]
+
+                        table.row.add(row).draw().nodes().to$().addClass(strClass)
+                    })
+
+                    if (STATUS_CONFIRM_BTN == false) {
+                        $("#btnCONFRIM").hide()
                     } else {
-                        STATUS = 'PASS'
-                        strClass = 'text-center table-success'
+                        $("#btnCONFRIM").show()
                     }
                 }
-                var row = [
-                    '<a href="visual_item.html?' +
-                    'COUNTRY=' + COUNTRY +
-                    '&FACTORY=' + FACTORY +
-                    '&BIZ=' + BIZ +
-                    '&CENTER=' + CENTER +
-                    '&LINE=' + LINE +
-                    '&START_DATE=' + START_DATE +
-                    '&END_DATE=' + END_DATE +
-                    '&SHIFT=' + SHIFT +
-                    '&PERIOD=' + PERIOD +
-                    '&TYPE=' + type +
-                    '&MODEL=' + model +
-                    '&PROCESS=' + PROCESS +
-                    '&dataFunc=' + dataFunc + '"><h5 class="text-primary">' + PROCESS + '</h5></a>',
-                    MODEL,
-                    PASS,
-                    FAIL,
-                    BLANK,
-                    TOTAL,
-                    STATUS,
-                ];
-                table.row.add(row).draw().nodes().to$().addClass(strClass);
             })
         }
     })
+
     window.history.pushState(
         "object or string",
         "Title",
@@ -280,6 +290,7 @@ function loadDatatable(type, model) {
     );
 }
 function showDataMemberTxT(obj) {
+
     var TECHNICIAN = '',
         MFE = '',
         PRODUCTION = '',
@@ -329,6 +340,35 @@ function showDataMemberTxT(obj) {
                 STATUS_CONFIRM[value.TYPE] = 'COMPLETE'
             }
         }
+
+        var name1 = '<br>',
+            tabk1 = '<br>',
+            datetime1 = '<br>'
+        if (value.NAME_CONFIRM1 != null && value.NAME_CONFIRM1 != '') {
+            name1 = value.NAME_CONFIRM1
+            tabk1 = value.TAKT1 + ' MIN.'
+            datetime1 = value.DATETIME1
+        }
+
+        var name2 = '<br>',
+            tabk2 = '<br>',
+            datetime2 = '<br>'
+        if (value.NAME_CONFIRM2 != null && value.NAME_CONFIRM2 != '') {
+            name2 = value.NAME_CONFIRM2
+            tabk2 = value.TAKT2 + ' MIN.'
+            datetime2 = value.DATETIME2
+        }
+
+        var name3 = '<br>',
+            tabk3 = '<br>',
+            datetime3 = '<br>'
+        if (value.NAME_CONFIRM3 != null && value.NAME_CONFIRM3 != '') {
+            name3 = value.NAME_CONFIRM3
+            tabk3 = value.TAKT3 + ' MIN.'
+            datetime3 = value.DATETIME3
+        }
+
+
         if (key == 0) {
             TECHNICIAN += '<div class="col-md-6"><br>' +
                 '<div class="card border-light bg-light shadow-sm">' +
@@ -336,9 +376,9 @@ function showDataMemberTxT(obj) {
                 '<h5>' + value.TYPE + '</h5>' +
                 '<h6>' + value.MODEL + '</h6>' +
                 '<img class="rounded-circle" src="' + CONFIRM1_URL + '" height="90px" width="90px" aria-label="For screen readers">' +
-                '<h6>' + value.NAME_CONFIRM1 + '</h6>' +
-                '<h6>' + value.TAKT1 + ' MIN.</h6>' +
-                '<h6>' + value.DATETIME1 + '</h6>' +
+                '<h6>' + name1 + '</h6>' +
+                '<h6>' + tabk1 + '</h6>' +
+                '<h6>' + datetime1 + '</h6>' +
                 '</div>' +
                 '</div>' +
                 '</div>'
@@ -349,9 +389,9 @@ function showDataMemberTxT(obj) {
                 '<h5>' + value.TYPE + '</h5>' +
                 '<h6>' + value.MODEL + '</h6>' +
                 '<img class="rounded-circle" src="' + CONFIRM2_URL + '" height="90px" width="90px" aria-label="For screen readers">' +
-                '<h6>' + value.NAME_CONFIRM2 + '</h6>' +
-                '<h6>' + value.TAKT2 + ' MIN.</h6>' +
-                '<h6>' + value.DATETIME2 + '</h6>' +
+                '<h6>' + name2 + '</h6>' +
+                '<h6>' + tabk2 + ' </h6>' +
+                '<h6>' + datetime2 + '</h6>' +
                 '</div>' +
                 '</div>' +
                 '</div>'
@@ -362,9 +402,9 @@ function showDataMemberTxT(obj) {
                 '<h5>' + value.TYPE + '</h5>' +
                 '<h6>' + value.MODEL + '</h6>' +
                 '<img class="rounded-circle" src="' + CONFIRM3_URL + '" height="90px" width="90px" aria-label="For screen readers">' +
-                '<h6>' + value.NAME_CONFIRM3 + '</h6>' +
-                '<h6>' + value.TAKT3 + ' MIN.</h6>' +
-                '<h6>' + value.DATETIME3 + '</h6>' +
+                '<h6>' + name3 + '</h6>' +
+                '<h6>' + tabk3 + ' </h6>' +
+                '<h6>' + datetime3 + '</h6>' +
                 '</div>' +
                 '</div>' +
                 '</div>'
@@ -380,9 +420,9 @@ function showDataMemberTxT(obj) {
                 '<h5>' + value.TYPE + '</h5>' +
                 '<h6>' + value.MODEL + '</h6>' +
                 '<img class="rounded-circle" src="' + CONFIRM1_URL + '" height="90px" width="90px" aria-label="For screen readers">' +
-                '<h6>' + value.NAME_CONFIRM1 + '</h6>' +
-                '<h6>' + value.TAKT1 + ' MIN.</h6>' +
-                '<h6>' + value.DATETIME1 + '</h6>' +
+                '<h6>' + name1 + '</h6>' +
+                '<h6>' + tabk1 + ' </h6>' +
+                '<h6>' + datetime1 + '</h6>' +
                 '</div>' +
                 '</div>' +
                 '</div>'
@@ -393,9 +433,9 @@ function showDataMemberTxT(obj) {
                 '<h5>' + value.TYPE + '</h5>' +
                 '<h6>' + value.MODEL + '</h6>' +
                 '<img class="rounded-circle" src="' + CONFIRM2_URL + '" height="90px" width="90px" aria-label="For screen readers">' +
-                '<h6>' + value.NAME_CONFIRM2 + '</h6>' +
-                '<h6>' + value.TAKT2 + ' MIN.</h6>' +
-                '<h6>' + value.DATETIME2 + '</h6>' +
+                '<h6>' + name2 + '</h6>' +
+                '<h6>' + tabk2 + ' </h6>' +
+                '<h6>' + datetime2 + '</h6>' +
                 '</div>' +
                 '</div>' +
                 '</div>'
@@ -406,9 +446,9 @@ function showDataMemberTxT(obj) {
                 '<h5>' + value.TYPE + '</h5>' +
                 '<h6>' + value.MODEL + '</h6>' +
                 '<img class="rounded-circle" src="' + CONFIRM3_URL + '" height="90px" width="90px" aria-label="For screen readers">' +
-                '<h6>' + value.NAME_CONFIRM3 + '</h6>' +
-                '<h6>' + value.TAKT3 + ' MIN.</h6>' +
-                '<h6>' + value.DATETIME3 + '</h6>' +
+                '<h6>' + name3 + '</h6>' +
+                '<h6>' + tabk3 + ' </h6>' +
+                '<h6>' + datetime3 + '</h6>' +
                 '</div>' +
                 '</div>' +
                 '</div>'
@@ -428,4 +468,59 @@ function showDataMemberTxT(obj) {
         }
     }
     $("#txtSub").text('LINE : ' + LINE + ' / MODEL : ' + strModel + ' / TYPE : ' + strType)
+}
+
+$('.modal').on('shown.bs.modal', function (e) {
+    // do something...
+    if (this.id == 'exampleModal1') {
+        $('#memberIdDispose').focus()
+    }
+})
+
+// $('.modal').on('hidden.bs.modal', function(e) {
+//     // do something...
+//     $("#idConfirm").val('')
+// })
+
+// Get the input field
+var memberIdDispose = document.getElementById("memberIdDispose");
+
+// Execute a function when the user presses a key on the keyboard
+memberIdDispose.addEventListener("keypress", function (event) {
+    // If the user presses the "Enter" key on the keyboard
+    if (event.key === "Enter") {
+        // Cancel the default action, if needed
+        dispose()
+    }
+});
+
+function dispose() {
+    var dataDispose = {
+        'LINE': LINE,
+        'PERIOD': PERIOD,
+        'START_DATE': START_DATE,
+        'END_DATE': END_DATE,
+        'SHIFT': SHIFT,
+        'TYPE': TYPE,
+        'MODEL': MODEL,
+        'MEMBER': $('#memberIdDispose').val()
+    }
+
+    $.ajax({
+        url: "php/ajax_visual_line_dispose.php",
+        type: "POST",
+        dataType: "json",
+        data: dataDispose,
+        success: function (result) {
+            console.log(result)
+            Swal.fire({
+                icon: 'success',
+                title: 'Sucess...',
+                text: 'Dispose complete',
+            }).then(function () {
+                
+            })
+        }
+    })
+
 }

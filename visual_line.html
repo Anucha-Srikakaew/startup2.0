@@ -36,7 +36,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="visual.html" id="VISUAL_URL">HOME</a>
+                            <!-- <a class="nav-link active" aria-current="page" href="visual.html" id="VISUAL_URL">HOME</a> -->
                         </li>
                     </ul>
                     <form class="d-flex">
@@ -56,7 +56,7 @@
             <div class="text-center">
                 <div class="container">
                     <h1><b class="animated fadeInDown"><a href="index.php">SMART STARTUP CHECK</a></b></h1>
-                    <p class="lead" id="txtMain"></p>
+                    <a href="visual.html" class="lead" id="txtMain"></a>
                     <hr>
                     <p class="lead" id="txtSub"></p>
                 </div>
@@ -101,13 +101,13 @@
                                                 <h1><b>SMART STARTUP CHECK</b></h1>
                                                 <p>CONFIRM TO DISPOSE YOUR STARTUP</p><br><br>
                                                 <h4><b>INPUT MEMBER ID</b></h4><br><br>
-                                                <input type="password" class="form-control text-center rounded-pill"
+                                                <input id="memberIdDispose" type="password" class="form-control text-center rounded-pill"
                                                     placeholder="INPUT MEMBER ID">
                                             </div>
                                             <br><br>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger rounded-pill">DISPOSE</button>
+                                            <button onclick="dispose()" id="enterDispose" type="button" class="btn btn-danger rounded-pill">DISPOSE</button>
                                             <button type="button" class="btn btn-secondary rounded-pill"
                                                 data-bs-dismiss="modal">Close</button>
                                         </div>
@@ -118,6 +118,7 @@
                         <div class="col" id="btnCONFRIM">
                             <button class="btn-success" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal2">CONFRIM</button>
+
                             <!-- Modal -->
                             <div class="modal fade bg-dark" id="exampleModal2" tabindex="-1"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">

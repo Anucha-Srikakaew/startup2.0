@@ -3,15 +3,24 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible"
+        content="IE=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
     <title>STARTUP CHECK</title>
-    <link rel="icon" href="framework/img/SMART_LOGO.png" type="image/png" sizes="16x16">
-    <link rel="stylesheet" href="framework/newVersion/dataTables/css/bootstrap.min.css">
-    <link rel="stylesheet" href="framework/newVersion/dataTables/css/dataTables.bootstrap5.min.css">
+    <link rel="icon"
+        href="framework/img/SMART_LOGO.png"
+        type="image/png"
+        sizes="16x16">
+    <link rel="stylesheet"
+        href="framework/newVersion/dataTables/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="framework/newVersion/dataTables/css/dataTables.bootstrap5.min.css">
     <!-- Bootstrap 5 -->
-    <link rel="stylesheet" href="framework/newVersion/Bootstrap5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet"
+        href="framework/newVersion/Bootstrap5/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="css/main.css">
 </head>
 
 <body>
@@ -19,25 +28,41 @@
     <section>
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark shadow">
             <div class="container-fluid">
-                <a class="navbar-brand" href="http://43.72.52.52/system/">SONY</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand"
+                    href="http://43.72.52.52/system/">SONY</a>
+                <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse"
+                    id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#" id="VISUAL_URL">BACK</a>
+                            <a class="nav-link active"
+                                aria-current="page"
+                                href="#"
+                                id="VISUAL_URL"></a>
                         </li>
                     </ul>
                     <form class="d-flex">
-                        <a class="text-light me-2" href="#" id="login"></a>
-                        <img src="http://43.72.228.147/attend/img_opt/22164429.jpg" alt="" class="rounded-circle"
-                            width="35" height="35">
+                        <a class="text-light me-2"
+                            href="#"
+                            id="login"></a>
+                        <img src="http://43.72.228.147/attend/img_opt/22164429.jpg"
+                            alt=""
+                            class="rounded-circle"
+                            width="35"
+                            height="35">
                         &nbsp; &nbsp;
-                        <img src="http://43.72.228.147/smart/pages/assets/media/internal/internal3.png" alt=""
-                            width="110" height="25">
+                        <img src="http://43.72.228.147/smart/pages/assets/media/internal/internal3.png"
+                            alt=""
+                            width="110"
+                            height="25">
                     </form>
                 </div>
             </div>
@@ -48,13 +73,21 @@
         <div class="container">
             <div class="container text-center">
                 <h1><b class="animated fadeInDown"><a href="index.php">SMART STARTUP CHECK</a></b></h1>
-                <p class="lead" id="txtMain"></p>
+                <a class="lead"
+                    id="txtMain"
+                    href="visual.html"></a>
                 <hr>
                 <div class="container">
-                    <p class="lead text-center" id="txtSub"></p>
+                    <a class="lead text-center"
+                        id="txtSub"
+                        href="#"></a>
+                    <p class="lead text-center"
+                        id="txtProcess">PROCESS : AORI</p>
                 </div>
-            </div><br>
-            <div id="carouselExampleControls" class="carousel slide shadow-sm" data-bs-ride="carousel"
+            </div>
+            <div id="carouselExampleControls"
+                class="carousel slide shadow-sm"
+                data-bs-ride="carousel"
                 data-bs-interval="false">
                 <div class="carousel-inner"></div>
             </div>
@@ -63,19 +96,54 @@
     <br><br>
     <section>
         <div class="text-center">
-            <button type="button" class="btn btn-dark" data-bs-target="#carouselExampleControls" data-bs-slide="prev"
+            <button type="button"
+                class="btn btn-dark"
+                data-bs-target="#carouselExampleControls"
+                data-bs-slide="prev"
                 title="prev">
-                <i class='fas fa-angle-left' style='color:white'></i>
+                <i class='fas fa-angle-left'
+                    style='color:white'></i>
             </button>
-            <button type="button" class="btn btn-dark" id="homeTable" title="homeTable">
-                <i class='fas fa-home' style='color:white'></i>
+            <button type="button"
+                class="btn btn-dark"
+                id="homeTable"
+                title="homeTable">
+                <i class='fas fa-home'
+                    style='color:white'></i>
             </button>
-            <button type="button" class="btn btn-dark" data-bs-target="#carouselExampleControls" data-bs-slide="next"
+            <button type="button"
+                class="btn btn-dark"
+                data-bs-target="#carouselExampleControls"
+                data-bs-slide="next"
                 title="next">
-                <i class='fas fa-angle-right' style='color:white'></i>
+                <i class='fas fa-angle-right'
+                    style='color:white'></i>
             </button>
         </div>
     </section>
+
+    <!-- Modal -->
+    <div class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"
+                        id="exampleModalLabelImg">Modal title</h5>
+                    <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img width="100%" src="framework/img/SMART_LOGO.png" alt="" id="imgValue1">
+                </div>
+            </div>
+        </div>
+    </div>
     <br><br><br>
 </body>
 

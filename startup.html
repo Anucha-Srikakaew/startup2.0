@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"
+        content="IE=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="">
+    <meta name="author"
+        content="">
+
+    <title>STARTUP CHECK</title>
+    <link rel="icon"
+        href="framework/img/SMART_LOGO.png"
+        type="image/png"
+        sizes="16x16">
+
+    <link rel="stylesheet"
+        href="framework/newVersion/dataTables/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="framework/newVersion/dataTables/css/dataTables.bootstrap5.min.css">
+
+    <!-- Bootstrap5 -->
+    <link href="framework/newVersion/Bootstrap5/css/bootstrap.min.css">
+
+    <link href="framework/css/google.icon.css"
+        rel="stylesheet">
+
+
+    <link rel="stylesheet"
+        href="css/main.css">
+    <link rel="stylesheet"
+        href="css/startup_c.css">
+
+</head>
+
+<body>
+    <div class="se-pre-con"></div>
+    <!-- Navbar -->
+    <section>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark shadow">
+            <div class="container-fluid">
+                <a class="navbar-brand"
+                    href="http://43.72.52.52/system/">SONY</a>
+                <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse"
+                    id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active"
+                                aria-current="page"
+                                href="index.php">HOME</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex"
+                        id="ShowLogin">
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </section>
+
+    <br><br><br><br>
+
+    <!-- main -->
+    <section>
+        <div class="container text-center">
+            <h1><b class="animated fadeInDown"><a href="index.php">SMART STARTUP CHECK</a></b></h1>
+            <a href="visual.html"
+                class="lead"
+                id="txtMain"></a>
+            <hr>
+            <p class="lead"
+                id="txtSub1"></p>
+            <p class="lead"
+                id="txtSub2"></p>
+        </div>
+
+        <div class="container">
+            <table class="table table-bordered table-hover"
+                id="example">
+                <thead class="table-dark">
+                    <tr>
+                        <th class="text-center">PROCESS</th>
+                        <th class="col-lg-2 text-center">PICTURE</th>
+                        <th class="text-center">ITEM</th>
+                        <th class="text-center">SPEC</th>
+                        <th class="text-center">VALUE</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"
+                        id="staticBackdropLabel">TAKE PHOTO</h5>
+                    <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="position-absolute top-50 start-50 translate-middle">
+                        <video id="video"
+                            autoplay class="shadow"></video>
+                        <canvas id="canvas" class="shadow"></canvas>
+                    </div>
+                </div>
+                <div class="modal-footer text-center">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
+                                <a id='retake'
+                                    class='btn btn-block form-control btn-primary'
+                                    onclick="openCamera()">
+                                    <i class="fas fa-sync-alt"></i>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a id='switchcamera'
+                                    class='btn btn-block form-control btn-primary '>
+                                    <!-- <i class="material-icons">&#xe41e;</i> -->
+                                    <svg class="svg-icon"
+                                        style="width: 25px; height: 25px;vertical-align: middle;fill: currentColor;overflow: hidden;"
+                                        viewBox="0 0 1024 1024"
+                                        version="1.1">
+                                        <path
+                                            d="M853.333333 170.666667h-135.253333L640 85.333333H384l-78.08 85.333334H170.666667c-47.146667 0-85.333333 38.186667-85.333334 85.333333v512c0 47.146667 38.186667 85.333333 85.333334 85.333333h682.666666c47.146667 0 85.333333-38.186667 85.333334-85.333333V256c0-47.146667-38.186667-85.333333-85.333334-85.333333zM640 661.333333v-106.666666H384v106.666666l-149.333333-149.333333 149.333333-149.333333v106.666666h256v-106.666666l149.333333 149.333333-149.333333 149.333333z" />
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a id='snap'
+                                    class='btn btn-block form-control btn-primary'
+                                    onclick="snap()">
+                                    <i class="fas fa-camera"></i>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a id='save'
+                                    class='btn btn-block form-control btn-success'
+                                    onClick="saveSnap()">
+                                    <i class="fa fa-check"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+    <input type="hidden"
+        id="First">
+</body>
+
+</html>
+<!-- datatable -->
+<script src="framework/newVersion/dataTables/js/jquery-3.5.1.js"></script>
+<script src="framework/newVersion/dataTables/js/jquery.dataTables.min.js"></script>
+<script src="framework/newVersion/dataTables/js/dataTables.bootstrap5.min.js"></script>
+
+<!-- Bootstrap5 -->
+<script src="framework/newVersion/Bootstrap5/js/bootstrap.bundle.min.js"></script>
+<script src="framework/newVersion/Bootstrap5/js/popper.min.js"></script>
+<script src="framework/newVersion/Bootstrap5/js/bootstrap.min.js"></script>
+
+<!-- icon -->
+<script src="framework/js/a076d05399.js"></script>
+
+<!-- sweetalert2 -->
+<script src="framework/js/sweetalert2@11.js"></script>
+
+<!-- mycode -->
+<script src="js/mainFunction.js"></script>
+<script src="js/startup.js"></script>

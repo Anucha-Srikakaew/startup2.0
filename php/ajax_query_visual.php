@@ -23,7 +23,7 @@ function getStartAndEndDate($year, $week)
 function searchForId($id, $array, $masterKey)
 {
     foreach ($array as $key => $val) {
-        if ($val[$masterKey] === $id) {
+        if ($val[$masterKey] == $id) {
             return $key;
         }
     }
@@ -45,13 +45,10 @@ $SHIFT = $_POST['SHIFT'];
 $SHIFT_DATE = $_POST['SHIFT_DATE'];
 $WEEK = $_POST['WEEK'];
 
-
 // check time get data from table.
 if ($PERIOD == 'SHIFT' || $PERIOD == 'DAY') {
-    if ($PERIOD == 'DAY') {
-        $SHIFT_DATE = date("Y-m-d", strtotime("-1 days", strtotime($DAY)));
-    }
-
+    $SHIFT_DATE = date("Y-m-d", strtotime("-1 days", strtotime($DAY)));
+    
     if (DateDiff($SHIFT_DATE, date("Y-m-d")) > 3) {
         $tbl_item = 'startup_item_trace';
         $tbl_time = 'startup_time_trace';
@@ -59,7 +56,6 @@ if ($PERIOD == 'SHIFT' || $PERIOD == 'DAY') {
         $tbl_item = 'startup_item';
         $tbl_time = 'startup_time';
     }
-
     $start_date = $SHIFT_DATE;
     $end_date = $SHIFT_DATE;
 } else {
@@ -85,8 +81,8 @@ $WHERE_STARTUP = "`PERIOD` = '$PERIOD' AND `SHIFT_DATE` BETWEEN '$start_date' AN
 $sql = "SELECT `$tbl_item`.`LINE`,`$tbl_item`.`LastUpdate`,`$tbl_item`.`SHIFT_DATE`,`$tbl_item`.`VALUE1`,Tbl1.`PASS`,Tbl2.`FAIL`,Tbl3.`BLANK`,Tbl4.`NULL`, COUNT(`ID`) AS TOTAL
             FROM `$tbl_item`
                 LEFT JOIN (SELECT `LINE`, COUNT(`ID`) AS `PASS` FROM `$tbl_item` WHERE `JUDGEMENT` LIKE 'PASS' AND $WHERE_STARTUP GROUP BY `LINE`) AS Tbl1 ON `$tbl_item`.`LINE` = Tbl1.`LINE`
-                LEFT JOIN  (SELECT `LINE`, COUNT(`ID`) AS `FAIL` FROM `$tbl_item` WHERE `JUDGEMENT` LIKE 'FAIL' AND $WHERE_STARTUP GROUP BY `LINE`) AS Tbl2 ON `$tbl_item`.`LINE` = Tbl2.`LINE`
-                LEFT JOIN  (SELECT `LINE`, COUNT(`ID`) AS `BLANK` FROM `$tbl_item` WHERE `JUDGEMENT` LIKE 'BLANK' AND $WHERE_STARTUP GROUP BY `LINE`) AS Tbl3 ON `$tbl_item`.`LINE` = Tbl3.`LINE`
+                LEFT JOIN (SELECT `LINE`, COUNT(`ID`) AS `FAIL` FROM `$tbl_item` WHERE `JUDGEMENT` LIKE 'FAIL' AND $WHERE_STARTUP GROUP BY `LINE`) AS Tbl2 ON `$tbl_item`.`LINE` = Tbl2.`LINE`
+                LEFT JOIN (SELECT `LINE`, COUNT(`ID`) AS `BLANK` FROM `$tbl_item` WHERE `JUDGEMENT` LIKE 'BLANK' AND $WHERE_STARTUP GROUP BY `LINE`) AS Tbl3 ON `$tbl_item`.`LINE` = Tbl3.`LINE`
                 LEFT JOIN (SELECT `LINE`, COUNT(`ID`) AS `NULL` FROM `$tbl_item` WHERE `JUDGEMENT` LIKE '' AND $WHERE_STARTUP GROUP BY `LINE`) AS Tbl4 ON `$tbl_item`.`LINE` = Tbl4.`LINE`
             WHERE $WHERE_STARTUP
             GROUP BY `LINE`
@@ -114,13 +110,13 @@ foreach ($arrQueryLineName as $objResult) {
     $keyItem = searchForId($LINE, $rowItem, 'LINE');
     $keyTime = searchForId($LINE, $rowTime, 'LINE');
 
-    if ($keyTime != '') {
+    if ($keyTime != '' || is_numeric($keyTime) == 1) {
         $arrDataTime = $rowTime[$keyTime];
     } else {
         $arrDataTime = array('LINE' => '', 'CONFIRM1' => '', 'CONFIRM2' => '', 'CONFIRM3' => '', 'STATUS' => '');
     }
 
-    if ($keyItem != '') {
+    if ($keyItem != '' || is_numeric($keyTime) == 1) {
         $PASS = intval($rowItem[$keyItem]['PASS']);
         $TOTAL = intval($rowItem[$keyItem]['TOTAL']);
     } else {
@@ -133,6 +129,11 @@ foreach ($arrQueryLineName as $objResult) {
     } else {
         $link = '<a href="visual_center.php?CENTER=' . $LINE . '&BIZ=' . $BIZ . '&PERIOD=' . $PERIOD . '"><h4><b>' . $LINE . '</b></h4></a>';
     }
+
+    // if($LINE == 'DEBUG'){
+    //     print_r($rowItem[$keyItem]);
+    //     print_r($TOTAL);
+    // }
 
     if ($arrDataTime['STATUS'] != "NO PRODUCTION") {
         if ($TOTAL != 0) {
@@ -156,8 +157,7 @@ foreach ($arrQueryLineName as $objResult) {
                 $status .= '<p>TECHNICIAN</p>';
             }
         } else {
-
-            if (searchForId($LINE, $rowItemMaster, 'LINE') != '') {
+            if (searchForId($LINE, $rowItemMaster, 'LINE') != '' || is_numeric(searchForId($LINE, $rowItemMaster, 'LINE')) == 1) {
                 $PASS = '--';
                 $TOTAL = '--';
                 $status = '<p><img src="framework/img/Rlight.png" width="50"></p>';

@@ -3,23 +3,34 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible"
+        content="IE=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description"
+        content="">
+    <meta name="author"
+        content="">
 
     <title>STARTUP CHECK</title>
-    <link rel="icon" href="framework/img/SMART_LOGO.png" type="image/png" sizes="16x16">
+    <link rel="icon"
+        href="framework/img/SMART_LOGO.png"
+        type="image/png"
+        sizes="16x16">
 
-    <link rel="stylesheet" href="framework/newVersion/dataTables/css/bootstrap.min.css">
-    <link rel="stylesheet" href="framework/newVersion/dataTables/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet"
+        href="framework/newVersion/dataTables/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="framework/newVersion/dataTables/css/dataTables.bootstrap5.min.css">
 
     <!-- Bootstrap5 -->
     <link href="framework/newVersion/Bootstrap5/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="css/visual.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet"
+        href="css/visual.css">
+    <link rel="stylesheet"
+        href="css/main.css">
 
 </head>
 
@@ -29,25 +40,117 @@
     <section>
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark shadow">
             <div class="container-fluid">
-                <a class="navbar-brand" href="http://43.72.52.52/system/">SONY</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand"
+                    href="http://43.72.52.52/system/">SONY</a>
+                <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse"
+                    id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="visual.html">HOME</a>
+                            <a class="nav-link active"
+                                aria-current="page"
+                                href="index.php">HOME</a>
                         </li>
                     </ul>
-                    <form class="d-flex">
-                        <a class="text-light me-2" href="#" id="login">
+                    <form class="d-flex"
+                        id="ShowLogin">
+
+                        <!-- Default dropstart button -->
+                        <!-- <div class="btn-group">
+                            <a href="login.html"
+                                type="button"
+                                class="btn btn-dark btn-sm">
+                                SIGN IN
+                                <img src="http://43.72.228.147/smart/pages/assets/media/internal/internal3.png"
+                                    alt=""
+                                    width="110"
+                                    height="25">
+                            </a>
+                        </div> -->
+
+                        <!-- Default dropstart button -->
+                        <!-- <div class="btn-group">
+                            <button type="button"
+                                class="btn btn-dark btn-sm dropdown-toggle"
+                                data-bs-toggle="dropdown"
+                                data-bs-auto-close="outside"
+                                aria-expanded="false">
+                                Mr. Anucha Srilakaew
+                                <img src="http://43.72.228.147/smart/pages/assets/media/internal/internal3.png"
+                                    alt=""
+                                    width="110"
+                                    height="25">
+                            </button>
+                            <div class="dropdown-menu w-100 border-light shadow">
+                                <div class="container-fluid">
+                                    <div class="text-center">
+                                        <div class="row">
+                                            <div class="col">
+                                                <img src="http://43.72.228.147/attend/img_opt/22164429.jpg"
+                                                    alt=""
+                                                    class="rounded-circle"
+                                                    width="30%">
+
+                                                <br>
+
+                                                <h6>Mr. Anucha Srilakarw</h6>
+                                                <p>Supervisor</p>
+                                                <b>STTC</b>
+                                                <p>HROD & Training Department</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">Action</h5>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <button type="button"
+                                                                    class="btn btn-dark form-control">ITEM</button>
+                                                            </div>
+                                                            <div class="col">
+                                                                <button type="button"
+                                                                    class="btn btn-dark form-control">ITEM</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col">
+                                                <a href="#"
+                                                    class="btn btn-danger btn-sm form-control" onclick="logout()">SIGN OUT</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <!-- <a class="text-light me-2"
+                            href="#"
+                            id="login">
                         </a>
-                        <img src="http://43.72.228.147/attend/img_opt/22164429.jpg" alt="" class="rounded-circle"
-                            width="35" height="35">&nbsp; &nbsp;
-                        <img src="http://43.72.228.147/smart/pages/assets/media/internal/internal3.png" alt=""
-                            width="110" height="25">
+                        <img src="http://43.72.228.147/attend/img_opt/22164429.jpg"
+                            alt=""
+                            class="rounded-circle"
+                            width="35"
+                            height="35">&nbsp; &nbsp; -->
+                        <!-- <img src="http://43.72.228.147/smart/pages/assets/media/internal/internal3.png"
+                            alt=""
+                            width="110"
+                            height="30"> -->
                     </form>
                 </div>
             </div>
@@ -70,46 +173,72 @@
                                 <div class="col-12">
                                     <div class="row">
                                         <div class="col">
-                                            <div class="btn-group form-control shadow-sm border-light" role="group"
+                                            <div class="btn-group form-control shadow-sm border-light"
+                                                role="group"
                                                 aria-label="Basic radio toggle button group">
-                                                <input id="partPeriodSHIFT" value="SHIFT" type="radio" class="btn-check"
-                                                    name="btnradio" autocomplete="off">
+                                                <input id="partPeriodSHIFT"
+                                                    value="SHIFT"
+                                                    type="radio"
+                                                    class="btn-check"
+                                                    name="btnradio"
+                                                    autocomplete="off">
                                                 <label class="btn btn-outline-primary border-light"
                                                     for="partPeriodSHIFT">SHIFT</label>
 
-                                                <input id="partPeriodDAY" value="DAY" type="radio" class="btn-check"
-                                                    name="btnradio" autocomplete="off">
+                                                <input id="partPeriodDAY"
+                                                    value="DAY"
+                                                    type="radio"
+                                                    class="btn-check"
+                                                    name="btnradio"
+                                                    autocomplete="off">
                                                 <label class="btn btn-outline-primary border-light"
                                                     for="partPeriodDAY">DAILY</label>
 
-                                                <input id="partPeriodWEEK" value="WEEK" type="radio" class="btn-check"
-                                                    name="btnradio" autocomplete="off">
+                                                <input id="partPeriodWEEK"
+                                                    value="WEEK"
+                                                    type="radio"
+                                                    class="btn-check"
+                                                    name="btnradio"
+                                                    autocomplete="off">
                                                 <label class="btn btn-outline-primary border-light"
                                                     for="partPeriodWEEK">WEEKLY</label>
                                             </div>
                                         </div>
                                         <div class="col">
-                                            <div id="boxShift" class="btn-group form-control border-light shadow-sm"
-                                                role="group" aria-label="Basic radio toggle button group">
-                                                <input name="SHIFT_DATE" id="SHIFT_DATE" type="date"
+                                            <div id="boxShift"
+                                                class="btn-group form-control border-light shadow-sm"
+                                                role="group"
+                                                aria-label="Basic radio toggle button group">
+                                                <input name="SHIFT_DATE"
+                                                    id="SHIFT_DATE"
+                                                    type="date"
                                                     class="form-control text-center border-light"
                                                     aria-labelledby="boxShift">
-                                                <select name="SHIFT" id="SHIFT"
+                                                <select name="SHIFT"
+                                                    id="SHIFT"
                                                     class="form-control text-center border-light"
                                                     aria-labelledby="boxShift">
                                                     <option value="DAY">DAY</option>
                                                     <option value="NIGHT">NIGHT</option>
                                                 </select>
                                             </div>
-                                            <div id="boxDaily" class="btn-group form-control border-light shadow-sm"
-                                                role="group" aria-label="Basic radio toggle button group">
-                                                <input name="DAY" id="DAY" type="date"
+                                            <div id="boxDaily"
+                                                class="btn-group form-control border-light shadow-sm"
+                                                role="group"
+                                                aria-label="Basic radio toggle button group">
+                                                <input name="DAY"
+                                                    id="DAY"
+                                                    type="date"
                                                     class="form-control text-center border-light"
                                                     aria-labelledby="boxDaily">
                                             </div>
-                                            <div id="boxWeekly" class="btn-group form-control border-light shadow-sm"
-                                                role="group" aria-label="Basic radio toggle button group">
-                                                <input name="WEEK" id="WEEK" type="week"
+                                            <div id="boxWeekly"
+                                                class="btn-group form-control border-light shadow-sm"
+                                                role="group"
+                                                aria-label="Basic radio toggle button group">
+                                                <input name="WEEK"
+                                                    id="WEEK"
+                                                    type="week"
                                                     class="form-control text-center border-light"
                                                     aria-labelledby="boxWeekly">
                                             </div>
@@ -129,17 +258,27 @@
     <section>
         <div class="container bg-light shadow-sm"><br>
             <div class="table-responsive">
-                <table id="example" class="table table-hover table-bordered" style="width:100%">
+                <table id="example"
+                    class="table table-hover table-bordered"
+                    style="width:100%">
                     <thead class="table-dark text-light">
                         <tr>
-                            <th width="20%" class="text-center">LINE</th>
-                            <th width="10%" class="text-center">PASS</th>
-                            <th width="10%" class="text-center">TOTAL</th>
-                            <th width="10%" class="text-center">STATUS</th>
-                            <th width="20%" class="text-center">LINE</th>
-                            <th width="10%" class="text-center">PASS</th>
-                            <th width="10%" class="text-center">TOTAL</th>
-                            <th width="10%" class="text-center">STATUS</th>
+                            <th width="20%"
+                                class="text-center">LINE</th>
+                            <th width="10%"
+                                class="text-center">PASS</th>
+                            <th width="10%"
+                                class="text-center">TOTAL</th>
+                            <th width="10%"
+                                class="text-center">STATUS</th>
+                            <th width="20%"
+                                class="text-center">LINE</th>
+                            <th width="10%"
+                                class="text-center">PASS</th>
+                            <th width="10%"
+                                class="text-center">TOTAL</th>
+                            <th width="10%"
+                                class="text-center">STATUS</th>
                         </tr>
                     </thead>
                 </table>
@@ -147,7 +286,8 @@
         </div>
     </section>
     <br><br>
-    <input type="hidden" id="First">
+    <input type="hidden"
+        id="First">
 </body>
 
 </html>
@@ -167,4 +307,3 @@
 <!-- mycode -->
 <script src="js/mainFunction.js"></script>
 <script src="js/visual.js"></script>
-<script src="js/login.js"></script>
