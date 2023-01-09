@@ -484,6 +484,7 @@
                                     if ($interval > 0) {
                                         $hour1 = $interval * 24;
                                     }
+                                    
                                     if ($interval_h > 0) {
                                         $hour2 = $interval_h;
                                     }

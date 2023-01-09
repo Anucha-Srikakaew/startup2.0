@@ -48,7 +48,7 @@ $WEEK = $_POST['WEEK'];
 // check time get data from table.
 if ($PERIOD == 'SHIFT' || $PERIOD == 'DAY') {
     $SHIFT_DATE = date("Y-m-d", strtotime("-1 days", strtotime($DAY)));
-    
+
     if (DateDiff($SHIFT_DATE, date("Y-m-d")) > 3) {
         $tbl_item = 'startup_item_trace';
         $tbl_time = 'startup_time_trace';
@@ -129,11 +129,6 @@ foreach ($arrQueryLineName as $objResult) {
     } else {
         $link = '<a href="visual_center.php?CENTER=' . $LINE . '&BIZ=' . $BIZ . '&PERIOD=' . $PERIOD . '"><h4><b>' . $LINE . '</b></h4></a>';
     }
-
-    // if($LINE == 'DEBUG'){
-    //     print_r($rowItem[$keyItem]);
-    //     print_r($TOTAL);
-    // }
 
     if ($arrDataTime['STATUS'] != "NO PRODUCTION") {
         if ($TOTAL != 0) {

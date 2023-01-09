@@ -135,7 +135,6 @@
 
             $strSQL = "SELECT * FROM `$tbl_time` 
             WHERE `PERIOD` = '$PERIOD' AND LINE = '$LINE' AND MODEL LIKE '%$MODEL%' AND TYPE LIKE '%$LINE_TYPE%' $query_shift_date ORDER BY DATETIME1 DESC";
-
             $objQuery = mysqli_query($con, $strSQL);
             $objResult = mysqli_fetch_array($objQuery);
 

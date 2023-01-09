@@ -162,7 +162,7 @@ function loadDatatableDefault() {
                                 FAIL,
                                 BLANK,
                                 TOTAL,
-                                STATUS_CONFIRM[TYPE],
+                                STATUS_CONFIRM[TYPE][MODEL],
                             ];
                             table.row.add(row).draw().nodes().to$().addClass(strClass);
                         })
@@ -287,6 +287,9 @@ function loadDatatable(type, model) {
         }
     })
 
+    MODEL = model
+    TYPE = type
+
     window.history.pushState(
         "object or string",
         "Title",
@@ -374,27 +377,30 @@ function showDataMemberTxT(obj) {
             CONFIRM1_URL = 'framework/img/avatar.png'
             CONFIRM2_URL = 'framework/img/avatar.png'
             CONFIRM3_URL = 'framework/img/avatar.png'
-            STATUS_CONFIRM[value.TYPE] = 'TECHNICIAN'
+            STATUS_CONFIRM[value.TYPE] = []
+            STATUS_CONFIRM[value.TYPE][value.MODEL] = 'TECHNICIAN'
             if (value.CONFIRM1 != null && value.CONFIRM1 != '') {
                 CONFIRM1_URL = URLIMG + value.CONFIRM1 + '.JPG'
                 STATUS = 'CONFIRM1'
-                if (dataFunc != 'loadDatatable') {
-                    STATUS_CONFIRM[value.TYPE] = 'SUPERVISOR'
-                }
+                // if (dataFunc != 'loadDatatable') {
+                STATUS_CONFIRM[value.TYPE][value.MODEL] = 'SUPERVISOR'
+                // }
             }
+
             if (value.CONFIRM2 != null && value.CONFIRM2 != '') {
                 CONFIRM2_URL = URLIMG + value.CONFIRM2 + '.JPG'
                 STATUS = 'CONFIRM2'
-                if (dataFunc != 'loadDatatable') {
-                    STATUS_CONFIRM[value.TYPE] = 'PRODUCTION'
-                }
+                // if (dataFunc != 'loadDatatable') {
+                STATUS_CONFIRM[value.TYPE][value.MODEL] = 'PRODUCTION'
+                // }
             }
+
             if (value.CONFIRM3 != null && value.CONFIRM3 != '') {
                 CONFIRM3_URL = URLIMG + value.CONFIRM3 + '.JPG'
                 STATUS = 'CONFIRM3'
-                if (dataFunc != 'loadDatatable') {
-                    STATUS_CONFIRM[value.TYPE] = 'COMPLETE'
-                }
+                // if (dataFunc != 'loadDatatable') {
+                STATUS_CONFIRM[value.TYPE][value.MODEL] = 'COMPLETE'
+                // }
             }
 
             var name1 = '<br>',
@@ -532,17 +538,13 @@ $('.modal').on('shown.bs.modal', function (e) {
     // do something...
     if (this.id == 'exampleModal1') {
         $('#memberIdDispose').focus()
+    } else if (this.id == 'exampleModal2') {
+        $('#memberIdConfirm').focus()
     }
 })
 
-// $('.modal').on('hidden.bs.modal', function(e) {
-//     // do something...
-//     $("#idConfirm").val('')
-// })
-
 // Get the input field
 var memberIdDispose = document.getElementById("memberIdDispose");
-
 // Execute a function when the user presses a key on the keyboard
 memberIdDispose.addEventListener("keypress", function (event) {
     // If the user presses the "Enter" key on the keyboard
@@ -551,6 +553,78 @@ memberIdDispose.addEventListener("keypress", function (event) {
         dispose()
     }
 });
+
+// Get the input field
+var memberIdConfirm = document.getElementById("memberIdConfirm");
+// Execute a function when the user presses a key on the keyboard
+memberIdConfirm.addEventListener("keypress", function (event) {
+    // If the user presses the "Enter" key on the keyboard
+    if (event.key === "Enter") {
+        // Cancel the default action, if needed
+        confirmData()
+    }
+});
+
+function confirmData() {
+    var confirm = ''
+    if (STATUS_CONFIRM[TYPE][MODEL] == "SUPERVISOR") {
+        confirm = 'CONFIRM2'
+    } else if (STATUS_CONFIRM[TYPE][MODEL] == "PRODUCTION") {
+        confirm = 'CONFIRM3'
+    }
+
+    var dataConfirm = {
+        'LINE': LINE,
+        'PERIOD': PERIOD,
+        'START_DATE': START_DATE,
+        'END_DATE': END_DATE,
+        'SHIFT': SHIFT,
+        'TYPE': TYPE,
+        'MODEL': MODEL,
+        'MEMBER': $('#memberIdConfirm').val(),
+        'CONFIRM': confirm
+    }
+
+    console.log(dataConfirm)
+
+    $.ajax({
+        url: "php/ajax_query_visual_line_confirm.php",
+        type: "POST",
+        dataType: "json",
+        data: dataConfirm,
+        success: function (result) {
+            console.log(result)
+
+            // var icon = '', title = '', text = result.message
+            // if (result.response == true) {
+            //     icon = 'success'
+            //     title = 'Sucess...'
+            // } else {
+            //     icon = 'error'
+            //     title = 'Error'
+            // }
+            // Swal.fire({
+            //     icon: icon,
+            //     title: title,
+            //     text: text,
+            // }).then(function () {
+            //     window.location.href = "visual_line.html?" +
+            //         "COUNTRY=" + COUNTRY +
+            //         "&FACTORY=" + FACTORY +
+            //         "&BIZ=" + BIZ +
+            //         "&CENTER=" + CENTER +
+            //         "&LINE=" + LINE +
+            //         "&START_DATE=" + START_DATE +
+            //         "&END_DATE=" + END_DATE +
+            //         "&SHIFT=" + SHIFT +
+            //         "&PERIOD=" + PERIOD +
+            //         "&TYPE=" + TYPE +
+            //         "&MODEL=" + MODEL +
+            //         "&dataFunc=loadDatatableDefault"
+            // })
+        }
+    })
+}
 
 function dispose() {
     var dataDispose = {
@@ -565,7 +639,7 @@ function dispose() {
     }
 
     $.ajax({
-        url: "php/ajax_visual_line_dispose.php",
+        url: "php/ajax_query_visual_line_dispose.php",
         type: "POST",
         dataType: "json",
         data: dataDispose,
@@ -585,7 +659,19 @@ function dispose() {
                 title: title,
                 text: text,
             }).then(function () {
-                window.location.reload()
+                window.location.href = "visual_line.html?" +
+                    "COUNTRY=" + COUNTRY +
+                    "&FACTORY=" + FACTORY +
+                    "&BIZ=" + BIZ +
+                    "&CENTER=" + CENTER +
+                    "&LINE=" + LINE +
+                    "&START_DATE=" + START_DATE +
+                    "&END_DATE=" + END_DATE +
+                    "&SHIFT=" + SHIFT +
+                    "&PERIOD=" + PERIOD +
+                    "&TYPE=" + TYPE +
+                    "&MODEL=" + MODEL +
+                    "&dataFunc=loadDatatableDefault"
             })
         }
     })

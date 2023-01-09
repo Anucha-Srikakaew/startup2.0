@@ -120,7 +120,6 @@ if ($MEMBER_TYPE == 'SUP.T' or $MEMBER_TYPE == 'ENG' or $MEMBER_TYPE == 'ADMIN' 
     //     $objQuery = mysqli_query($con84, $strSQL);
     // }
 
-    // echo $sql;
     if (mysqli_multi_query($con, $sql)) {
         $response['response'] = true;
         $response['message'] = 'DISPOSE COMPLETE MFE TEAM.';
