@@ -115,43 +115,59 @@ function loadDatatableDefault() {
                 dataType: "json",
                 data: dataSearch,
                 success: function (obj) {
+                    console.log(obj)
                     var TYPE = '', MODEL = '', strClass
                     table.clear().draw();
                     table.column(1).visible(true);
                     $(table.column(0).header()).text('TYPE');
-                    $.each(obj, function (key, value) {
-                        var row = '';
-                        var TYPE = value.TYPE
-                        var MODEL = value.MODEL
-                        var PASS = +value.PASS
-                        var FAIL = +value.FAIL
-                        var BLANK = +value.BLANK
-                        var TOTAL = +value.TOTAL
-                        var MODEL = value.MODEL
-                        var STATUS = '';
-                        if (FAIL > 0) {
-                            STATUS = 'FAIL'
-                            strClass = 'text-center table-danger'
-                        } else {
-                            if (BLANK > 0) {
-                                STATUS = 'BLANK'
-                                strClass = 'text-center table-warning'
-                            } else {
-                                STATUS = 'PASS'
-                                strClass = 'text-center table-success'
-                            }
-                        }
+
+                    if (obj.length == 0) {
                         var row = [
-                            '<a href="#" onclick="loadDatatable(this.name, this.id)" name="' + TYPE + '" id="' + MODEL + '"><h5><b class="text-primary">' + TYPE + '</b></h5></a>',
-                            MODEL,
-                            PASS,
-                            FAIL,
-                            BLANK,
-                            TOTAL,
-                            STATUS_CONFIRM[TYPE],
+                            '--',
+                            '--',
+                            '--',
+                            '--',
+                            '--',
+                            '--',
+                            '--',
                         ];
-                        table.row.add(row).draw().nodes().to$().addClass(strClass);
-                    })
+                        table.row.add(row).draw().nodes().to$().addClass('text-center');
+                    } else {
+                        $.each(obj, function (key, value) {
+                            var row = '';
+                            var TYPE = value.TYPE
+                            var MODEL = value.MODEL
+                            var PASS = +value.PASS
+                            var FAIL = +value.FAIL
+                            var BLANK = +value.BLANK
+                            var TOTAL = +value.TOTAL
+                            var MODEL = value.MODEL
+                            var STATUS = '';
+                            if (FAIL > 0) {
+                                STATUS = 'FAIL'
+                                strClass = 'text-center table-danger'
+                            } else {
+                                if (BLANK > 0) {
+                                    STATUS = 'BLANK'
+                                    strClass = 'text-center table-warning'
+                                } else {
+                                    STATUS = 'PASS'
+                                    strClass = 'text-center table-success'
+                                }
+                            }
+                            var row = [
+                                '<a href="#" onclick="loadDatatable(this.name, this.id)" name="' + TYPE + '" id="' + MODEL + '"><h5><b class="text-primary">' + TYPE + '</b></h5></a>',
+                                MODEL,
+                                PASS,
+                                FAIL,
+                                BLANK,
+                                TOTAL,
+                                STATUS_CONFIRM[TYPE],
+                            ];
+                            table.row.add(row).draw().nodes().to$().addClass(strClass);
+                        })
+                    }
+
                     window.history.pushState(
                         "object or string",
                         "Title",
@@ -290,7 +306,6 @@ function loadDatatable(type, model) {
     );
 }
 function showDataMemberTxT(obj) {
-
     var TECHNICIAN = '',
         MFE = '',
         PRODUCTION = '',
@@ -300,160 +315,203 @@ function showDataMemberTxT(obj) {
         right = 109,
         strClass,
         STATUS
-    $.each(obj, function (key, value) {
-        if (strModel.search(value.MODEL) == -1) {
+
+    if (obj.length == 0) {
+        TECHNICIAN += '<div class="col-md-6"><br>' +
+            '<div class="card border-light bg-light shadow-sm">' +
+            '<div class="card-body shadow-sm">' +
+            '<h5></h5>' +
+            '<h6></h6>' +
+            '<img class="rounded-circle" src="framework/img/avatar.png" height="90px" width="90px" aria-label="For screen readers">' +
+            '<h6></h6>' +
+            '<h6></h6>' +
+            '<h6></h6>' +
+            '</div>' +
+            '</div>' +
+            '</div>'
+
+        MFE += '<div class="col-md-6"><br>' +
+            '<div class="card border-light bg-light shadow-sm">' +
+            '<div class="card-body shadow-sm">' +
+            '<h5></h5>' +
+            '<h6></h6>' +
+            '<img class="rounded-circle" src="framework/img/avatar.png" height="90px" width="90px" aria-label="For screen readers">' +
+            '<h6></h6>' +
+            '<h6></h6>' +
+            '<h6></h6>' +
+            '</div>' +
+            '</div>' +
+            '</div>'
+
+        PRODUCTION += '<div class="col-md-6"><br>' +
+            '<div class="card border-light bg-light shadow-sm">' +
+            '<div class="card-body shadow-sm">' +
+            '<h5></h5>' +
+            '<h6></h6>' +
+            '<img class="rounded-circle" src="framework/img/avatar.png" height="90px" width="90px" aria-label="For screen readers">' +
+            '<h6></h6>' +
+            '<h6></h6>' +
+            '<h6></h6>' +
+            '</div>' +
+            '</div>' +
+            '</div>'
+    } else {
+        $.each(obj, function (key, value) {
+            if (strModel.search(value.MODEL) == -1) {
+                if (key == 0) {
+                    strModel += value.MODEL
+                } else {
+                    strModel += ', ' + value.MODEL
+                }
+            }
+            if (strType.search(value.TYPE) == -1) {
+                if (key == 0) {
+                    strType += value.TYPE
+                } else {
+                    strType += ', ' + value.TYPE
+                }
+            }
+            CONFIRM1_URL = 'framework/img/avatar.png'
+            CONFIRM2_URL = 'framework/img/avatar.png'
+            CONFIRM3_URL = 'framework/img/avatar.png'
+            STATUS_CONFIRM[value.TYPE] = 'TECHNICIAN'
+            if (value.CONFIRM1 != null && value.CONFIRM1 != '') {
+                CONFIRM1_URL = URLIMG + value.CONFIRM1 + '.JPG'
+                STATUS = 'CONFIRM1'
+                if (dataFunc != 'loadDatatable') {
+                    STATUS_CONFIRM[value.TYPE] = 'SUPERVISOR'
+                }
+            }
+            if (value.CONFIRM2 != null && value.CONFIRM2 != '') {
+                CONFIRM2_URL = URLIMG + value.CONFIRM2 + '.JPG'
+                STATUS = 'CONFIRM2'
+                if (dataFunc != 'loadDatatable') {
+                    STATUS_CONFIRM[value.TYPE] = 'PRODUCTION'
+                }
+            }
+            if (value.CONFIRM3 != null && value.CONFIRM3 != '') {
+                CONFIRM3_URL = URLIMG + value.CONFIRM3 + '.JPG'
+                STATUS = 'CONFIRM3'
+                if (dataFunc != 'loadDatatable') {
+                    STATUS_CONFIRM[value.TYPE] = 'COMPLETE'
+                }
+            }
+
+            var name1 = '<br>',
+                tabk1 = '<br>',
+                datetime1 = '<br>'
+            if (value.NAME_CONFIRM1 != null && value.NAME_CONFIRM1 != '') {
+                name1 = value.NAME_CONFIRM1
+                tabk1 = value.TAKT1 + ' MIN.'
+                datetime1 = value.DATETIME1
+            }
+
+            var name2 = '<br>',
+                tabk2 = '<br>',
+                datetime2 = '<br>'
+            if (value.NAME_CONFIRM2 != null && value.NAME_CONFIRM2 != '') {
+                name2 = value.NAME_CONFIRM2
+                tabk2 = value.TAKT2 + ' MIN.'
+                datetime2 = value.DATETIME2
+            }
+
+            var name3 = '<br>',
+                tabk3 = '<br>',
+                datetime3 = '<br>'
+            if (value.NAME_CONFIRM3 != null && value.NAME_CONFIRM3 != '') {
+                name3 = value.NAME_CONFIRM3
+                tabk3 = value.TAKT3 + ' MIN.'
+                datetime3 = value.DATETIME3
+            }
+
+
             if (key == 0) {
-                strModel += value.MODEL
+                TECHNICIAN += '<div class="col-md-6"><br>' +
+                    '<div class="card border-light bg-light shadow-sm">' +
+                    '<div class="card-body shadow-sm">' +
+                    '<h5>' + value.TYPE + '</h5>' +
+                    '<h6>' + value.MODEL + '</h6>' +
+                    '<img class="rounded-circle" src="' + CONFIRM1_URL + '" height="90px" width="90px" aria-label="For screen readers">' +
+                    '<h6>' + name1 + '</h6>' +
+                    '<h6>' + tabk1 + '</h6>' +
+                    '<h6>' + datetime1 + '</h6>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>'
+
+                MFE += '<div class="col-md-6"><br>' +
+                    '<div class="card border-light bg-light shadow-sm">' +
+                    '<div class="card-body shadow-sm">' +
+                    '<h5>' + value.TYPE + '</h5>' +
+                    '<h6>' + value.MODEL + '</h6>' +
+                    '<img class="rounded-circle" src="' + CONFIRM2_URL + '" height="90px" width="90px" aria-label="For screen readers">' +
+                    '<h6>' + name2 + '</h6>' +
+                    '<h6>' + tabk2 + ' </h6>' +
+                    '<h6>' + datetime2 + '</h6>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>'
+
+                PRODUCTION += '<div class="col-md-6"><br>' +
+                    '<div class="card border-light bg-light shadow-sm">' +
+                    '<div class="card-body shadow-sm">' +
+                    '<h5>' + value.TYPE + '</h5>' +
+                    '<h6>' + value.MODEL + '</h6>' +
+                    '<img class="rounded-circle" src="' + CONFIRM3_URL + '" height="90px" width="90px" aria-label="For screen readers">' +
+                    '<h6>' + name3 + '</h6>' +
+                    '<h6>' + tabk3 + ' </h6>' +
+                    '<h6>' + datetime3 + '</h6>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>'
             } else {
-                strModel += ', ' + value.MODEL
+                top = top + 3
+                right = right + 3
+                strClass = '.img' + key + ' { top: ' + top + 'px; right: ' + right + 'px; }';
+                $('style')[0].append(strClass);
+
+                TECHNICIAN += '<div class="col-md-6 absolute img' + key + '"><br>' +
+                    '<div class="card border-light bg-light shadow-sm">' +
+                    '<div class="card-body shadow-sm">' +
+                    '<h5>' + value.TYPE + '</h5>' +
+                    '<h6>' + value.MODEL + '</h6>' +
+                    '<img class="rounded-circle" src="' + CONFIRM1_URL + '" height="90px" width="90px" aria-label="For screen readers">' +
+                    '<h6>' + name1 + '</h6>' +
+                    '<h6>' + tabk1 + ' </h6>' +
+                    '<h6>' + datetime1 + '</h6>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>'
+
+                MFE += '<div class="col-md-6 absolute img' + key + '"><br>' +
+                    '<div class="card border-light bg-light shadow-sm">' +
+                    '<div class="card-body shadow-sm">' +
+                    '<h5>' + value.TYPE + '</h5>' +
+                    '<h6>' + value.MODEL + '</h6>' +
+                    '<img class="rounded-circle" src="' + CONFIRM2_URL + '" height="90px" width="90px" aria-label="For screen readers">' +
+                    '<h6>' + name2 + '</h6>' +
+                    '<h6>' + tabk2 + ' </h6>' +
+                    '<h6>' + datetime2 + '</h6>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>'
+
+                PRODUCTION += '<div class="col-md-6 absolute img' + key + '"><br>' +
+                    '<div class="card border-light bg-light shadow-sm">' +
+                    '<div class="card-body shadow-sm">' +
+                    '<h5>' + value.TYPE + '</h5>' +
+                    '<h6>' + value.MODEL + '</h6>' +
+                    '<img class="rounded-circle" src="' + CONFIRM3_URL + '" height="90px" width="90px" aria-label="For screen readers">' +
+                    '<h6>' + name3 + '</h6>' +
+                    '<h6>' + tabk3 + ' </h6>' +
+                    '<h6>' + datetime3 + '</h6>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>'
             }
-        }
-        if (strType.search(value.TYPE) == -1) {
-            if (key == 0) {
-                strType += value.TYPE
-            } else {
-                strType += ', ' + value.TYPE
-            }
-        }
-        CONFIRM1_URL = 'framework/img/avatar.png'
-        CONFIRM2_URL = 'framework/img/avatar.png'
-        CONFIRM3_URL = 'framework/img/avatar.png'
-        STATUS_CONFIRM[value.TYPE] = 'TECHNICIAN'
-        if (value.CONFIRM1 != null && value.CONFIRM1 != '') {
-            CONFIRM1_URL = URLIMG + value.CONFIRM1 + '.JPG'
-            STATUS = 'CONFIRM1'
-            if (dataFunc != 'loadDatatable') {
-                STATUS_CONFIRM[value.TYPE] = 'SUPERVISOR'
-            }
-        }
-        if (value.CONFIRM2 != null && value.CONFIRM2 != '') {
-            CONFIRM2_URL = URLIMG + value.CONFIRM2 + '.JPG'
-            STATUS = 'CONFIRM2'
-            if (dataFunc != 'loadDatatable') {
-                STATUS_CONFIRM[value.TYPE] = 'PRODUCTION'
-            }
-        }
-        if (value.CONFIRM3 != null && value.CONFIRM3 != '') {
-            CONFIRM3_URL = URLIMG + value.CONFIRM3 + '.JPG'
-            STATUS = 'CONFIRM3'
-            if (dataFunc != 'loadDatatable') {
-                STATUS_CONFIRM[value.TYPE] = 'COMPLETE'
-            }
-        }
+        });
+    }
 
-        var name1 = '<br>',
-            tabk1 = '<br>',
-            datetime1 = '<br>'
-        if (value.NAME_CONFIRM1 != null && value.NAME_CONFIRM1 != '') {
-            name1 = value.NAME_CONFIRM1
-            tabk1 = value.TAKT1 + ' MIN.'
-            datetime1 = value.DATETIME1
-        }
-
-        var name2 = '<br>',
-            tabk2 = '<br>',
-            datetime2 = '<br>'
-        if (value.NAME_CONFIRM2 != null && value.NAME_CONFIRM2 != '') {
-            name2 = value.NAME_CONFIRM2
-            tabk2 = value.TAKT2 + ' MIN.'
-            datetime2 = value.DATETIME2
-        }
-
-        var name3 = '<br>',
-            tabk3 = '<br>',
-            datetime3 = '<br>'
-        if (value.NAME_CONFIRM3 != null && value.NAME_CONFIRM3 != '') {
-            name3 = value.NAME_CONFIRM3
-            tabk3 = value.TAKT3 + ' MIN.'
-            datetime3 = value.DATETIME3
-        }
-
-
-        if (key == 0) {
-            TECHNICIAN += '<div class="col-md-6"><br>' +
-                '<div class="card border-light bg-light shadow-sm">' +
-                '<div class="card-body shadow-sm">' +
-                '<h5>' + value.TYPE + '</h5>' +
-                '<h6>' + value.MODEL + '</h6>' +
-                '<img class="rounded-circle" src="' + CONFIRM1_URL + '" height="90px" width="90px" aria-label="For screen readers">' +
-                '<h6>' + name1 + '</h6>' +
-                '<h6>' + tabk1 + '</h6>' +
-                '<h6>' + datetime1 + '</h6>' +
-                '</div>' +
-                '</div>' +
-                '</div>'
-
-            MFE += '<div class="col-md-6"><br>' +
-                '<div class="card border-light bg-light shadow-sm">' +
-                '<div class="card-body shadow-sm">' +
-                '<h5>' + value.TYPE + '</h5>' +
-                '<h6>' + value.MODEL + '</h6>' +
-                '<img class="rounded-circle" src="' + CONFIRM2_URL + '" height="90px" width="90px" aria-label="For screen readers">' +
-                '<h6>' + name2 + '</h6>' +
-                '<h6>' + tabk2 + ' </h6>' +
-                '<h6>' + datetime2 + '</h6>' +
-                '</div>' +
-                '</div>' +
-                '</div>'
-
-            PRODUCTION += '<div class="col-md-6"><br>' +
-                '<div class="card border-light bg-light shadow-sm">' +
-                '<div class="card-body shadow-sm">' +
-                '<h5>' + value.TYPE + '</h5>' +
-                '<h6>' + value.MODEL + '</h6>' +
-                '<img class="rounded-circle" src="' + CONFIRM3_URL + '" height="90px" width="90px" aria-label="For screen readers">' +
-                '<h6>' + name3 + '</h6>' +
-                '<h6>' + tabk3 + ' </h6>' +
-                '<h6>' + datetime3 + '</h6>' +
-                '</div>' +
-                '</div>' +
-                '</div>'
-        } else {
-            top = top + 3
-            right = right + 3
-            strClass = '.img' + key + ' { top: ' + top + 'px; right: ' + right + 'px; }';
-            $('style')[0].append(strClass);
-
-            TECHNICIAN += '<div class="col-md-6 absolute img' + key + '"><br>' +
-                '<div class="card border-light bg-light shadow-sm">' +
-                '<div class="card-body shadow-sm">' +
-                '<h5>' + value.TYPE + '</h5>' +
-                '<h6>' + value.MODEL + '</h6>' +
-                '<img class="rounded-circle" src="' + CONFIRM1_URL + '" height="90px" width="90px" aria-label="For screen readers">' +
-                '<h6>' + name1 + '</h6>' +
-                '<h6>' + tabk1 + ' </h6>' +
-                '<h6>' + datetime1 + '</h6>' +
-                '</div>' +
-                '</div>' +
-                '</div>'
-
-            MFE += '<div class="col-md-6 absolute img' + key + '"><br>' +
-                '<div class="card border-light bg-light shadow-sm">' +
-                '<div class="card-body shadow-sm">' +
-                '<h5>' + value.TYPE + '</h5>' +
-                '<h6>' + value.MODEL + '</h6>' +
-                '<img class="rounded-circle" src="' + CONFIRM2_URL + '" height="90px" width="90px" aria-label="For screen readers">' +
-                '<h6>' + name2 + '</h6>' +
-                '<h6>' + tabk2 + ' </h6>' +
-                '<h6>' + datetime2 + '</h6>' +
-                '</div>' +
-                '</div>' +
-                '</div>'
-
-            PRODUCTION += '<div class="col-md-6 absolute img' + key + '"><br>' +
-                '<div class="card border-light bg-light shadow-sm">' +
-                '<div class="card-body shadow-sm">' +
-                '<h5>' + value.TYPE + '</h5>' +
-                '<h6>' + value.MODEL + '</h6>' +
-                '<img class="rounded-circle" src="' + CONFIRM3_URL + '" height="90px" width="90px" aria-label="For screen readers">' +
-                '<h6>' + name3 + '</h6>' +
-                '<h6>' + tabk3 + ' </h6>' +
-                '<h6>' + datetime3 + '</h6>' +
-                '</div>' +
-                '</div>' +
-                '</div>'
-        }
-    });
     $("#TECHNICIAN").append(TECHNICIAN)
     $("#MFE").append(MFE)
     $("#PRODUCTION").append(PRODUCTION)
@@ -513,12 +571,21 @@ function dispose() {
         data: dataDispose,
         success: function (result) {
             console.log(result)
+
+            var icon = '', title = '', text = result.message
+            if (result.response == true) {
+                icon = 'success'
+                title = 'Sucess...'
+            } else {
+                icon = 'error'
+                title = 'Error'
+            }
             Swal.fire({
-                icon: 'success',
-                title: 'Sucess...',
-                text: 'Dispose complete',
+                icon: icon,
+                title: title,
+                text: text,
             }).then(function () {
-                
+                window.location.reload()
             })
         }
     })

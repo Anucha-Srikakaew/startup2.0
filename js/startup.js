@@ -58,31 +58,31 @@ var table = $('#example').DataTable({
 });
 
 var timeId = ''
-$.ajax({
-    url: "php/ajax_query_startup.php",
-    type: "POST",
-    dataType: "json",
-    data: {
-        'TIME': 'TIME',
-        'COUNTRY': urlParams.get('COUNTRY'),
-        'FACTORY': urlParams.get('FACTORY'),
-        'BIZ': urlParams.get('BIZ'),
-        'PERIOD': urlParams.get('PERIOD'),
-        'START_DATE': urlParams.get('START_DATE'),
-        'END_DATE': urlParams.get('END_DATE'),
-        'SHIFT': urlParams.get('SHIFT'),
-        'LINE': urlParams.get('LINE'),
-        'TYPE': urlParams.get('TYPE'),
-        'MODEL': urlParams.get('MODEL')
-    },
-    success: function (result) {
-        // start success
-        console.log(result)
-        timeId = result[0].ID
-        // console.log(timeId)
-        // end success
-    }
-})
+// $.ajax({
+//     url: "php/ajax_query_startup.php",
+//     type: "POST",
+//     dataType: "json",
+//     data: {
+//         'TIME': 'TIME',
+//         'COUNTRY': urlParams.get('COUNTRY'),
+//         'FACTORY': urlParams.get('FACTORY'),
+//         'BIZ': urlParams.get('BIZ'),
+//         'PERIOD': urlParams.get('PERIOD'),
+//         'START_DATE': urlParams.get('START_DATE'),
+//         'END_DATE': urlParams.get('END_DATE'),
+//         'SHIFT': urlParams.get('SHIFT'),
+//         'LINE': urlParams.get('LINE'),
+//         'TYPE': urlParams.get('TYPE'),
+//         'MODEL': urlParams.get('MODEL')
+//     },
+//     success: function (result) {
+//         // start success
+//         console.log(result)
+//         timeId = result[0].ID
+//         // console.log(timeId)
+//         // end success
+//     }
+// })
 
 var specArr = []
 $.ajax({
@@ -92,68 +92,74 @@ $.ajax({
     data: dataSearchUrl,
     success: function (result) {
         // start success
-        table.clear().draw();
-        $.each(result, function (key, value) {
-            var picture, input = '', cls = 'text-center ', valueInput = ''
-            console.log(value)
+        console.log(result)
+        if (result.length != 0) {
+            table.clear().draw();
+            $.each(result, function (key, value) {
+                var picture, input = '', cls = 'text-center ', valueInput = ''
+                console.log(value)
 
-            if (value.PICTURE == '') {
-                picture = '<img width="60%" src="https://png.pngtree.com/png-vector/20190820/ourmid/pngtree-no-image-vector-illustration-isolated-png-image_1694547.jpg" alt="">'
-            } else {
-                picture = '<img width="60%" src="http://43.72.52.206/excel_body/item/photo/' + value.PICTURE + '" alt="">'
-            }
-
-            if (value.SPEC == 'OK' || value.SPEC == 'NG' || value.SPEC == 'JUDGEMENT') {
-                input = '<select name="VALUE1" id="' + value.ID + '" class="form-select">' +
-                    '<option value="OK">OK</option>' +
-                    '<option value="NG">NG</option>' +
-                    '</select>'
-            } else if (value.SPEC == 'TEXT') {
-                input = '<input type="text" class="form-control" name="VALUE1" id="' + value.ID + '">'
-            } else if (value.SPEC == 'PHOTO') {
-
-                if (value.VALUE1 == '') {
-                    valueInput = '<i class="fa fa-camera"></i>'
+                if (value.PICTURE == '') {
+                    picture = '<img width="60%" src="framework/img/no-image-vector.jpg" alt="">'
                 } else {
-                    valueInput = value.VALUE1
+                    picture = '<img width="60%" src="http://43.72.52.206/excel_body/item/photo/' + value.PICTURE + '" alt="">'
                 }
 
-                input = '<button id="' + value.ID + '" class="btn btn-primary form-control" data-bs-toggle="modal" data-bs-target="#exampleModal">' + valueInput + '</button>';
-            } else if (value.SPEC == 'DATE') {
-                input = '<input type="date" class="form-control" name="VALUE1" id="' + value.ID + '">'
-            } else if (value.SPEC == 'VALUE') {
-                input = '<input type="number" step="any" class="form-control" name="VALUE1" id="' + value.ID + '">'
-            }
+                if (value.SPEC == 'OK' || value.SPEC == 'NG' || value.SPEC == 'JUDGEMENT') {
+                    input = '<select name="VALUE1" id="' + value.ID + '" class="form-select">' +
+                        '<option value="OK">OK</option>' +
+                        '<option value="NG">NG</option>' +
+                        '</select>'
+                } else if (value.SPEC == 'TEXT') {
+                    input = '<input type="text" class="form-control" name="VALUE1" id="' + value.ID + '">'
+                } else if (value.SPEC == 'PHOTO') {
 
-            if (value.JUDGEMENT == 'FAIL') {
-                cls += 'border-light table-danger'
-            } else if (value.JUDGEMENT == 'PASS') {
-                cls += 'border-light table-success'
-            }
+                    if (value.VALUE1 == '') {
+                        valueInput = '<i class="fa fa-camera"></i>'
+                    } else {
+                        valueInput = value.VALUE1
+                    }
 
-            table.row.add([
-                value.PROCESS,
-                picture,
-                value.ITEM,
-                value.SPEC_DES,
-                input
-            ]).node().id = 'tr' + value.ID
-            table.draw(true)
-            $('#tr' + value.ID).addClass(cls)
+                    input = '<button id="' + value.ID + '" class="btn btn-primary form-control" data-bs-toggle="modal" data-bs-target="#exampleModal">' + valueInput + '</button>';
+                } else if (value.SPEC == 'DATE') {
+                    input = '<input type="date" class="form-control" name="VALUE1" id="' + value.ID + '">'
+                } else if (value.SPEC == 'VALUE') {
+                    input = '<input type="number" step="any" class="form-control" name="VALUE1" id="' + value.ID + '">'
+                }
 
-            $('#' + value.ID).val(value.VALUE1)
+                if (value.JUDGEMENT == 'FAIL') {
+                    cls += 'border-light table-danger'
+                } else if (value.JUDGEMENT == 'PASS') {
+                    cls += 'border-light table-success'
+                }
 
-            specArr[value.ID] = {
-                'MIN': value.MIN,
-                'MAX': value.MAX,
-                'SPEC_DES': value.SPEC_DES,
-                'SPEC': value.SPEC,
-            }
-        })
+                table.row.add([
+                    value.PROCESS,
+                    picture,
+                    value.ITEM,
+                    value.SPEC_DES,
+                    input
+                ]).node().id = 'tr' + value.ID
+                table.draw(true)
+                $('#tr' + value.ID).addClass(cls)
 
-        $('input,select').on('keyup change', function (e) {
-            setElement(this)
-        });
+                $('#' + value.ID).val(value.VALUE1)
+
+                specArr[value.ID] = {
+                    'MIN': value.MIN,
+                    'MAX': value.MAX,
+                    'SPEC_DES': value.SPEC_DES,
+                    'SPEC': value.SPEC,
+                }
+            })
+
+            $('input,select').on('keyup change', function (e) {
+                setElement(this)
+            });
+        } else {
+            window.location.href = "startup_c.html"
+        }
+
         // end success
     }
 })

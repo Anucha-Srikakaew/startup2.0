@@ -39,13 +39,7 @@
                             <!-- <a class="nav-link active" aria-current="page" href="visual.html" id="VISUAL_URL">HOME</a> -->
                         </li>
                     </ul>
-                    <form class="d-flex">
-                        <a class="text-light me-2" href="#" id="login"></a>
-                        <img src="http://43.72.228.147/attend/img_opt/22164429.jpg" alt="" class="rounded-circle"
-                            width="35" height="35">&nbsp; &nbsp;
-                        <img src="http://43.72.228.147/smart/pages/assets/media/internal/internal3.png" alt=""
-                            width="110" height="25">
-                    </form>
+                    <form class="d-flex" id="ShowLogin"></form>
                 </div>
             </div>
         </nav>
@@ -101,13 +95,15 @@
                                                 <h1><b>SMART STARTUP CHECK</b></h1>
                                                 <p>CONFIRM TO DISPOSE YOUR STARTUP</p><br><br>
                                                 <h4><b>INPUT MEMBER ID</b></h4><br><br>
-                                                <input id="memberIdDispose" type="password" class="form-control text-center rounded-pill"
+                                                <input id="memberIdDispose" type="password"
+                                                    class="form-control text-center rounded-pill"
                                                     placeholder="INPUT MEMBER ID">
                                             </div>
                                             <br><br>
                                         </div>
                                         <div class="modal-footer">
-                                            <button onclick="dispose()" id="enterDispose" type="button" class="btn btn-danger rounded-pill">DISPOSE</button>
+                                            <button onclick="dispose()" id="enterDispose" type="button"
+                                                class="btn btn-danger rounded-pill">DISPOSE</button>
                                             <button type="button" class="btn btn-secondary rounded-pill"
                                                 data-bs-dismiss="modal">Close</button>
                                         </div>
@@ -202,6 +198,9 @@
 
 <!-- icon -->
 <script src="framework/js/a076d05399.js"></script>
+
+<!-- sweetalert2 -->
+<script src="framework/js/sweetalert2@11.js"></script>
 
 <!-- mycode -->
 <script src="js/mainFunction.js"></script>

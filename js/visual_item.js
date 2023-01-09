@@ -102,7 +102,7 @@ $.ajax({
                 if (valueTbl.PICTURE != null && valueTbl.PICTURE != '') {
                     IMG_SRC = '<img width="100%" src="http://43.72.52.206/excel_body/item/photo/' + valueTbl.PICTURE + '" alt="">'
                 } else {
-                    IMG_SRC = '<img width="30%" src="framework/img/SMART_LOGO.png" alt="">'
+                    IMG_SRC = '<img width="60%" src="framework/img/no-image-vector.jpg" alt="">'
                 }
 
                 if (valueTbl.SPEC == 'PHOTO') {
