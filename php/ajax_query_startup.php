@@ -113,7 +113,8 @@ if (isset($_POST['TIME'])) {
         AND `MODEL` = '$MODEL'
         AND `PERIOD` = '$PERIOD'
         AND `TYPE` = '$TYPE'
-        $where_period";
+        $where_period
+        ORDER BY `NUM_ORDER` ASC";
 }
 $query = mysqli_query($con, $sql);
 $row = mysqli_fetch_all($query, MYSQLI_ASSOC);

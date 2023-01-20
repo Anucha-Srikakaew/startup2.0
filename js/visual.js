@@ -127,7 +127,6 @@ $('#First, input, select').change(function () {
 $("#First").change()
 
 function LoadData(dataSearch) {
-    console.log('ddddd')
     $(".se-pre-con").fadeIn()
     $.ajax({
         url: "php/ajax_query_visual.php",
@@ -135,6 +134,7 @@ function LoadData(dataSearch) {
         dataType: "json",
         data: dataSearch,
         success: function (result) {
+            console.log(result)
 
             table.clear().draw();
             table.rows.add(result).draw().nodes().to$().addClass("text-center");

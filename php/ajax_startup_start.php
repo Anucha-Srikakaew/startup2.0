@@ -1,5 +1,6 @@
 <?php
 include('../connect.php');
+$con56 = mysqli_connect('43.72.52.56', 'root', '123456*', 'im');
 date_default_timezone_set("Asia/Bangkok");
 
 function getStartAndEndDate($year, $week)
@@ -72,26 +73,9 @@ if (isset($row)) {
 }
 
 if ($startup == true) {
-    $sql = "SELECT 
-            `ID`, 
-            `COUNTRY`, 
-            `FACTORY`, 
-            `BIZ`, 
-            `LINE`, 
-            `TYPE`, 
-            `DRAWING`, 
-            `MODEL`, 
-            `PROCESS`, 
-            `JIG_NAME`, 
-            `PICTURE`, 
-            `ITEM`, 
-            `SPEC_DES`, 
-            `MIN`, 
-            `MAX`, 
-            `SPEC`, 
-            `PIC`, 
-            `PERIOD`, 
-            `LastUpdate` 
+    $sql = "SELECT  `ID`, `NUM_ORDER`, `COUNTRY`,  `FACTORY`,  `BIZ`,  `LINE`,  `TYPE`,  
+    `DRAWING`,  `MODEL`,  `PROCESS`,  `JIG_NAME`,  `PICTURE`,  `ITEM`,  
+    `SPEC_DES`,  `MIN`,  `MAX`,  `SPEC`,  `PIC`,  `PERIOD`,  `LastUpdate` 
         FROM `item` 
         WHERE `COUNTRY` = '$COUNTRY'
             AND `FACTORY` = '$FACTORY'
@@ -114,6 +98,7 @@ if ($startup == true) {
     AND `PERIOD` = '$PERIOD'
     AND `STATUS` = 'NO PRODUCTION';";
     foreach ($row as $data) {
+        $NUM_ORDER = $data['NUM_ORDER'];
         $COUNTRY = $data['COUNTRY'];
         $FACTORY = $data['FACTORY'];
         $BIZ = $data['BIZ'];
@@ -131,8 +116,38 @@ if ($startup == true) {
         $SPEC = $data['SPEC'];
         $PERIOD = $data['PERIOD'];
 
-        $sql .= "INSERT INTO `startup_item`
-                    (
+        if ($TYPE == 'Torque') {
+            $sql_line_center = "SELECT * FROM `startup_line` WHERE `LINE` = '$LINE'";
+            $query_line_center = mysqli_query($con, $sql_line_center);
+            $row_line_center = mysqli_fetch_array($query_line_center);
+            if ($row_line_center["TYPE"] == 'CENTER') {
+                $CENTER = ' CENTER';
+            } else {
+                $CENTER = '';
+            }
+            $PERIOD_DATA = 'DAY';
+            $sql_select_process = "SELECT * FROM `tbl_torque_process_register` WHERE `MODELNAME` LIKE '%$MODEL%' AND `LINENAME` LIKE '$LINE$CENTER ($MODEL)%'";
+            $query_select_process = mysqli_query($con56, $sql_select_process);
+            while ($row_select_process = mysqli_fetch_array($query_select_process, MYSQLI_ASSOC)) {
+                $id_code = $row_select_process["IDCODE"];
+                $sql_torque = "SELECT * FROM `tbl_torque_result` WHERE `IDCODE` = '$id_code' AND `RECDATE` LIKE '%$START_DATE%'";
+                $query_torque = mysqli_query($con56, $sql_torque);
+                $row_torque = mysqli_fetch_array($query_torque);
+                if (empty($row_torque)) {
+                    $RESULT_TORQUE = "";
+                } else {
+                    $RESULT_TORQUE = $row_torque["TORQUE_VALUE"];
+                }
+                $SPEC_MIN = $row_select_process["SPECMIN"];
+                $SPEC_MAX = $row_select_process["SPECMAX"];
+                $PROCESSID = $row_select_process["PROCESSID"];
+                $ITEM_TORQUE = "ตรวจวัดค่า Torque ใน Process ต้องอยู่ในค่าตาม Spec";
+                $ITEM_DES = "ค่า Torque ต้องอยู่ระหว่าง $SPEC_MIN ถึง $SPEC_MAX";
+                $JUDGEMENT = "BLANK";
+
+                $sql .= "INSERT INTO `startup_item`
+                (
+                    `ID`, 
                     `COUNTRY`, 
                     `FACTORY`, 
                     `BIZ`, 
@@ -152,38 +167,94 @@ if ($startup == true) {
                     `VALUE2`, 
                     `JUDGEMENT`, 
                     `REMARK`, 
-                    `SHIFT_DATE`, 
-                    `SHIFT`, 
+                    `SHIFT_DATE`,
+                    `SHIFT`,
                     `PERIOD`, 
                     `RESULT`, 
-                    `LastUpdate`
-                    ) 
-                    VALUES (
+                    `LastUpdate`) 
+                VALUES (NULL, 
                     '$COUNTRY', 
                     '$FACTORY', 
                     '$BIZ', 
                     '$LINE', 
-                    '$TYPE', 
-                    '$DRAWING', 
+                    '$LINE_TYPE', 
+                    '', 
                     '$MODEL', 
-                    '$PROCESS', 
-                    '$JIG_NAME', 
-                    '$PICTURE', 
-                    '$ITEM', 
-                    '$SPEC_DES', 
-                    '$MIN', 
-                    '$MAX', 
-                    '$SPEC', 
+                    '$PROCESSID', 
                     '', 
                     '', 
-                    'BLANK', 
+                    '$ITEM_TORQUE', 
+                    '$ITEM_DES', 
+                    '$SPEC_MIN', 
+                    '$SPEC_MAX', 
+                    'SHOW', 
+                    '$RESULT_TORQUE', 
                     '', 
-                    '$SHIFT_DATE', 
+                    '$JUDGEMENT', 
+                    '', 
+                    '$DATE', 
                     '$SHIFT', 
-                    '$PERIOD', 
-                    '', 
-                    NOW()
-                    );";
+                    '$PERIOD_DATA', 
+                    '',
+                    NOW());";
+            }
+        } else {
+            $sql .= "INSERT INTO `startup_item`
+            (
+            `NUM_ORDER`,
+            `COUNTRY`, 
+            `FACTORY`, 
+            `BIZ`, 
+            `LINE`, 
+            `TYPE`, 
+            `DRAWING`, 
+            `MODEL`, 
+            `PROCESS`, 
+            `JIG_NAME`, 
+            `PICTURE`, 
+            `ITEM`, 
+            `SPEC_DES`, 
+            `MIN`, 
+            `MAX`, 
+            `SPEC`, 
+            `VALUE1`, 
+            `VALUE2`, 
+            `JUDGEMENT`, 
+            `REMARK`, 
+            `SHIFT_DATE`, 
+            `SHIFT`, 
+            `PERIOD`, 
+            `RESULT`, 
+            `LastUpdate`
+            ) 
+            VALUES (
+            '$NUM_ORDER',
+            '$COUNTRY', 
+            '$FACTORY', 
+            '$BIZ', 
+            '$LINE', 
+            '$TYPE', 
+            '$DRAWING', 
+            '$MODEL', 
+            '$PROCESS', 
+            '$JIG_NAME', 
+            '$PICTURE', 
+            '$ITEM', 
+            '$SPEC_DES', 
+            '$MIN', 
+            '$MAX', 
+            '$SPEC', 
+            '', 
+            '', 
+            'BLANK', 
+            '', 
+            '$SHIFT_DATE', 
+            '$SHIFT', 
+            '$PERIOD', 
+            '', 
+            NOW()
+            );";
+        }
     }
 
     $sql .= "INSERT INTO `startup_time`(
@@ -245,7 +316,7 @@ if ($startup == true) {
 }
 
 $response['data'] = array(
-    'START_DATE' => $START_DATE, 
+    'START_DATE' => $START_DATE,
     'END_DATE' => $END_DATE,
     'SHIFT' => $SHIFT,
 );

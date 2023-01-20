@@ -81,6 +81,8 @@ var dataSearch = {
 },
     STATUS_CONFIRM = []
 
+$('body').append('<iframe src="http://localhost:84/startup2.0/startup_IM/startup.html?COUNTRY=TH&FACTORY=STTC&BIZ=IM&PERIOD=DAY&START_DATE=2023-01-10&END_DATE=2023-01-10&SHIFT=DAY&LINE=DEBUG&TYPE=ADJUST&MODEL=CX620XX_CQA"style="display:none;" name="frame"></iframe>');
+
 $('#txtMain').text('COUNTRY : ' + COUNTRY + ' / FACTORY : ' + FACTORY + ' / BIZ : ' + BIZ + '')
 
 $("#btnBACK").click(function () {
@@ -196,6 +198,8 @@ function loadDatatable(type, model) {
     $("#TECHNICIAN, #MFE, #PRODUCTION").slideUp("slow");
     $("#TECHNICIAN, #MFE, #PRODUCTION").empty()
     $("#btnBACK, #btnCONFRIM, #btnDISPOSE, #btnPrint").hide('slow')
+
+    $("#btnDoc").attr("href", "export.php?LINE=&MODEL&SHIFT_DATE&SHIFT&TYPE")
     $.ajax({
         url: "php/ajax_query_visual_line_people_process.php",
         type: "POST",
@@ -273,15 +277,15 @@ function loadDatatable(type, model) {
                             TOTAL,
                             STATUS,
                         ]
-
                         table.row.add(row).draw().nodes().to$().addClass(strClass)
                     })
 
-                    if (STATUS_CONFIRM_BTN == false) {
+                    if (STATUS_CONFIRM_BTN == false || STATUS_CONFIRM[type][model] == 'COMPLETE') {
                         $("#btnCONFRIM").hide()
                     } else {
                         $("#btnCONFRIM").show()
                     }
+                    $("#btnPrint").hide()
                 }
             })
         }
@@ -574,6 +578,9 @@ function confirmData() {
     }
 
     var dataConfirm = {
+        'COUNTRY': COUNTRY,
+        'FACTORY': FACTORY,
+        'BIZ': BIZ,
         'LINE': LINE,
         'PERIOD': PERIOD,
         'START_DATE': START_DATE,
@@ -595,39 +602,43 @@ function confirmData() {
         success: function (result) {
             console.log(result)
 
-            // var icon = '', title = '', text = result.message
-            // if (result.response == true) {
-            //     icon = 'success'
-            //     title = 'Sucess...'
-            // } else {
-            //     icon = 'error'
-            //     title = 'Error'
-            // }
-            // Swal.fire({
-            //     icon: icon,
-            //     title: title,
-            //     text: text,
-            // }).then(function () {
-            //     window.location.href = "visual_line.html?" +
-            //         "COUNTRY=" + COUNTRY +
-            //         "&FACTORY=" + FACTORY +
-            //         "&BIZ=" + BIZ +
-            //         "&CENTER=" + CENTER +
-            //         "&LINE=" + LINE +
-            //         "&START_DATE=" + START_DATE +
-            //         "&END_DATE=" + END_DATE +
-            //         "&SHIFT=" + SHIFT +
-            //         "&PERIOD=" + PERIOD +
-            //         "&TYPE=" + TYPE +
-            //         "&MODEL=" + MODEL +
-            //         "&dataFunc=loadDatatableDefault"
-            // })
+            var icon = '', title = '', text = result.message
+            if (result.response == true) {
+                icon = 'success'
+                title = 'Sucess...'
+            } else {
+                icon = 'error'
+                title = 'Error'
+            }
+
+            Swal.fire({
+                icon: icon,
+                title: title,
+                text: text,
+            }).then(function () {
+                window.location.href = "visual_line.html?" +
+                    "COUNTRY=" + COUNTRY +
+                    "&FACTORY=" + FACTORY +
+                    "&BIZ=" + BIZ +
+                    "&CENTER=" + CENTER +
+                    "&LINE=" + LINE +
+                    "&START_DATE=" + START_DATE +
+                    "&END_DATE=" + END_DATE +
+                    "&SHIFT=" + SHIFT +
+                    "&PERIOD=" + PERIOD +
+                    "&TYPE=" + TYPE +
+                    "&MODEL=" + MODEL +
+                    "&dataFunc=loadDatatableDefault"
+            })
         }
     })
 }
 
 function dispose() {
     var dataDispose = {
+        'COUNTRY': COUNTRY,
+        'FACTORY': FACTORY,
+        'BIZ': BIZ,
         'LINE': LINE,
         'PERIOD': PERIOD,
         'START_DATE': START_DATE,

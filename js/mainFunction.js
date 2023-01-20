@@ -68,7 +68,7 @@ function checkLogin() {
                 STARTUP_EMP_TYPE = result.STARTUP_EMP_TYPE
 
                 var btnStartup = '<a href="startup_c.html?COUNTRY=' + STARTUP_EMP_COUNTRY + '&FACTORY=' + STARTUP_EMP_FACTORY + '&BIZ=' + STARTUP_EMP_BIZ + '&PERIOD=' + PERIODmain + '" type="button" class="btn btn-dark form-control">STARTUP</a><br><br>'
-                var btnItem = '<a href="#" type="button" class="btn btn-dark form-control">ITEM</a><br><br>'
+                var btnItem = '<a href="item.html" type="button" class="btn btn-dark form-control">ITEM</a><br><br>'
                 var btnMember = '<a href="#" type="button" class="btn btn-dark form-control">MEMBER</a><br><br>'
                 var btnTime = '<a href="#" type="button" class="btn btn-dark form-control">TIME</a><br><br>'
 

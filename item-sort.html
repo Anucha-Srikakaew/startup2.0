@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"
+        content="IE=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+    <title>STARTUP CHECK</title>
+
+    <!-- logo -->
+    <link rel="icon"
+        href="framework/img/SMART_LOGO.png"
+        type="image/png"
+        sizes="16x16">
+
+    <!-- dataTables -->
+    <link rel="stylesheet"
+        href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet"
+        href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css">
+    <link rel="stylesheet"
+        href="https://cdn.datatables.net/select/1.5.0/css/select.dataTables.min.css">
+    <link rel="stylesheet"
+        href="https://cdn.datatables.net/datetime/1.2.0/css/dataTables.dateTime.min.css">
+    <link rel="stylesheet"
+        href="https://cdn.datatables.net/rowreorder/1.3.1/css/rowReorder.dataTables.min.css">
+    <link rel="stylesheet"
+        href="https://editor.datatables.net/extensions/Editor/css/editor.dataTables.min.css">
+
+    <!-- Bootstrap 5 -->
+    <link rel="stylesheet"
+        href="framework/newVersion/Bootstrap5/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="css/main.css">
+</head>
+
+<body>
+    <div class="se-pre-con"></div>
+    <!-- Navbar -->
+    <section>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark shadow">
+            <div class="container-fluid">
+                <a class="navbar-brand"
+                    href="http://43.72.52.52/system/">SONY</a>
+                <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse"
+                    id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active"
+                                aria-current="page"
+                                href="#"
+                                id="VISUAL_URL"></a>
+                        </li>
+                    </ul>
+                    <form class="d-flex"
+                        id="ShowLogin"></form>
+                </div>
+            </div>
+        </nav>
+    </section>
+    <br><br><br><br>
+
+    <section>
+        <div class="container-fluid">
+            <div class="text-center">
+                <h1><b class="animated fadeInDown"><a href="index.php">SMART STARTUP CHECK [ <span
+                                class="text-danger">ITEM</span> ]</a></b>
+                </h1>
+                <p class="lead">Manage the data over all startup check project.</p>
+            </div>
+        </div>
+    </section>
+
+    <br><br>
+
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <label for="FACTORY">FACTORY :</label>
+                    <select class="form-select"
+                        aria-label="FACTORY"
+                        id="FACTORY">
+                        <option selected>FACTORY</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="BIZ">BIZ :</label>
+                    <select class="form-select"
+                        aria-label="BIZ"
+                        id="BIZ">
+                        <option selected>BIZ</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="LINE">LINE :</label>
+                    <select class="form-select"
+                        aria-label="LINE"
+                        id="LINE">
+                        <option selected>LINE</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="TYPE">TYPE :</label>
+                    <select class="form-select"
+                        aria-label="TYPE"
+                        id="TYPE">
+                        <option selected>TYPE</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="MODEL">MODEL :</label>
+                    <select class="form-select"
+                        aria-label="MODEL"
+                        id="MODEL">
+                        <option selected>MODEL</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <br>
+
+    <section>
+        <div class="container-fluid">
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered"
+                    id="example">
+                    <thead class="table-dark">
+                        <tr class="text-center">
+                            <th class="text-center">NO.</th>
+                            <th class="text-center">DATAID</th>
+                            <th class="text-center">LINE</th>
+                            <th class="text-center">TYPE</th>
+                            <th class="text-center">DRAWING</th>
+                            <th class="text-center">MODEL</th>
+                            <th class="text-center">PROCESS</th>
+                            <th class="text-center">PICTURE</th>
+                            <th class="text-center"
+                                width='20%'>ITEM</th>
+                            <th class="text-center">SPEC DES</th>
+                            <th class="text-center">MIN</th>
+                            <th class="text-center">MAX</th>
+                            <th class="text-center">SPEC</th>
+                            <th class="text-center">PIC</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"
+                        id="exampleModalLabel">PICTURE</h5>
+                    <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="showPicture"
+                        src="framework/img/no-image-vector.jpg"
+                        alt=""
+                        width="50%">
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <input type="file"
+        hidden
+        id="fileData">
+
+    <!-- datatlist -->
+    <datalist id="listFACTORY"></datalist>
+    <datalist id="listBIZ"></datalist>
+    <datalist id="listLINE"></datalist>
+    <datalist id="listTYPE"></datalist>
+    <datalist id="listMODEL"></datalist>
+    <datalist id="listPROCESS"></datalist>
+    <datalist id="listSPEC"></datalist>
+    <datalist id="listPERIOD"></datalist>
+</body>
+
+</html>
+
+<!-- datatable -->
+<script src="framework/newVersion/dataTables/js/jquery-3.5.1.js"></script>
+<script src="framework/newVersion/dataTables/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/select/1.5.0/js/dataTables.select.min.js"></script>
+<script src="https://cdn.datatables.net/datetime/1.2.0/js/dataTables.dateTime.min.js"></script>
+<script src="https://cdn.datatables.net/rowreorder/1.3.1/js/dataTables.rowReorder.min.js"></script>
+<script src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>
+<script src="http://desa.antsgsm.com/ants/libs/Editor-2.0.4/js/dataTables.editor.js" ></script>
+
+<!-- Bootstrap 5 -->
+<script src="framework/newVersion/Bootstrap5/js/bootstrap.bundle.min.js"></script>
+<script src="framework/newVersion/Bootstrap5/js/popper.min.js"></script>
+<script src="framework/newVersion/Bootstrap5/js/bootstrap.min.js"></script>
+
+<!-- sweetalert2 -->
+<script src="framework/js/sweetalert2@11.js"></script>
+
+<!-- icon -->
+<script src="framework/js/a076d05399.js"></script>
+
+<!-- mycode -->
+<script src="js/mainFunction.js"></script>
+<!-- <script src="js/ajax_addVal_Select_List.js"></script> -->
+<script src="js/item-sort.js"></script>

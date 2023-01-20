@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"
+        content="IE=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+    <title>STARTUP CHECK</title>
+
+    <!-- logo -->
+    <link rel="icon"
+        href="framework/img/SMART_LOGO.png"
+        type="image/png"
+        sizes="16x16">
+
+    <!-- dataTables -->
+    <link rel="stylesheet"
+        href="framework/newVersion/dataTables/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="framework/newVersion/dataTables/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet"
+        href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css">
+
+    <!-- Bootstrap 5 -->
+    <link rel="stylesheet"
+        href="framework/newVersion/Bootstrap5/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="css/main.css">
+</head>
+
+<body>
+    <div class="se-pre-con"></div>
+    <!-- Navbar -->
+    <section>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark shadow">
+            <div class="container-fluid">
+                <a class="navbar-brand"
+                    href="http://43.72.52.52/system/">SONY</a>
+                <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse"
+                    id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active"
+                                aria-current="page"
+                                href="#"
+                                id="VISUAL_URL"></a>
+                        </li>
+                    </ul>
+                    <form class="d-flex"
+                        id="ShowLogin"></form>
+                </div>
+            </div>
+        </nav>
+    </section>
+    <br><br><br><br>
+
+    <section>
+        <div class="container-fluid">
+            <div class="text-center">
+                <h1><b class="animated fadeInDown"><a href="index.php">SMART STARTUP CHECK [ <span
+                                class="text-danger">ITEM</span> ]</a></b>
+                </h1>
+                <p class="lead">Manage the data over all startup check project.</p>
+            </div>
+        </div>
+    </section>
+
+    <br><br>
+
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <label for="FACTORY">FACTORY :</label>
+                    <select class="form-select"
+                        aria-label="FACTORY"
+                        id="FACTORY">
+                        <option selected>FACTORY</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="BIZ">BIZ :</label>
+                    <select class="form-select"
+                        aria-label="BIZ"
+                        id="BIZ">
+                        <option selected>BIZ</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="LINE">LINE :</label>
+                    <select class="form-select"
+                        aria-label="LINE"
+                        id="LINE">
+                        <option selected>LINE</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="TYPE">TYPE :</label>
+                    <select class="form-select"
+                        aria-label="TYPE"
+                        id="TYPE">
+                        <option selected>TYPE</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="MODEL">MODEL :</label>
+                    <select class="form-select"
+                        aria-label="MODEL"
+                        id="MODEL">
+                        <option selected>MODEL</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="PROCESS">PROCESS :</label>
+                    <select class="form-select"
+                        aria-label="PROCESS"
+                        id="PROCESS">
+                        <option selected>PROCESS</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="SPEC">SPEC :</label>
+                    <select class="form-select"
+                        aria-label="SPEC"
+                        id="SPEC">
+                        <option selected>SPEC</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="PERIOD">PERIOD :</label>
+                    <select class="form-select"
+                        aria-label="PERIOD"
+                        id="PERIOD">
+                        <option selected>PERIOD</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <br>
+
+    <section>
+        <div class="container-fluid">
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered"
+                    id="tableData">
+                    <thead class="table-dark">
+                        <tr class="text-center">
+                            <th class="text-center">
+                                <input type="checkbox"
+                                    name="checkbox"
+                                    id="checkAll">
+                            </th>
+                            <th class="text-center">LINE</th>
+                            <th class="text-center">TYPE</th>
+                            <th class="text-center">DRAWING</th>
+                            <th class="text-center">MODEL</th>
+                            <th class="text-center">PROCESS</th>
+                            <th class="text-center">PICTURE</th>
+                            <th class="text-center"
+                                width='20%'>ITEM</th>
+                            <th class="text-center">SPEC DES</th>
+                            <th class="text-center">MIN</th>
+                            <th class="text-center">MAX</th>
+                            <th class="text-center">SPEC</th>
+                            <th class="text-center">PIC</th>
+                            <th class="text-center">TOOLS</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"
+                        id="exampleModalLabel">PICTURE</h5>
+                    <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="showPicture"
+                        src="framework/img/no-image-vector.jpg"
+                        alt=""
+                        width="50%">
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade"
+        id="exampleModalEdit"
+        tabindex="-1"
+        aria-labelledby="exampleModalEditLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"
+                        id="exampleModalEditLabel">EDIT ITEM ID : <span id="editItemId"></span>.</h5>
+                    <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md text-center">
+                                        <img id="imgEdit"
+                                            src="framework/img/no-image-vector.jpg"
+                                            alt="">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="editLINE"
+                                            class="form-label">LINE:</label>
+                                        <input type="text"
+                                            class="form-control text-center"
+                                            id="editLINE">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="editTYPE"
+                                            class="form-label">TYPE:</label>
+                                        <input type="text"
+                                            class="form-control text-center"
+                                            id="editTYPE">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="editDRAWING"
+                                            class="form-label">DRAWING:</label>
+                                        <input type="text"
+                                            class="form-control text-center"
+                                            id="editDRAWING">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="editMODEL"
+                                            class="form-label">MODEL:</label>
+                                        <input type="text"
+                                            class="form-control text-center"
+                                            id="editMODEL">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="editPROCESS"
+                                            class="form-label">PROCESS:</label>
+                                        <input type="text"
+                                            class="form-control text-center"
+                                            id="editPROCESS">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="editMIN"
+                                            class="form-label">MIN:</label>
+                                        <input type="text"
+                                            class="form-control text-center"
+                                            id="editMIN">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="editMAX"
+                                            class="form-label">MAX:</label>
+                                        <input type="text"
+                                            class="form-control text-center"
+                                            id="editMAX">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="editSPEC"
+                                            class="form-label">SPEC:</label>
+                                        <input type="text"
+                                            class="form-control text-center"
+                                            id="editSPEC">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="editPIC"
+                                            class="form-label">PIC:</label>
+                                        <input type="text"
+                                            class="form-control text-center"
+                                            id="editPIC">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md">
+                                        <label for="editITEM"
+                                            class="form-label">ITEM:</label>
+                                        <textarea class="form-control"
+                                            name="editITEM"
+                                            id="editITEM"
+                                            rows="2"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md">
+                                        <label for="editSPEC_DES"
+                                            class="form-label">SPEC DES:</label>
+                                        <textarea class="form-control"
+                                            name="editSPEC_DES"
+                                            id="editSPEC_DES"
+                                            rows="2"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">Close</button>
+                    <button type="button"
+                        class="btn btn-primary"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModalEdit2">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade"
+        id="exampleModalAdd"
+        tabindex="-1"
+        aria-labelledby="exampleModalAddLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"
+                        id="exampleModalAddLabel">Add ITEM.</h5>
+                    <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md text-center">
+                                        <img id="imgAdd"
+                                            src="framework/img/no-image-vector.jpg"
+                                            alt=""><br>
+                                            <input id="imgFile" type="file" name="myImage" accept="image/png, image/gif, image/jpeg" />
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="addLINE"
+                                            class="form-label">LINE:</label>
+                                        <input type="text"
+                                            class="form-control text-center"
+                                            id="addLINE"
+                                            list="listLINE">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="addTYPE"
+                                            class="form-label">TYPE:</label>
+                                        <input type="text"
+                                            class="form-control text-center"
+                                            id="addTYPE"
+                                            list="listTYPE">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="addDRAWING"
+                                            class="form-label">DRAWING:</label>
+                                        <input type="text"
+                                            class="form-control text-center"
+                                            id="addDRAWING"
+                                            list="listDRAWING">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="addMODEL"
+                                            class="form-label">MODEL:</label>
+                                        <input type="text"
+                                            class="form-control text-center"
+                                            id="addMODEL"
+                                            list="listMODEL">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="addPROCESS"
+                                            class="form-label">PROCESS:</label>
+                                        <input type="text"
+                                            class="form-control text-center"
+                                            id="addPROCESS"
+                                            list="listPROCESS">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="addMIN"
+                                            class="form-label">MIN:</label>
+                                        <input type="text"
+                                            class="form-control text-center"
+                                            id="addMIN"
+                                            list="listMIN">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="addMAX"
+                                            class="form-label">MAX:</label>
+                                        <input type="text"
+                                            class="form-control text-center"
+                                            id="addMAX"
+                                            list="listMAX">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="addSPEC"
+                                            class="form-label">SPEC:</label>
+                                        <input type="text"
+                                            class="form-control text-center"
+                                            id="addSPEC"
+                                            list="listSPEC">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="addPIC"
+                                            class="form-label">PIC:</label>
+                                        <input type="text"
+                                            class="form-control text-center"
+                                            id="addPIC"
+                                            list="listPIC">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md">
+                                        <label for="addITEM"
+                                            class="form-label">ITEM:</label>
+                                        <textarea class="form-control"
+                                            name="addITEM"
+                                            id="addITEM"
+                                            list="listITEM"
+                                            rows="2"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md">
+                                        <label for="addSPEC_DES"
+                                            class="form-label">SPEC DES:</label>
+                                        <textarea class="form-control"
+                                            name="addSPEC_DES"
+                                            id="addSPEC_DES"
+                                            list="listSPEC_DES"
+                                            rows="2"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">Close</button>
+                    <button type="button"
+                        class="btn btn-primary"
+                        onclick="addItem()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade"
+        id="exampleModalEdit2"
+        tabindex="-1"
+        aria-labelledby="exampleModalEdit2Label"
+        aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"
+                        id="exampleModalEdit2Label">ARE YOU SURE?</h5>
+                    <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">ITEM MASTER.</h5><br>
+                                        <div class="form-group"
+                                            id="objShowConfrim1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">ITEM EDIT.</h5><br>
+                                            <div class="form-group"
+                                                id="objShowConfrim2"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">Back</button>
+                    <button type="button"
+                        class="btn btn-primary"
+                        onclick="saveEdit()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <input type="file"
+        hidden
+        id="fileData">
+
+    <!-- datatlist -->
+    <datalist id="listFACTORY"></datalist>
+    <datalist id="listBIZ"></datalist>
+    <datalist id="listLINE"></datalist>
+    <datalist id="listTYPE"></datalist>
+    <datalist id="listMODEL"></datalist>
+    <datalist id="listPROCESS"></datalist>
+    <datalist id="listSPEC"></datalist>
+    <datalist id="listPERIOD"></datalist>
+</body>
+
+</html>
+
+<!-- datatable -->
+<script src="framework/newVersion/dataTables/js/jquery-3.5.1.js"></script>
+<script src="framework/newVersion/dataTables/js/jquery.dataTables.min.js"></script>
+<script src="framework/newVersion/dataTables/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+
+<!-- Bootstrap 5 -->
+<script src="framework/newVersion/Bootstrap5/js/bootstrap.bundle.min.js"></script>
+<script src="framework/newVersion/Bootstrap5/js/popper.min.js"></script>
+<script src="framework/newVersion/Bootstrap5/js/bootstrap.min.js"></script>
+
+<!-- sweetalert2 -->
+<script src="framework/js/sweetalert2@11.js"></script>
+
+<!-- icon -->
+<script src="framework/js/a076d05399.js"></script>
+
+<!-- mycode -->
+<script src="js/mainFunction.js"></script>
+<script src="js/ajax_addVal_Select_List.js"></script>
+<script src="js/item.js"></script>

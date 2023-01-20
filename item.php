@@ -390,8 +390,6 @@
         <a class="text-dark" href="http://43.72.52.52/excel_body/test/index.php?MEMBER_ID=<?php echo $_GET['MEMBER_ID'] ?>"><i class='fas fa-upload btn btn-success'></i></a>
 
 
-
-
         <script type="text/javascript">
             $(document).ready(function() {
 

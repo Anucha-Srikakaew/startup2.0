@@ -47,6 +47,9 @@ $response = array(
 );
 
 $END_DATE = $_POST['END_DATE'];
+$COUNTRY = $_POST['COUNTRY'];
+$FACTORY = $_POST['FACTORY'];
+$BIZ = $_POST['BIZ'];
 $LINE = $_POST['LINE'];
 $MEMBER = $_POST['MEMBER'];
 $MODEL = $_POST['MODEL'];
@@ -86,7 +89,8 @@ if ($PERIOD == 'SHIFT') {
     $QUERY_WHERE = "AND `SHIFT_DATE` BETWEEN '$START_DATE' AND '$END_DATE'";
 }
 
-$strSQL = "SELECT * FROM `member` WHERE MEMBER_ID = '$MEMBER'";
+$strSQL = "SELECT * FROM `member` 
+WHERE MEMBER_ID = '$MEMBER' AND COUNTRY = '$COUNTRY' AND FACTORY = '$FACTORY' AND BIZ = '$BIZ'";
 $objQuery = mysqli_query($con, $strSQL);
 $objResult = mysqli_fetch_array($objQuery);
 
@@ -96,19 +100,25 @@ $MEMBER_TYPE = $objResult['TYPE'];
 if ($MEMBER_TYPE == 'SUP.T' or $MEMBER_TYPE == 'ENG' or $MEMBER_TYPE == 'ADMIN' or $MEMBER_TYPE == 'TECH' or $MEMBER_TYPE == 'PIC') {
     /////// HAVE PERMISSION CASE ///////////////
     $sql = "DELETE FROM `$tbl_time` 
-        WHERE LINE = '$LINE'
+        WHERE `COUNTRY` = '$COUNTRY'
+        AND `FACTORY` = '$FACTORY'
+        AND `BIZ` = '$BIZ'
+        AND `LINE` = '$LINE'
         AND `MODEL` = '$MODEL'
         AND `PERIOD` = '$PERIOD'
         AND `TYPE` = '$TYPE' $QUERY_WHERE;";
 
     $sql .= "DELETE FROM `$tbl_item` 
-        WHERE LINE = '$LINE'
+        WHERE `COUNTRY` = '$COUNTRY'
+        AND `FACTORY` = '$FACTORY'
+        AND `BIZ` = '$BIZ'
+        AND `LINE` = '$LINE'
         AND `MODEL` = '$MODEL'
         AND `PERIOD` = '$PERIOD'
         AND `TYPE` = '$TYPE' $QUERY_WHERE;";
 
     $sql .= "INSERT INTO `login` (`ID`, `MEMBER_ID`, `NAME`, `IP`, `USAGE`, `LastUpdate`, `STATUS`) 
-            VALUES (NULL, '$MEMBER', '$NAME', '$IP', 'DISPOSE $LINE $MODEL START DATE : $START_DATE, END DATE : $END_DATE $SHIFT', NOW(), 'SUCCESS');";
+            VALUES (NULL, '$MEMBER', '$NAME', '$IP', 'DISPOSE $COUNTRY $FACTORY $BIZ $LINE $MODEL START DATE : $START_DATE, END DATE : $END_DATE $SHIFT', NOW(), 'SUCCESS');";
 
     ////// UPDATE GOOD STARTUP TO 84 MONITOR ///////////
     // if (StatusResult($SHIFT_DATE, $SHIFT, $LINE, $PERIOD) == true) {

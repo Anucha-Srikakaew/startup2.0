@@ -116,7 +116,7 @@ foreach ($arrQueryLineName as $objResult) {
         $arrDataTime = array('LINE' => '', 'CONFIRM1' => '', 'CONFIRM2' => '', 'CONFIRM3' => '', 'STATUS' => '');
     }
 
-    if ($keyItem != '' || is_numeric($keyTime) == 1) {
+    if ($keyItem != '' || is_numeric($keyItem) == 1) {
         $PASS = intval($rowItem[$keyItem]['PASS']);
         $TOTAL = intval($rowItem[$keyItem]['TOTAL']);
     } else {
