@@ -92,6 +92,7 @@ function FACTORYName(dataSearch) {
                     text: 'FACTORY'
                 })
             );
+            
             $.each(result.data, function (key, value) {
                 $('#FACTORY').append(
                     $('<option>', {

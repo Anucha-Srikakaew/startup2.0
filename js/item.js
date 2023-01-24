@@ -55,6 +55,13 @@ var table = $('#tableData').DataTable({
             }
         },
         {
+            text: '<i class="fas fa-image"></i>',
+            action: function (e, dt, node, config) {
+                console.log("upload")
+                $("#fileDataPicture").click()
+            }
+        },
+        {
             text: '<i class="fas fa-download"></i>',
             action: function (e, dt, node, config) {
                 console.log("download")
@@ -392,16 +399,22 @@ $("input[type=checkbox]").change(function () {
     }
 })
 
-$("#fileData").change(function () {
-    var file_data = $('#fileData').prop('files')[0];
-    console.log(file_data)
+$("#fileData, #fileDataPicture").change(function () {
+    var url = ''
+    if(this.id == 'fileDataPicture'){
+        url = "php/ajax_item_upload_file_picture.php"
+    }else{
+        url = "php/ajax_item_upload_file.php"
+    }
+
+    var file_data = $("#"+this.id).prop('files')[0];
     var form_data = new FormData();
     form_data.append("excel_file", file_data);
     form_data.append("table", 'item');
     console.log(form_data)
 
     $.ajax({
-        url: "php/ajax_item_upload_file.php",
+        url: url,
         type: "POST",
         dataType: 'json',
         cache: false,
