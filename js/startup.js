@@ -206,16 +206,6 @@ function setElement(elem) {
         judgment = 'BLANK'
     }
 
-    // judgment tr table color
-    $('#tr' + id).removeClass()
-    if (judgment == 'PASS') {
-        $('#tr' + id).addClass('text-center border-light table-success')
-    } else if (judgment == 'FAIL') {
-        $('#tr' + id).addClass('text-center border-light table-danger')
-    } else {
-        $('#tr' + id).addClass('text-center')
-    }
-
     updateInput(id, 'VALUE1', value, judgment)
 }
 
@@ -238,6 +228,18 @@ function updateInput(id, column, value, judgment) {
         success: function (result) {
             // start success
             console.log(result)
+
+            // judgment tr table color
+            $('#tr' + id).removeClass()
+            if (judgment == 'PASS') {
+                $('#tr' + id).addClass('text-center border-light table-success')
+            } else if (judgment == 'FAIL') {
+                $('#tr' + id).addClass('text-center border-light table-danger')
+            } else {
+                $('#tr' + id).addClass('text-center')
+            }
+
+            $("#cloasModelCamera").click()
             // end success
         }
     })
@@ -289,7 +291,7 @@ function openCamera() {
             title: err.message,
             text: 'ไม่สามารถเข้าถึงกล้องของคุณได้.',
             footer: '<a href="manual.php">Go to manual!</a>'
-        }).then(function (){
+        }).then(function () {
             window.location.reload()
         })
     });
@@ -332,8 +334,8 @@ function saveSnap() {
             checkimage: 1
         },
         function (data) {
-            document.getElementById(id).textContent
-            document.getElementById(id).innerText
+            // document.getElementById(id).textContent
+            // document.getElementById(id).innerText
             updateInput(id, 'VALUE1', data, 'PASS')
         });
 }

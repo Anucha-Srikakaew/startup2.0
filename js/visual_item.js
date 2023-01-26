@@ -68,6 +68,7 @@ $.ajax({
     dataType: "json",
     data: dataSearch,
     success: function (json) {
+        console.log(json)
         var tblData = [], carousel_item, table = []
         $.each(json, function (key, value) {
             var idProcess = key.replace(/[$/&!+=.() ]/g, '') + value[0]['ID']

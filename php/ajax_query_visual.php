@@ -143,15 +143,15 @@ foreach ($arrQueryLineName as $key => $objResult) {
                         $status .= '<p>GOOD</p>';
                     } else {
                         $status = '<p><img src="framework/img/Ylight.png" width="50"></p>';
-                        $status .= '<p>PRODUCTION</p>';
+                        $status .= '<p>PROD.</p>';
                     }
                 } else {
                     $status = '<p><img src="framework/img/Ylight.png" width="50"></p>';
-                    $status .= '<p>SUPERVISIOR</p>';
+                    $status .= '<p>SUP.</p>';
                 }
             } else {
                 $status = '<p><img src="framework/img/Ylight.png" width="50"></p>';
-                $status .= '<p>TECHNICIAN</p>';
+                $status .= '<p>TECH.</p>';
             }
         } else {
             if (searchForId($LINE, $rowItemMaster, 'LINE') != '' || is_numeric(searchForId($LINE, $rowItemMaster, 'LINE')) == 1) {
