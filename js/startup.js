@@ -54,7 +54,13 @@ $("#txtSub2").text(txtSub2)
 
 var table = $('#example').DataTable({
     paging: false,
-    searching: false
+    searching: false,
+    columnDefs: [
+        {
+            orderable: false,
+            targets: [0, 1, 2, 3, 4]
+        }
+    ],
 });
 
 var timeId = ''

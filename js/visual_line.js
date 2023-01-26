@@ -49,6 +49,7 @@ var table = $('#example').DataTable({
         $(api.column(6).footer()).html('--');
     },
 });
+
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 var COUNTRY = urlParams.get('COUNTRY')
@@ -68,6 +69,13 @@ if (FACTORY == 'STTC') {
 } else {
     var URLIMG = 'http://43.72.228.147/attend/img_opt/';
 }
+
+console.log(START_DATE)
+var dateArr = START_DATE.split('-')
+var date_pust_1 = parseFloat(dateArr[2]) + 1
+var dateLocation = dateArr[0] + '-' + dateArr[1] + '-' + date_pust_1;
+console.log(dateLocation)
+
 var dataSearch = {
     COUNTRY: COUNTRY,
     FACTORY: FACTORY,
@@ -81,7 +89,9 @@ var dataSearch = {
 },
     STATUS_CONFIRM = []
 
-$('body').append('<iframe src="http://localhost:84/startup2.0/startup_IM/startup.html?COUNTRY=TH&FACTORY=STTC&BIZ=IM&PERIOD=DAY&START_DATE=2023-01-10&END_DATE=2023-01-10&SHIFT=DAY&LINE=DEBUG&TYPE=ADJUST&MODEL=CX620XX_CQA"style="display:none;" name="frame"></iframe>');
+// $('body').append('<iframe src="startup.html?COUNTRY=TH&FACTORY=STTC&BIZ=IM&PERIOD=DAY&START_DATE=2023-01-10&END_DATE=2023-01-10&SHIFT=DAY&LINE=DEBUG&TYPE=ADJUST&MODEL=CX620XX_CQA"style="display:none;" name="frame"></iframe>');
+
+$("#btnBackPage").attr('href', 'visual.html?COUNTRY=' + COUNTRY + '&FACTORY=' + FACTORY + '&BIZ=' + BIZ + '&PERIOD=' + PERIOD + '&SHIFT_DATE=' + dateLocation + '&SHIFT=' + SHIFT + '&DAY=' + dateLocation)
 
 $('#txtMain').text('COUNTRY : ' + COUNTRY + ' / FACTORY : ' + FACTORY + ' / BIZ : ' + BIZ + '')
 
@@ -103,6 +113,7 @@ function loadDatatableDefault() {
     $("#TECHNICIAN, #MFE, #PRODUCTION").empty()
     $("#btnBACK, #btnCONFRIM, #btnDISPOSE, #btnPrint").hide('slow')
     $(table.column(6).header()).text('STATUS')
+    console.log(dataSearch)
     $.ajax({
         url: "php/ajax_query_visual_line_people_data.php",
         type: "POST",
@@ -118,6 +129,7 @@ function loadDatatableDefault() {
                 data: dataSearch,
                 success: function (obj) {
                     console.log(obj)
+                    console.log(STATUS_CONFIRM)
                     var TYPE = '', MODEL = '', strClass
                     table.clear().draw();
                     table.column(1).visible(true);
@@ -381,7 +393,11 @@ function showDataMemberTxT(obj) {
             CONFIRM1_URL = 'framework/img/avatar.png'
             CONFIRM2_URL = 'framework/img/avatar.png'
             CONFIRM3_URL = 'framework/img/avatar.png'
-            STATUS_CONFIRM[value.TYPE] = []
+
+            if(STATUS_CONFIRM[value.TYPE] == undefined){
+                STATUS_CONFIRM[value.TYPE] = []
+            }
+
             STATUS_CONFIRM[value.TYPE][value.MODEL] = 'TECHNICIAN'
             if (value.CONFIRM1 != null && value.CONFIRM1 != '') {
                 CONFIRM1_URL = URLIMG + value.CONFIRM1 + '.JPG'

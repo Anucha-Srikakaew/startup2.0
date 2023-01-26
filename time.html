@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>STARTUP CHECK</title>
+    <link rel="icon" href="framework/img/SMART_LOGO.png" type="image/png" sizes="16x16">
+
+    <link rel="stylesheet" href="framework/newVersion/dataTables/css/bootstrap.min.css">
+    <link rel="stylesheet" href="framework/newVersion/dataTables/css/dataTables.bootstrap5.min.css">
+
+    <!-- Bootstrap5 -->
+    <link href="framework/newVersion/Bootstrap5/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="css/visual.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <div class="se-pre-con"></div>
+    <!-- Navbar -->
+    <section>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark shadow">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="http://43.72.52.52/system/">SONY</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.php">HOME</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex" id="ShowLogin">
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </section>
+
+    <br><br><br><br>
+
+    <!-- main -->
+    <section>
+        <div class="container text-center">
+            <h1><b class="animated fadeInDown"><a href="index.php">SMART STARTUP CHECK </a><span
+                        class="text-danger">[TIME]</span></b></h1>
+        </div><br><br>
+
+        <div class="container">
+            <table class="table table-bordered table-hover display" id="example">
+                <thead class="table-dark">
+                    <tr>
+                        <th class="text-center">LINE</th>
+                        <th class="text-center">TARGET (MIN.)</th>
+                        <th class="text-center">STARTUP DAY</th>
+                        <th class="text-center">STARTUP NIGHT</th>
+                        <th class="text-center">SHIFT DATE</th>
+                        <th class="text-center">TOOLS</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">EDIT LINE : <span id="LINENAME"></span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <label for="TARGET1">TARGET1:</label>
+                            <input type="number" id="TARGET1" class="form-control text-center">
+                        </div>
+                        <div class="col">
+                            <label for="TARGET2">TARGET2:</label>
+                            <input type="number" id="TARGET2" class="form-control text-center">
+                        </div>
+                        <div class="col">
+                            <label for="TARGET3">TARGET3:</label>
+                            <input type="number" id="TARGET3" class="form-control text-center">
+                        </div>
+                    </div><br>
+
+                    <h6 class="text-primary"><u>SHIFT DATE</u></h6>
+                    <div class="row">
+                        <div class="col">
+                            <input type="date" id="SHIFT_DATE" class="form-control text-center">
+                        </div>
+                    </div><br>
+
+                    <h6 class="text-primary"><u>STARTUP DAY</u></h6>
+                    <div class="row">
+                        <div class="col">
+                            <label for="START_TIME_SHIFT_DAY">START:</label>
+                            <input type="time" id="START_TIME_SHIFT_DAY" class="form-control text-center">
+                        </div>
+                        <div class="col">
+                            <label for="TARGET_TIME_SHIFT_DAY">END:</label>
+                            <input type="time" id="TARGET_TIME_SHIFT_DAY" class="form-control text-center">
+                        </div>
+                    </div><br>
+
+                    <h6 class="text-primary"><u>STARTUP NIGTH</u></h6>
+                    <div class="row">
+                        <div class="col">
+                            <label for="START_TIME_SHIFT_NIGHT">START:</label>
+                            <input type="time" id="START_TIME_SHIFT_NIGHT" class="form-control text-center">
+                        </div>
+                        <div class="col">
+                            <label for="TARGET_TIME_SHIFT_NIGHT">END:</label>
+                            <input type="time" id="TARGET_TIME_SHIFT_NIGHT" class="form-control text-center">
+                        </div>
+                    </div><br>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeModal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="SaveData()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+<!-- datatable -->
+<script src="framework/newVersion/dataTables/js/jquery-3.5.1.js"></script>
+<script src="framework/newVersion/dataTables/js/jquery.dataTables.min.js"></script>
+<script src="framework/newVersion/dataTables/js/dataTables.bootstrap5.min.js"></script>
+
+<!-- Bootstrap5 -->
+<script src="framework/newVersion/Bootstrap5/js/bootstrap.bundle.min.js"></script>
+<script src="framework/newVersion/Bootstrap5/js/popper.min.js"></script>
+<script src="framework/newVersion/Bootstrap5/js/bootstrap.min.js"></script>
+
+<!-- sweetalert2 -->
+<script src="framework/js/sweetalert2@11.js"></script>
+
+<!-- icon -->
+<script src="framework/js/a076d05399.js"></script>
+
+<!-- mycode -->
+<script src="js/mainFunction.js"></script>
+<script src="js/manage_time.js"></script>

@@ -26,25 +26,25 @@ if (isset($_POST['username']) && isset($_POST['username'])) {
     $row = mysqli_fetch_array($query);
     if (isset($row)) {
         if ($row['FACTORY'] == 'STTB') {
-            $output['STARTUP_EMP_IMG'] = '';
+            $output['STARTUP_EMP_IMG'] = 'http://43.72.228.147/attend/img_opt/' . $row['MEMBER_ID'] . '.jpg';
         } else {
             $output['STARTUP_EMP_IMG'] = 'http://43.72.52.159/attend/img_opt/' . $row['MEMBER_ID'] . '.jpg';
         }
 
-        $sql2 = "SELECT top(100) [GID] ,[ENID] ,[EMP_NAME_TH] ,[EMP_NAME_EN] ,
-        [EMP_LEVEL] ,[EMP_POSITION] ,[CENTER] ,[DIVISION] ,[DEPARTMENT] ,
-        [EMP_STATUS] ,[PLANT] ,[PLANT_EN] ,[RFID]
-        FROM [STTC_HUMAN_RESOURCE].[dbo].[V_EMPLOYEE_COMBIN_PLANTE] 
-        WHERE [ENID] = '" . $row['MEMBER_ID'] . "'";
-        $query2 = sqlsrv_query($con158, $sql2);
-        $row2 = sqlsrv_fetch_array($query2, MYSQLI_NUM);
+        // $sql2 = "SELECT [GID] ,[ENID] ,[EMP_NAME_TH] ,[EMP_NAME_EN] ,
+        // [EMP_LEVEL] ,[EMP_POSITION] ,[CENTER] ,[DIVISION] ,[DEPARTMENT] ,
+        // [EMP_STATUS] ,[PLANT] ,[PLANT_EN] ,[RFID]
+        // FROM [STTC_HUMAN_RESOURCE].[dbo].[V_EMPLOYEE_COMBIN_PLANTE] 
+        // WHERE [ENID] = '" . $row['MEMBER_ID'] . "'";
+        // $query2 = sqlsrv_query($con158, $sql2);
+        // $row2 = sqlsrv_fetch_array($query2);
 
         $output['STARTUP_EMP_ID'] = $row['MEMBER_ID'];
         $output['STARTUP_EMP_NAME'] = $row['NAME'];
         $output['STARTUP_EMP_BIZ'] = $row['BIZ'];
         $output['STARTUP_EMP_FACTORY'] = $row['FACTORY'];
         $output['STARTUP_EMP_COUNTRY'] = $row['COUNTRY'];
-        $output['STARTUP_EMP_DEPARTMENT'] = $row2['DEPARTMENT'];
+        // $output['STARTUP_EMP_DEPARTMENT'] = $row2['DEPARTMENT'];
         $output['STARTUP_EMP_TYPE'] = $row['TYPE'];
 
         $_SESSION['STARTUP_LOGIN'] = $output;

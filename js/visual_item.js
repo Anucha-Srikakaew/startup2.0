@@ -27,8 +27,10 @@ var dataSearch = {
     SHIFT: SHIFT,
     PERIOD: PERIOD
 }
-var homeProcess = ''
 
+$("#btnBackPage").attr('href', 'visual_line.html?COUNTRY=' + COUNTRY + '&FACTORY=' + FACTORY + '&BIZ=' + BIZ + '&CENTER=' + CENTER + '&LINE=' + LINE + '&START_DATE=' + START_DATE + '&END_DATE=' + END_DATE + '&SHIFT=' + SHIFT + '&PERIOD=' + PERIOD + '&TYPE=' + TYPE + '&MODEL=' + MODEL + '&dataFunc=loadDatatableDefault')
+
+var homeProcess = ''
 $("#txtSub").attr(
     'href', 'visual_line.html?' +
     'COUNTRY=' + COUNTRY +

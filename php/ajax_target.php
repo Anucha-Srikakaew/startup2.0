@@ -6,6 +6,7 @@ $response = array(
     "data" => array(),
     "message" => "No data post",
 );
+
 $BIZ = $_POST['BIZ'];
 $COUNTRY = $_POST['COUNTRY'];
 $FACTORY = $_POST['FACTORY'];

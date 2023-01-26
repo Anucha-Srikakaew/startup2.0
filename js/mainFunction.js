@@ -1,9 +1,9 @@
 const queryStringmain = window.location.search;
 const urlParamsmain = new URLSearchParams(queryStringmain);
-const COUNTRYmain = urlParamsmain.get('COUNTRY')
-const FACTORYmain = urlParamsmain.get('FACTORY')
-const BIZmain = urlParamsmain.get('BIZ')
-const PERIODmain = urlParamsmain.get('PERIOD')
+var COUNTRYmain = urlParamsmain.get('COUNTRY')
+var FACTORYmain = urlParamsmain.get('FACTORY')
+var BIZmain = urlParamsmain.get('BIZ')
+var PERIODmain = urlParamsmain.get('PERIOD')
 
 var STARTUP_EMP_BIZ
     , STARTUP_EMP_COUNTRY
@@ -106,7 +106,7 @@ function checkLogin() {
                     '<h6>' + result.STARTUP_EMP_NAME + '</h6>' +
                     '<p>' + result.STARTUP_EMP_TYPE + '</p>' +
                     '<b>' + result.STARTUP_EMP_FACTORY + '</b>' +
-                    '<p>' + result.STARTUP_EMP_DEPARTMENT + '</p>' +
+                    // '<p>' + result.STARTUP_EMP_DEPARTMENT + '</p>' +
                     '</div>' +
                     '</div>' +
                     '<div class="row">' +

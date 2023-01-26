@@ -74,6 +74,7 @@ var dataSearch = {
     BIZ: BIZ,
     CENTER: CENTER,
     LINE: LINE,
+    MODEL: MODEL,
     START_DATE: START_DATE,
     END_DATE: END_DATE,
     SHIFT: SHIFT,
@@ -81,7 +82,7 @@ var dataSearch = {
 },
     STATUS_CONFIRM = []
 
-$('body').append('<iframe src="http://localhost:84/startup2.0/startup_IM/startup.html?COUNTRY=TH&FACTORY=STTC&BIZ=IM&PERIOD=DAY&START_DATE=2023-01-10&END_DATE=2023-01-10&SHIFT=DAY&LINE=DEBUG&TYPE=ADJUST&MODEL=CX620XX_CQA"style="display:none;" name="frame"></iframe>');
+// $('body').append('<iframe src="startup.html?COUNTRY=TH&FACTORY=STTC&BIZ=IM&PERIOD=DAY&START_DATE=2023-01-10&END_DATE=2023-01-10&SHIFT=DAY&LINE=DEBUG&TYPE=ADJUST&MODEL=CX620XX_CQA"style="display:none;" name="frame"></iframe>');
 
 $('#txtMain').text('COUNTRY : ' + COUNTRY + ' / FACTORY : ' + FACTORY + ' / BIZ : ' + BIZ + '')
 
@@ -104,7 +105,7 @@ function loadDatatableDefault() {
     $("#btnBACK, #btnCONFRIM, #btnDISPOSE, #btnPrint").hide('slow')
     $(table.column(6).header()).text('STATUS')
     $.ajax({
-        url: "php/ajax_query_visual_line_people_data.php",
+        url: "php/ajax_query_visual_model_people_data.php",
         type: "POST",
         dataType: "json",
         data: dataSearch,
@@ -112,13 +113,13 @@ function loadDatatableDefault() {
             showDataMemberTxT(obj)
 
             $.ajax({
-                url: "php/ajax_query_visual_line_table_default.php",
+                url: "php/ajax_query_visual_model_table_default.php",
                 type: "POST",
                 dataType: "json",
                 data: dataSearch,
                 success: function (obj) {
                     console.log(obj)
-                    var TYPE = '', MODEL = '', strClass
+                    var TYPE = '', strClass
                     table.clear().draw();
                     table.column(1).visible(true);
                     $(table.column(0).header()).text('TYPE');
@@ -173,7 +174,7 @@ function loadDatatableDefault() {
                     window.history.pushState(
                         "object or string",
                         "Title",
-                        "visual_line.html?" +
+                        "visual_model.html?" +
                         "COUNTRY=" + COUNTRY +
                         "&FACTORY=" + FACTORY +
                         "&BIZ=" + BIZ +
@@ -201,7 +202,7 @@ function loadDatatable(type, model) {
 
     $("#btnDoc").attr("href", "export.php?LINE=&MODEL&SHIFT_DATE&SHIFT&TYPE")
     $.ajax({
-        url: "php/ajax_query_visual_line_people_process.php",
+        url: "php/ajax_query_visual_model_people_process.php",
         type: "POST",
         dataType: "json",
         data: {
@@ -214,7 +215,7 @@ function loadDatatable(type, model) {
 
             var STATUS_CONFIRM_BTN = true
             $.ajax({
-                url: "php/ajax_query_visual_line_table_process.php",
+                url: "php/ajax_query_visual_model_table_process.php",
                 type: "POST",
                 dataType: "json",
                 data: {
@@ -291,13 +292,12 @@ function loadDatatable(type, model) {
         }
     })
 
-    MODEL = model
     TYPE = type
 
     window.history.pushState(
         "object or string",
         "Title",
-        "visual_line.html?" +
+        "visual_model.html?" +
         "COUNTRY=" + COUNTRY +
         "&FACTORY=" + FACTORY +
         "&BIZ=" + BIZ +
@@ -308,7 +308,7 @@ function loadDatatable(type, model) {
         "&SHIFT=" + SHIFT +
         "&PERIOD=" + PERIOD +
         "&TYPE=" + type +
-        "&MODEL=" + model +
+        "&MODEL=" + MODEL +
         "&dataFunc=" + dataFunc
     );
 }
@@ -316,7 +316,6 @@ function showDataMemberTxT(obj) {
     var TECHNICIAN = '',
         MFE = '',
         PRODUCTION = '',
-        strModel = '',
         strType = '',
         top = 0,
         right = 109,
@@ -364,13 +363,6 @@ function showDataMemberTxT(obj) {
             '</div>'
     } else {
         $.each(obj, function (key, value) {
-            if (strModel.search(value.MODEL) == -1) {
-                if (key == 0) {
-                    strModel += value.MODEL
-                } else {
-                    strModel += ', ' + value.MODEL
-                }
-            }
             if (strType.search(value.TYPE) == -1) {
                 if (key == 0) {
                     strType += value.TYPE
@@ -381,7 +373,9 @@ function showDataMemberTxT(obj) {
             CONFIRM1_URL = 'framework/img/avatar.png'
             CONFIRM2_URL = 'framework/img/avatar.png'
             CONFIRM3_URL = 'framework/img/avatar.png'
-            STATUS_CONFIRM[value.TYPE] = []
+            if(STATUS_CONFIRM[value.TYPE] == undefined){
+                STATUS_CONFIRM[value.TYPE] = []
+            }
             STATUS_CONFIRM[value.TYPE][value.MODEL] = 'TECHNICIAN'
             if (value.CONFIRM1 != null && value.CONFIRM1 != '') {
                 CONFIRM1_URL = URLIMG + value.CONFIRM1 + '.JPG'
@@ -535,7 +529,7 @@ function showDataMemberTxT(obj) {
             $("#btnCONFRIM, #btnDISPOSE").hide()
         }
     }
-    $("#txtSub").text('LINE : ' + LINE + ' / MODEL : ' + strModel + ' / TYPE : ' + strType)
+    $("#txtSub").text('LINE : ' + LINE + ' / MODEL : ' + MODEL + ' / TYPE : ' + strType)
 }
 
 $('.modal').on('shown.bs.modal', function (e) {
@@ -595,7 +589,7 @@ function confirmData() {
     console.log(dataConfirm)
 
     $.ajax({
-        url: "php/ajax_query_visual_line_confirm.php",
+        url: "php/ajax_query_visual_model_confirm.php",
         type: "POST",
         dataType: "json",
         data: dataConfirm,
@@ -616,7 +610,7 @@ function confirmData() {
                 title: title,
                 text: text,
             }).then(function () {
-                window.location.href = "visual_line.html?" +
+                window.location.href = "visual_model.html?" +
                     "COUNTRY=" + COUNTRY +
                     "&FACTORY=" + FACTORY +
                     "&BIZ=" + BIZ +
@@ -650,7 +644,7 @@ function dispose() {
     }
 
     $.ajax({
-        url: "php/ajax_query_visual_line_dispose.php",
+        url: "php/ajax_query_visual_model_dispose.php",
         type: "POST",
         dataType: "json",
         data: dataDispose,
@@ -670,7 +664,7 @@ function dispose() {
                 title: title,
                 text: text,
             }).then(function () {
-                window.location.href = "visual_line.html?" +
+                window.location.href = "visual_model.html?" +
                     "COUNTRY=" + COUNTRY +
                     "&FACTORY=" + FACTORY +
                     "&BIZ=" + BIZ +

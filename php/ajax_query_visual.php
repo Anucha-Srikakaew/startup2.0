@@ -67,7 +67,7 @@ if ($PERIOD == 'SHIFT' || $PERIOD == 'DAY') {
 }
 
 $output = array();
-$i = 0;
+$i = 1;
 $data = array();
 $strSQL = "SELECT `LINE`,`TYPE`
 FROM `startup_line` 
@@ -93,18 +93,20 @@ $rowItem = mysqli_fetch_all($query, MYSQLI_ASSOC);
 $sql = "SELECT `LINE`, `CONFIRM1`,`CONFIRM2`,`CONFIRM3`, `STATUS`
             FROM `$tbl_time` 
             WHERE $WHERE_STARTUP
-            ORDER BY ID DESC";
+            GROUP BY `LINE`
+            ORDER BY CONFIRM3 ASC";
 $query = mysqli_query($con, $sql);
 $rowTime = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
 $sql = "SELECT DISTINCT `LINE`
-        FROM `item` 
+        FROM `item`
         WHERE `PERIOD` = '$PERIOD'
         ORDER BY ID DESC";
 $query = mysqli_query($con, $sql);
 $rowItemMaster = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
-foreach ($arrQueryLineName as $objResult) {
+$data = array();
+foreach ($arrQueryLineName as $key => $objResult) {
     $LINE = $objResult["LINE"];
     $TYPE = $objResult["TYPE"];
     $keyItem = searchForId($LINE, $rowItem, 'LINE');
@@ -172,10 +174,7 @@ foreach ($arrQueryLineName as $objResult) {
         $TOTAL = '<h4 class="text-secondary">NO PRODUCTION</h4>';
     }
 
-    if ($i % 2 == 0 && $i > 0) {
-        $output[] = array_merge($data[0], $data[1]);
-
-        $data = array();
+    if ($i % 2 == 0) {
         $sub = array(
             $link, $PASS, $TOTAL, $status
         );
@@ -185,6 +184,11 @@ foreach ($arrQueryLineName as $objResult) {
             $link, $PASS, $TOTAL, $status
         );
         $data[] = $sub;
+    }
+
+    if(count($data) == 2){
+        $output[] = array_merge($data[0], $data[1]);
+        $data = array();
     }
     $i++;
 }

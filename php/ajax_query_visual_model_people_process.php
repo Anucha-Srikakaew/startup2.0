@@ -15,15 +15,20 @@ $response = array(
     "message" => "No data post",
 );
 
-$BIZ = $_POST['BIZ'];
-$CENTER = $_POST['CENTER'];
-$COUNTRY = $_POST['COUNTRY'];
-$FACTORY = $_POST['FACTORY'];
-$LINE = $_POST['LINE'];
-$PERIOD = $_POST['PERIOD'];
-$SHIFT = $_POST['SHIFT'];
-$START_DATE = $_POST['START_DATE'];
-$END_DATE = $_POST['END_DATE'];
+$MAIN = $_POST['MAIN'];
+$TYPE = $_POST['TYPE'];
+$MODEL = $_POST['MODEL'];
+
+$BIZ = $MAIN['BIZ'];
+$CENTER = $MAIN['CENTER'];
+$COUNTRY = $MAIN['COUNTRY'];
+$FACTORY = $MAIN['FACTORY'];
+$LINE = $MAIN['LINE'];
+$MODEL = $MAIN['MODEL'];
+$PERIOD = $MAIN['PERIOD'];
+$SHIFT = $MAIN['SHIFT'];
+$START_DATE = $MAIN['START_DATE'];
+$END_DATE = $MAIN['END_DATE'];
 
 // check time get data from table.
 if ($PERIOD == 'SHIFT' || $PERIOD == 'DAY') {
@@ -92,6 +97,8 @@ WHERE `COUNTRY` = '$COUNTRY'
 AND `FACTORY` = '$FACTORY'
 AND `BIZ` = '$BIZ'
 AND `LINE` = '$LINE'
+AND `TYPE` = '$TYPE'
+AND `MODEL` = '$MODEL'
 AND `PERIOD` = '$PERIOD'
 AND `SHIFT_DATE` BETWEEN '$START_DATE' AND '$END_DATE'
 GROUP BY `ID`";

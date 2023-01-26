@@ -618,6 +618,7 @@
                         } else {
                             $sql_insert_tourqe = "INSERT INTO `startup_item` (`ID`, `COUNTRY`, `FACTORY`, `BIZ`, `LINE`, `TYPE`, `DRAWING`, `MODEL`, `PROCESS`, `JIG_NAME`, `PICTURE`, `ITEM`, `SPEC_DES`, `MIN`, `MAX`, `SPEC`, `VALUE1`, `VALUE2`, `JUDGEMENT`, `REMARK`, `SHIFT_DATE`,`SHIFT`,`PERIOD`, `RESULT`, `LastUpdate`) VALUES (NULL, '$COUNTRY', '$FACTORY', '$BIZ', '$LINE', '$LINE_TYPE', '', '$MODEL', '$PROCESSID', '', '', '$ITEM_TORQUE', '$ITEM_DES', '$SPEC_MIN', '$SPEC_MAX', 'SHOW', '$RESULT_TORQUE', '', '$JUDGEMENT', '', '$DATE', '$SHIFT', '$PERIOD_DATA', '',NOW());";
                         }
+                        
                         mysqli_query($con, $sql_insert_tourqe);
                     }
                 }

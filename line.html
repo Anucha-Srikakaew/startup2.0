@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"
+        content="IE=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+    <title>STARTUP CHECK</title>
+
+    <!-- logo -->
+    <link rel="icon"
+        href="framework/img/SMART_LOGO.png"
+        type="image/png"
+        sizes="16x16">
+
+    <!-- dataTables -->
+    <link rel="stylesheet"
+        href="framework/newVersion/dataTables/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="framework/newVersion/dataTables/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet"
+        href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css">
+
+    <!-- Bootstrap 5 -->
+    <link rel="stylesheet"
+        href="framework/newVersion/Bootstrap5/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="css/main.css">
+</head>
+
+<body>
+    <div class="se-pre-con"></div>
+    <!-- Navbar -->
+    <section>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark shadow">
+            <div class="container-fluid">
+                <a class="navbar-brand"
+                    href="http://43.72.52.52/system/">SONY</a>
+                <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse"
+                    id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active"
+                                aria-current="page"
+                                href="#"
+                                id="VISUAL_URL"></a>
+                        </li>
+                    </ul>
+                    <form class="d-flex"
+                        id="ShowLogin"></form>
+                </div>
+            </div>
+        </nav>
+    </section>
+    <br><br><br><br>
+
+    <section>
+        <div class="container-fluid">
+            <div class="text-center">
+                <h1><b class="animated fadeInDown"><a href="index.php">SMART STARTUP CHECK [ <span
+                                class="text-danger">LINE</span> ]</a></b>
+                </h1>
+                <p class="lead">Manage the data over all startup check project.</p>
+            </div>
+        </div>
+    </section>
+
+    <br><br>
+
+    <!-- <select name="" id="">
+        <option value="CENTER">CENTER</option>
+        <option value="PRODUCTION">PRODUCTION</option>
+    </select> -->
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <label for="FACTORY">FACTORY :</label>
+                    <select class="form-select"
+                        aria-label="FACTORY"
+                        id="FACTORY">
+                        <option selected>FACTORY</option>
+                        <option value="STTC">STTC</option>
+                        <option value="STTB">STTB</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="BIZ">BIZ :</label>
+                    <select class="form-select"
+                        aria-label="BIZ"
+                        id="BIZ">
+                        <option value="IM"
+                            selected>IM</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <br>
+
+    <section>
+        <div class="container">
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered"
+                    id="example">
+                    <thead class="table-dark">
+                        <tr class="text-center">
+                            <th class="text-center">FACTORY</th>
+                            <th class="text-center">BIZ</th>
+                            <th class="text-center">LINE</th>
+                            <th class="text-center">TYPE</th>
+                            <th class="text-center">TOOLS</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>
+
+<!-- datatable -->
+<script src="framework/newVersion/dataTables/js/jquery-3.5.1.js"></script>
+<script src="framework/newVersion/dataTables/js/jquery.dataTables.min.js"></script>
+<script src="framework/newVersion/dataTables/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+
+<!-- Bootstrap 5 -->
+<script src="framework/newVersion/Bootstrap5/js/bootstrap.bundle.min.js"></script>
+<script src="framework/newVersion/Bootstrap5/js/popper.min.js"></script>
+<script src="framework/newVersion/Bootstrap5/js/bootstrap.min.js"></script>
+
+<!-- sweetalert2 -->
+<script src="framework/js/sweetalert2@11.js"></script>
+
+<!-- icon -->
+<script src="framework/js/a076d05399.js"></script>
+
+<!-- mycode -->
+<script src="js/mainFunction.js"></script>
+<script src="js/line.js"></script>
