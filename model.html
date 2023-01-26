@@ -73,8 +73,8 @@
     <section>
         <div class="container-fluid">
             <div class="text-center">
-                <h1><b class="animated fadeInDown"><a href="index.php">SMART STARTUP CHECK [ <span
-                                class="text-danger">LINE</span> ]</a></b>
+                <h1><b class="animated fadeInDown"><span id="txtCenter"></span> [ <span
+                                class="text-danger">CENTER</span> ]</b>
                 </h1>
                 <p class="lead">Manage the data over all startup check project.</p>
             </div>
@@ -87,28 +87,28 @@
         <div class="container">
             <div class="row">
                 <div class="col-5">
-                    <label for="FACTORY">FACTORY :</label>
+                    <!-- <label for="FACTORY">FACTORY :</label>
                     <select class="form-select"
                         aria-label="FACTORY"
                         id="FACTORY">
                         <option selected>FACTORY</option>
                         <option value="STTC">STTC</option>
                         <option value="STTB">STTB</option>
-                    </select>
+                    </select> -->
                 </div>
                 <div class="col-5">
-                    <label for="BIZ">BIZ :</label>
+                    <!-- <label for="BIZ">BIZ :</label>
                     <select class="form-select"
                         aria-label="BIZ"
                         id="BIZ">
                         <option value="IM"
                             selected>IM</option>
-                    </select>
+                    </select> -->
                 </div>
                 <div class="col-2"><br>
                     <button class="btn btn-primary form-control"
                         data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">ADD LINE</button>
+                        data-bs-target="#exampleModal">ADD MODEL</button>
                 </div>
             </div>
         </div>
@@ -146,7 +146,7 @@
                                     class="form-control text-center"
                                     placeholder="BIZ"
                                     value="IM"
-                                    name="BIZ">
+                                    name="BIZ" disabled>
                             </div>
                         </div><br>
                         <div class="row">
@@ -154,16 +154,15 @@
                                 <input type="text"
                                     class="form-control text-center"
                                     placeholder="INPUT LINE NAME"
-                                    name="LINE">
+                                    name="LINE" disabled>
                             </div>
                         </div><br>
                         <div class="row">
                             <div class="col">
                                 <input type="text"
                                     class="form-control text-center"
-                                    placeholder="TYPE"
-                                    name="TYPE"
-                                    list="TYPELIST">
+                                    placeholder="MODEL"
+                                    name="MODEL">
                             </div>
                         </div><br>
                     </div>
@@ -173,14 +172,14 @@
                         class="btn btn-secondary"
                         data-bs-dismiss="modal">Close</button>
                     <button type="button"
-                        class="btn btn-primary" onclick="saveLine()">Save</button>
+                        class="btn btn-primary" onclick="saveModel()">Save</button>
                 </div>
             </div>
         </div>
     </div>
 
     <br>
-
+    
     <section>
         <div class="container">
             <div class="table-responsive">
@@ -190,8 +189,7 @@
                         <tr class="text-center">
                             <th class="text-center">FACTORY</th>
                             <th class="text-center">BIZ</th>
-                            <th class="text-center">LINE</th>
-                            <th class="text-center">TYPE</th>
+                            <th class="text-center">MODEL</th>
                             <th class="text-center">TOOLS</th>
                         </tr>
                     </thead>
@@ -237,4 +235,4 @@
 
 <!-- mycode -->
 <script src="js/mainFunction.js"></script>
-<script src="js/line.js"></script>
+<script src="js/model.js"></script>

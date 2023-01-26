@@ -1,74 +1,41 @@
-$(".se-pre-con").fadeOut()
-console.log(STARTUP_EMP_BIZ)
-console.log(STARTUP_EMP_COUNTRY)
-console.log(STARTUP_EMP_FACTORY)
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+var CENTER = urlParams.get('CENTER')
 
 $("#FACTORY").val(STARTUP_EMP_FACTORY)
 $("#BIZ").val(STARTUP_EMP_BIZ)
+$("#txtCenter").text(CENTER)
+$('input[name=LINE]').val(CENTER)
+$('input[name=FACTORY]').val(STARTUP_EMP_FACTORY)
 
-var dataShow = [], dataEdit = {
-}, idUpdate
-
+var dataShow = [], dataInsert = {}
 var table = $('#example').DataTable({
     paging: false,
     searching: false,
     columns: [
         { data: 'FACTORY' },
         { data: 'BIZ' },
-        { data: 'LINE' },
-        { data: 'TYPE' },
+        { data: 'MODEL' },
         { data: 'ID' },
     ],
     createdRow: function (row, data, dataIndex) {
 
         dataShow[data.ID] = data
 
-        var selectType = '<select name="selectEdit" id="' + data.ID + '" class="form-select">'
-        selectType += '<option value="" selected>TYPE</option>'
-        selectType += '<option value="CENTER">CENTER</option>'
-        selectType += '<option value="PRODUCTION">PRODUCTION</option>'
-        selectType += '</select>'
-
-        $('td:eq(3)', row).empty()
-        $('td:eq(3)', row).append(selectType)
-
         var btn = '<button class="btn btn-danger" onclick="DelData(this.name)" name="' + data.ID + '"><i class="fas fa-trash"></i></button>'
-        $('td:eq(4)', row).empty()
-        $('td:eq(4)', row).append(btn)
-
-        if (data.TYPE == 'CENTER') {
-            var linkModel = '<a href="model.html?CENTER=' + data.LINE + '" class="text-primary"><u>' + data.LINE + '</u></a>'
-            $('td:eq(2)', row).empty()
-            $('td:eq(2)', row).append(linkModel)
-        }
+        $('td:eq(3)', row).empty()
+        $('td:eq(3)', row).append(btn)
     }
 });
 
-$('select').change(function () {
-    if (this.name == 'selectEdit') {
-        UpdateType(this.value, this.id)
-    } else {
-        if (this.id == 'FACTORY') {
-            STARTUP_EMP_FACTORY = this.value
-        }
-
-        if (this.id == 'BIZ') {
-            STARTUP_EMP_BIZ = this.value
-        }
-        LoadData()
-    }
-})
-
-function saveLine() {
+function saveModel() {
     var data = {}
     $.each($('input'), function (key, value) {
         data[value.name] = value.value
     })
 
-    console.log(data)
-
     $.ajax({
-        url: "php/ajax_query_line_insert.php",
+        url: "php/ajax_query_model_insert.php",
         type: "POST",
         dataType: "json",
         data: data,
@@ -97,13 +64,14 @@ function saveLine() {
 LoadData()
 function LoadData() {
     $.ajax({
-        url: "php/ajax_query_line.php",
+        url: "php/ajax_query_model.php",
         type: "POST",
         dataType: "json",
         data: {
             BIZ: STARTUP_EMP_BIZ,
             COUNTRY: STARTUP_EMP_COUNTRY,
             FACTORY: STARTUP_EMP_FACTORY,
+            CENTER: CENTER,
         },
         async: false,
         success: function (json) {
@@ -114,31 +82,6 @@ function LoadData() {
                     $('#' + value.ID).val(value.TYPE)
                 }
             })
-        }
-    })
-}
-
-function UpdateType(val, id) {
-    $.ajax({
-        url: "php/ajax_query_line_update.php",
-        type: "POST",
-        dataType: "json",
-        data: {
-            id: id,
-            val: val,
-        },
-        success: function (json) {
-            if (json.response == true) {
-                console.log(json)
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: json.message,
-                }).then(function () {
-                    window.location.reload()
-                })
-            }
         }
     })
 }
@@ -155,7 +98,7 @@ function DelData(id) {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "php/ajax_query_line_delete.php",
+                url: "php/ajax_query_model_delete.php",
                 type: "POST",
                 dataType: "json",
                 data: { id: id },
