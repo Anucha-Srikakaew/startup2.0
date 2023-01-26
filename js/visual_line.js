@@ -145,6 +145,7 @@ function loadDatatableDefault() {
                             '--',
                             '--',
                         ];
+                        
                         table.row.add(row).draw().nodes().to$().addClass('text-center');
                     } else {
                         $.each(obj, function (key, value) {
@@ -169,6 +170,7 @@ function loadDatatableDefault() {
                                     strClass = 'text-center table-success'
                                 }
                             }
+
                             var row = [
                                 '<a href="#" onclick="loadDatatable(this.name, this.id)" name="' + TYPE + '" id="' + MODEL + '"><h5><b class="text-primary">' + TYPE + '</b></h5></a>',
                                 MODEL,
@@ -176,8 +178,9 @@ function loadDatatableDefault() {
                                 FAIL,
                                 BLANK,
                                 TOTAL,
-                                STATUS_CONFIRM[TYPE][MODEL],
+                                STATUS,
                             ];
+
                             table.row.add(row).draw().nodes().to$().addClass(strClass);
                         })
                     }
@@ -394,7 +397,7 @@ function showDataMemberTxT(obj) {
             CONFIRM2_URL = 'framework/img/avatar.png'
             CONFIRM3_URL = 'framework/img/avatar.png'
 
-            if(STATUS_CONFIRM[value.TYPE] == undefined){
+            if (STATUS_CONFIRM[value.TYPE] == undefined) {
                 STATUS_CONFIRM[value.TYPE] = []
             }
 
@@ -402,25 +405,19 @@ function showDataMemberTxT(obj) {
             if (value.CONFIRM1 != null && value.CONFIRM1 != '') {
                 CONFIRM1_URL = URLIMG + value.CONFIRM1 + '.JPG'
                 STATUS = 'CONFIRM1'
-                // if (dataFunc != 'loadDatatable') {
                 STATUS_CONFIRM[value.TYPE][value.MODEL] = 'SUPERVISOR'
-                // }
             }
 
             if (value.CONFIRM2 != null && value.CONFIRM2 != '') {
                 CONFIRM2_URL = URLIMG + value.CONFIRM2 + '.JPG'
                 STATUS = 'CONFIRM2'
-                // if (dataFunc != 'loadDatatable') {
                 STATUS_CONFIRM[value.TYPE][value.MODEL] = 'PRODUCTION'
-                // }
             }
 
             if (value.CONFIRM3 != null && value.CONFIRM3 != '') {
                 CONFIRM3_URL = URLIMG + value.CONFIRM3 + '.JPG'
                 STATUS = 'CONFIRM3'
-                // if (dataFunc != 'loadDatatable') {
                 STATUS_CONFIRM[value.TYPE][value.MODEL] = 'COMPLETE'
-                // }
             }
 
             var name1 = '<br>',

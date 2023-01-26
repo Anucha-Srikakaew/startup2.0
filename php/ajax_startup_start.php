@@ -77,7 +77,8 @@ if (isset($row)) {
 
 $sql = '';
 if ($startup == true && $check == '1') {
-    $sql = "DELETE FROM `startup_time`
+    if ($TYPE == 'Torque') {
+        $sql = "DELETE FROM `startup_time`
         WHERE `COUNTRY` = '$COUNTRY'
         AND `FACTORY` = '$FACTORY'
         AND `BIZ` = '$BIZ'
@@ -88,8 +89,6 @@ if ($startup == true && $check == '1') {
         AND `SHIFT` = '$SHIFT'
         AND `PERIOD` = '$PERIOD'
         AND `STATUS` = 'NO PRODUCTION';";
-
-    if ($TYPE == 'Torque') {
         $sql_line_center = "SELECT * FROM `startup_line` WHERE `LINE` = '$LINE'";
         $query_line_center = mysqli_query($con, $sql_line_center);
         $row_line_center = mysqli_fetch_array($query_line_center);
@@ -154,6 +153,17 @@ if ($startup == true && $check == '1') {
         $query = mysqli_query($con, $sql);
         $row = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
+        $sql = "DELETE FROM `startup_time`
+        WHERE `COUNTRY` = '$COUNTRY'
+        AND `FACTORY` = '$FACTORY'
+        AND `BIZ` = '$BIZ'
+        AND `LINE` = '$LINE'
+        AND `TYPE` = '$TYPE'
+        AND `MODEL` = '$MODEL'
+        AND `SHIFT_DATE` = '$SHIFT_DATE'
+        AND `SHIFT` = '$SHIFT'
+        AND `PERIOD` = '$PERIOD'
+        AND `STATUS` = 'NO PRODUCTION';";
         foreach ($row as $data) {
             $NUM_ORDER = $data['NUM_ORDER'];
             $COUNTRY = $data['COUNTRY'];
@@ -230,8 +240,6 @@ if ($startup == true && $check == '1') {
                 );";
         }
     }
-
-    // echo $sql;
 
     $sql .= "INSERT INTO `startup_time`(
                         `COUNTRY`,

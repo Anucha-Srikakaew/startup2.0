@@ -281,7 +281,18 @@ function openCamera() {
     }).then(function (stream) {
         window.stream = stream
         video.srcObject = stream
-    })
+    }).catch(function (err) {
+        console.log(err.name + " : " + err.message);
+        console.log('Error.')
+        Swal.fire({
+            icon: 'error',
+            title: err.message,
+            text: 'ไม่สามารถเข้าถึงกล้องของคุณได้.',
+            footer: '<a href="manual.php">Go to manual!</a>'
+        }).then(function (){
+            window.location.reload()
+        })
+    });
 }
 
 function snap() {
