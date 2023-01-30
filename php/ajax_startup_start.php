@@ -101,7 +101,7 @@ if ($startup == true && $check == '1') {
         $DATE_TORQUE = date("Y-m-d", strtotime("+1 days", strtotime($START_DATE)));
 
         $PERIOD_DATA = 'DAY';
-        $sql_select_process = "SELECT * FROM `tbl_torque_process_register` WHERE `LINENAME` LIKE '%$LINE%$CENTER%($MODEL)%'";
+        $sql_select_process = "SELECT * FROM `tbl_torque_process_register` WHERE `LINENAME` LIKE '$LINE%$CENTER%($MODEL)%'";
         $query_select_process = mysqli_query($con56, $sql_select_process);
         while ($row_select_process = mysqli_fetch_array($query_select_process, MYSQLI_ASSOC)) {
             $id_code = $row_select_process["IDCODE"];
@@ -307,7 +307,7 @@ if ($startup == true && $check == '1') {
 
         $PERIOD_DATA = 'DAY';
         $DATE_TORQUE = date("Y-m-d", strtotime("+1 days", strtotime($START_DATE)));
-        $sql_select_process = "SELECT * FROM `tbl_torque_process_register` WHERE `LINENAME` LIKE '%$LINE%$CENTER%($MODEL)%'";
+        $sql_select_process = "SELECT * FROM `tbl_torque_process_register` WHERE `LINENAME` LIKE '$LINE%$CENTER%($MODEL)%'";
         $query_select_process = mysqli_query($con56, $sql_select_process);
         while ($row_select_process = mysqli_fetch_array($query_select_process, MYSQLI_ASSOC)) {
             $id_code = $row_select_process["IDCODE"];

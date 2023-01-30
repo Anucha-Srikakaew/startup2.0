@@ -22,7 +22,7 @@ $database = "STTC_HUMAN_RESOURCE";
 $uid = 'mfe';
 $pwd = 'mfeP@ssw0rd';
 try {
-	$conn = new PDO(
+	$con158 = new PDO(
 		"sqlsrv:server=$serverName;Database=$database",
 		$uid,
 		$pwd,

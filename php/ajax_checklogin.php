@@ -31,7 +31,7 @@ if (isset($_POST['username']) && isset($_POST['username'])) {
             $output['STARTUP_EMP_IMG'] = 'http://43.72.52.159/attend/img_opt/' . $row['MEMBER_ID'] . '.jpg';
         }
 
-        $stmt = $conn->prepare("SELECT [GID] ,[ENID] ,[EMP_NAME_TH] ,[EMP_NAME_EN] ,
+        $stmt = $con158->prepare("SELECT [GID] ,[ENID] ,[EMP_NAME_TH] ,[EMP_NAME_EN] ,
         [EMP_LEVEL] ,[EMP_POSITION] ,[CENTER] ,[DIVISION] ,[DEPARTMENT],
         [EMP_STATUS] ,[PLANT] ,[PLANT_EN] ,[RFID]
         FROM [STTC_HUMAN_RESOURCE].[dbo].[V_EMPLOYEE_COMBIN_PLANTE]

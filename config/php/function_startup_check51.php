@@ -54,7 +54,7 @@ while ($objResult = mysqli_fetch_array($objQuery, MYSQLI_ASSOC)) {
     $MODEL = $objResult['MODEL'];
     $PROCESS = $objResult['PROCESS'];
     $JIG_NAME = $objResult['JIG_NAME'];
-    $PICTURE = '<img src="http://43.72.52.206/excel_body/item/photo/' . $objResult['PICTURE'] . '" alt="" width="50%" class="img">';
+    $PICTURE = '<img src="http://43.72.52.239/STARTUP_photo_body/photo_By_item/photo/' . $objResult['PICTURE'] . '" alt="" width="50%" class="img">';
     $ITEM = $objResult['ITEM'];
     $SPEC = $objResult['SPEC'];
     $MIN = $objResult['MIN'];

@@ -110,7 +110,7 @@ $.ajax({
                 var value1 = ''
 
                 if (valueTbl.PICTURE != null && valueTbl.PICTURE != '') {
-                    IMG_SRC = '<img width="100%" src="http://43.72.52.206/excel_body/item/photo/' + valueTbl.PICTURE + '" alt="">'
+                    IMG_SRC = '<img width="100%" src="http://43.72.52.239/STARTUP_photo_body/photo_By_item/photo/' + valueTbl.PICTURE + '" alt="">'
                 } else {
                     IMG_SRC = '<img width="60%" src="framework/img/no-image-vector.jpg" alt="">'
                 }

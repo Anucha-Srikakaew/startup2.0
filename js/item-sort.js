@@ -376,5 +376,5 @@ function LoadData(dataSearch) {
 }
 
 function showPicture(pictureName) {
-    $("#showPicture").attr("src", 'http://43.72.52.206/excel_body/item/photo/' + pictureName)
+    $("#showPicture").attr("src", 'http://43.72.52.239/STARTUP_photo_body/photo_By_item/photo/' + pictureName)
 }

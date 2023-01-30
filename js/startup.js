@@ -17,8 +17,6 @@ $("#btnBackPage").attr('href', 'startup_c.html?COUNTRY=' + dataSearchUrl.COUNTRY
     + '&BIZ=' + dataSearchUrl.BIZ
     + '&PERIOD=' + dataSearchUrl.PERIOD)
 
-// startup_c.html?COUNTRY=TH&FACTORY=STTC&BIZ=IM&PERIOD=DAY
-
 if (dataSearchUrl.LINE == null || dataSearchUrl.MODEL == null || dataSearchUrl.TYPE == null) {
     window.location.href = 'startup_c.html?COUNTRY=' + dataSearchUrl.COUNTRY + '&FACTORY=' + dataSearchUrl.FACTORY + '&BIZ=' + dataSearchUrl.BIZ + '&PERIOD=' + dataSearchUrl.PERIOD + '';
 }
@@ -70,32 +68,6 @@ var table = $('#example').DataTable({
 });
 
 var timeId = ''
-// $.ajax({
-//     url: "php/ajax_query_startup.php",
-//     type: "POST",
-//     dataType: "json",
-//     data: {
-//         'TIME': 'TIME',
-//         'COUNTRY': urlParams.get('COUNTRY'),
-//         'FACTORY': urlParams.get('FACTORY'),
-//         'BIZ': urlParams.get('BIZ'),
-//         'PERIOD': urlParams.get('PERIOD'),
-//         'START_DATE': urlParams.get('START_DATE'),
-//         'END_DATE': urlParams.get('END_DATE'),
-//         'SHIFT': urlParams.get('SHIFT'),
-//         'LINE': urlParams.get('LINE'),
-//         'TYPE': urlParams.get('TYPE'),
-//         'MODEL': urlParams.get('MODEL')
-//     },
-//     success: function (result) {
-//         // start success
-//         console.log(result)
-//         timeId = result[0].ID
-//         // console.log(timeId)
-//         // end success
-//     }
-// })
-
 var specArr = []
 $.ajax({
     url: "php/ajax_query_startup.php",
@@ -109,12 +81,11 @@ $.ajax({
             table.clear().draw();
             $.each(result, function (key, value) {
                 var picture, input = '', cls = 'text-center ', valueInput = ''
-                console.log(value)
 
                 if (value.PICTURE == '') {
                     picture = '<img width="60%" src="framework/img/no-image-vector.jpg" alt="">'
                 } else {
-                    picture = '<img width="60%" src="http://43.72.52.206/excel_body/item/photo/' + value.PICTURE + '" alt="">'
+                    picture = '<img width="60%" src="http://43.72.52.239/STARTUP_photo_body/photo_By_item/photo/' + value.PICTURE + '" alt="">'
                 }
 
                 if (value.SPEC == 'OK' || value.SPEC == 'NG' || value.SPEC == 'JUDGEMENT') {
@@ -125,7 +96,6 @@ $.ajax({
                 } else if (value.SPEC == 'TEXT') {
                     input = '<input type="text" class="form-control" name="VALUE1" id="' + value.ID + '">'
                 } else if (value.SPEC == 'PHOTO') {
-
                     if (value.VALUE1 == '') {
                         valueInput = '<i class="fa fa-camera"></i>'
                     } else {
@@ -332,7 +302,6 @@ function waitBIGimage() {
 
 function saveSnap() {
     var imgData = canvas.toDataURL('image/png');
-
     $.post("http://43.72.52.239/STARTUP_photo_body/uploadphoto.php",
         {
             image: imgData,
@@ -340,8 +309,7 @@ function saveSnap() {
             checkimage: 1
         },
         function (data) {
-            // document.getElementById(id).textContent
-            // document.getElementById(id).innerText
+            $('button#' + id).text(data)
             updateInput(id, 'VALUE1', data, 'PASS')
         });
 }

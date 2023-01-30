@@ -305,7 +305,7 @@
                                         <?php
                                         if ($PICTURE[$i] != '') {
                                             // echo 'sdfsdfsd';
-                                            echo '<td class="text-center"><img src="http://43.72.52.206/excel_body/item/photo/' . $PICTURE[$i] . '" alt="" width="100%" class="img"><br>' . $JIG_NAME[$i] . '</td>';
+                                            echo '<td class="text-center"><img src="http://43.72.52.239/STARTUP_photo_body/photo_By_item/photo/' . $PICTURE[$i] . '" alt="" width="100%" class="img"><br>' . $JIG_NAME[$i] . '</td>';
                                         } else {
                                             echo '<td class="text-center"><img src="http://43.72.52.51/startup2.0/framework/img/SMART_LOGO.png" alt="" width="30%" class="img"><br>STARTUP2.0</td>';
                                         }
@@ -440,7 +440,7 @@
                                     <tr class="table-<?php echo $STATUS; ?> ">
                                         <?php
                                         if ($PICTURE[$i] != '') {
-                                            echo '<td class="text-center"><img src="http://43.72.52.206/excel_body/item/photo/' . $PICTURE[$i] . '" alt="" width="100%" class="img"><br>' . $JIG_NAME[$i] . '</td>';
+                                            echo '<td class="text-center"><img src="http://43.72.52.239/STARTUP_photo_body/photo_By_item/photo/' . $PICTURE[$i] . '" alt="" width="100%" class="img"><br>' . $JIG_NAME[$i] . '</td>';
                                         } else {
                                             echo '<td class="text-center"><img src="http://43.72.52.51/startup2.0/framework/img/SMART_LOGO.png" alt="" width="30%" class="img"><br>STARTUP2.0</td>';
                                         }

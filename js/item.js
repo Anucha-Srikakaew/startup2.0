@@ -231,28 +231,34 @@ function LoadData(dataSearch) {
 }
 
 function showPicture(pictureName) {
-    $("#showPicture").attr("src", 'http://43.72.52.206/excel_body/item/photo/' + pictureName)
+    $("#showPicture").attr("src", 'http://43.72.52.239/STARTUP_photo_body/photo_By_item/photo/' + pictureName)
 }
 
 var dataEditBefore = []
 function editData(id) {
     $('#editItemId').text(id)
     dataEditBefore = dataAllTable[id]
-    console.log(dataEditBefore)
     $.each(dataAllTable[id], function (key, value) {
         if (key == 'PICTURE') {
-            $("#imgEdit").attr("src", 'http://43.72.52.206/excel_body/item/photo/' + value)
+            if (value != '' && value != null) {
+                $("#imgEdit").attr("src", 'http://43.72.52.239/STARTUP_photo_body/photo_By_item/photo/' + value)
+            } else {
+                console.log('sssss')
+                $("#imgEdit").attr("src", 'framework/img/no-image-vector.jpg')
+            }
         } else {
             $('#edit' + key).val(value)
         }
     })
 }
 
+var addImg = 0
 function addItem() {
     console.log(dataAdd)
     dataAdd['COUNTRY'] = STARTUP_EMP_COUNTRY
     dataAdd['FACTORY'] = STARTUP_EMP_FACTORY
     dataAdd['BIZ'] = STARTUP_EMP_BIZ
+    dataAdd['PICTURE'] = addImg
     var check_error = ''
     if (dataAdd.LINE == undefined || dataAdd.LINE == '') {
         check_error += ' >LINE< '
@@ -260,10 +266,6 @@ function addItem() {
 
     if (dataAdd.TYPE == undefined || dataAdd.TYPE == '') {
         check_error += ' >TYPE< '
-    }
-
-    if (dataAdd.DRAWING == undefined || dataAdd.DRAWING == '') {
-        check_error += ' >DRAWING< '
     }
 
     if (dataAdd.PROCESS == undefined || dataAdd.PROCESS == '') {
@@ -288,15 +290,19 @@ function addItem() {
             type: 'POST',
             data: dataAdd,
             dataType: "json",
+            async: false,
             success: function (json) {
-                console.log(json)
                 if (json.response == true) {
                     Swal.fire({
                         icon: 'success',
                         title: 'Complete.',
                         text: json.message,
                     }).then(function () {
-                        window.location.reload()
+                        if (addImg == 1) {
+                            sendImg(json.data.ID)
+                        } else {
+                            window.location.reload()
+                        }
                     })
                 } else {
                     Swal.fire({
@@ -326,7 +332,7 @@ $('select').change(function () {
 })
 
 var dataEdit = {}, dataAdd = {}
-$('input, textarea').on('keyup keypress blur change', function (e) {
+$('input, textarea').on('change', function (e) {
     // e.type is the type of event fired
     if (this.id.split("edit")[1] != undefined) {
         dataEdit[this.id.split("edit")[1]] = this.value
@@ -401,13 +407,13 @@ $("input[type=checkbox]").change(function () {
 
 $("#fileData, #fileDataPicture").change(function () {
     var url = ''
-    if(this.id == 'fileDataPicture'){
+    if (this.id == 'fileDataPicture') {
         url = "php/ajax_item_upload_file_picture.php"
-    }else{
+    } else {
         url = "php/ajax_item_upload_file.php"
     }
 
-    var file_data = $("#"+this.id).prop('files')[0];
+    var file_data = $("#" + this.id).prop('files')[0];
     var form_data = new FormData();
     form_data.append("excel_file", file_data);
     form_data.append("table", 'item');
@@ -442,9 +448,44 @@ $("#fileData, #fileDataPicture").change(function () {
         }
     });
 })
-
+var reader
 $("#imgFile").change(function () {
-    console.log(this.value)
+    addImg = 1
+    var file = this.files[0];
+    reader = new FileReader();
+    reader.onloadend = function () {
+        $("#imgAdd").attr('src', reader.result)
+    }
+    reader.readAsDataURL(file);
 })
 
-// load data select ####
+function sendImg(id) {
+    var NameImg = id + '.jpg'
+    toDataURL($("#imgAdd").attr('src'), function (dataURL) {
+        console.log(dataURL)
+        $.post("http://43.72.52.239/STARTUP_photo_body/photo_By_item/uploadphoto.php",
+            {
+                name: NameImg,
+                img: dataURL,
+            },
+            function (data) {
+                console.log(data)
+                window.location.reload()
+            });
+    })
+}
+
+function toDataURL(src, callback) {
+    var image = new Image();
+    image.crossOrigin = 'Anonymous';
+    image.onload = function () {
+        var canvas = document.createElement('canvas');
+        var context = canvas.getContext('2d');
+        canvas.height = this.naturalHeight;
+        canvas.width = this.naturalWidth;
+        context.drawImage(this, 0, 0);
+        var dataURL = canvas.toDataURL('image/jpeg');
+        callback(dataURL);
+    };
+    image.src = src;
+}

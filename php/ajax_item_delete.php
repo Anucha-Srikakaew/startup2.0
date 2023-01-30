@@ -15,12 +15,12 @@ foreach ($IDArr as $id) {
     $sql .= "DELETE FROM `item` WHERE `ID` = '$id';";
 }
 
-if (mysqli_query($con, $sql)) {
+if (mysqli_multi_query($con, $sql)) {
     $response['response'] = true;
     $response['message'] = 'Delete item complete.';
 } else {
     $response['response'] = false;
-    $response['message'] = 'Delete item fail.';
+    $response['message'] = "Failed to query to MySQL: " . $con->error;
 }
 
 echo json_encode($response);
