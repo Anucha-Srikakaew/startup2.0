@@ -124,7 +124,7 @@ foreach ($arrQueryLineName as $objResult) {
         $TOTAL = 0;
     }
 
-    $link = '<a href="visual_model.html?MODEL=' . $MODEL . '&COUNTRY=' . $COUNTRY . '&FACTORY=' . $FACTORY . '&BIZ=' . $BIZ . '&LINE=' . $CENTER . '&START_DATE=' . $start_date . '&END_DATE=' . $end_date . '&SHIFT=' . $SHIFT . '&PERIOD=' . $PERIOD . '"><h4><b>' . $MODEL . '</b></h4></a>';
+    $link = '<a href="visual_model.html?MODEL=' . $MODEL . '&COUNTRY=' . $COUNTRY . '&FACTORY=' . $FACTORY . '&BIZ=' . $BIZ . '&CENTER=' . $CENTER . '&LINE=' . $CENTER . '&START_DATE=' . $start_date . '&END_DATE=' . $end_date . '&SHIFT=' . $SHIFT . '&PERIOD=' . $PERIOD . '"><h4><b>' . $MODEL . '</b></h4></a>';
 
     if ($arrDataTime['STATUS'] != "NO PRODUCTION") {
         if ($TOTAL != 0) {

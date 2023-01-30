@@ -54,14 +54,6 @@ if ($PERIOD == 'SHIFT' || $PERIOD == 'DAY') {
 if ($PERIOD == 'SHIFT') {
     $where_period = "AND `SHIFT_DATE` = '$SHIFT_DATE' AND `SHIFT` = '$SHIFT'";
 } else {
-    if ($PERIOD == 'DAY') {
-        $START_DATE = $START_DATE;
-        $END_DATE = $START_DATE;
-    } else {
-        $date_arr = explode("-", $WEEK);
-        $START_DATE = getStartAndEndDate($date_arr[0], str_replace('W', '', $date_arr[1]))[0];
-        $END_DATE = getStartAndEndDate($date_arr[0], str_replace('W', '', $date_arr[1]))[1];
-    }
     $where_period = "AND `SHIFT_DATE` BETWEEN '$START_DATE' AND '$END_DATE'";
 }
 

@@ -49,6 +49,12 @@ if (WEEK == '' || WEEK == null) {
     WEEK = year + "-W" + weekNumber
 }
 
+var dateArr = SHIFT_DATE.split('-')
+var date_pust_1 = parseFloat(dateArr[2])
+var dateLocation = dateArr[0] + '-' + dateArr[1] + '-' + date_pust_1;
+
+$("#btnBackPage").attr('href', 'visual.html?COUNTRY=' + COUNTRY + '&FACTORY=' + FACTORY + '&BIZ=' + BIZ + '&PERIOD=' + PERIOD + '&SHIFT_DATE=' + dateLocation + '&SHIFT=' + SHIFT + '&DAY=' + dateLocation)
+
 $("#boxShift").hide()
 $("#boxDaily").hide()
 $("#boxWeekly").hide()

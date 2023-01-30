@@ -28,11 +28,16 @@ var dataSearch = {
     PERIOD: PERIOD
 }
 
-$("#btnBackPage").attr('href', 'visual_line.html?COUNTRY=' + COUNTRY + '&FACTORY=' + FACTORY + '&BIZ=' + BIZ + '&CENTER=' + CENTER + '&LINE=' + LINE + '&START_DATE=' + START_DATE + '&END_DATE=' + END_DATE + '&SHIFT=' + SHIFT + '&PERIOD=' + PERIOD + '&TYPE=' + TYPE + '&MODEL=' + MODEL + '&dataFunc=loadDatatableDefault')
+var fileVisual = 'visual_line.html'
+if (CENTER != null) {
+    fileVisual = 'visual_model.html'
+}
+
+$("#btnBackPage").attr('href', fileVisual + '?COUNTRY=' + COUNTRY + '&FACTORY=' + FACTORY + '&BIZ=' + BIZ + '&CENTER=' + CENTER + '&LINE=' + LINE + '&START_DATE=' + START_DATE + '&END_DATE=' + END_DATE + '&SHIFT=' + SHIFT + '&PERIOD=' + PERIOD + '&TYPE=' + TYPE + '&MODEL=' + MODEL + '&dataFunc=loadDatatableDefault')
 
 var homeProcess = ''
 $("#txtSub").attr(
-    'href', 'visual_line.html?' +
+    'href', fileVisual + '?' +
     'COUNTRY=' + COUNTRY +
     '&FACTORY=' + FACTORY +
     '&BIZ=' + BIZ +

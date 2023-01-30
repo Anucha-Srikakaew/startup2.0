@@ -12,6 +12,12 @@ var dataSearchUrl = {
     'TYPE': urlParams.get('TYPE'),
     'MODEL': urlParams.get('MODEL')
 }
+$("#btnBackPage").attr('href', 'startup_c.html?COUNTRY=' + dataSearchUrl.COUNTRY
+    + '&FACTORY=' + dataSearchUrl.FACTORY
+    + '&BIZ=' + dataSearchUrl.BIZ
+    + '&PERIOD=' + dataSearchUrl.PERIOD)
+
+// startup_c.html?COUNTRY=TH&FACTORY=STTC&BIZ=IM&PERIOD=DAY
 
 if (dataSearchUrl.LINE == null || dataSearchUrl.MODEL == null || dataSearchUrl.TYPE == null) {
     window.location.href = 'startup_c.html?COUNTRY=' + dataSearchUrl.COUNTRY + '&FACTORY=' + dataSearchUrl.FACTORY + '&BIZ=' + dataSearchUrl.BIZ + '&PERIOD=' + dataSearchUrl.PERIOD + '';

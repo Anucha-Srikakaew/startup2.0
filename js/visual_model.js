@@ -82,7 +82,10 @@ var dataSearch = {
 },
     STATUS_CONFIRM = []
 
-// $('body').append('<iframe src="startup.html?COUNTRY=TH&FACTORY=STTC&BIZ=IM&PERIOD=DAY&START_DATE=2023-01-10&END_DATE=2023-01-10&SHIFT=DAY&LINE=DEBUG&TYPE=ADJUST&MODEL=CX620XX_CQA"style="display:none;" name="frame"></iframe>');
+var dateArr = START_DATE.split('-')
+var date_pust_1 = parseFloat(dateArr[2]) + 1
+var dateLocation = dateArr[0] + '-' + dateArr[1] + '-' + date_pust_1;
+$("#btnBackPage").attr('href', 'visual2.html?COUNTRY=' + COUNTRY + '&FACTORY=' + FACTORY + '&BIZ=' + BIZ + '&CENTER=' + LINE + '&PERIOD=' + PERIOD + '&SHIFT_DATE=' + dateLocation + '&SHIFT=' + SHIFT + '&DAY=' + dateLocation + '&WEEK=' + dateLocation)
 
 $('#txtMain').text('COUNTRY : ' + COUNTRY + ' / FACTORY : ' + FACTORY + ' / BIZ : ' + BIZ + '')
 
@@ -373,7 +376,7 @@ function showDataMemberTxT(obj) {
             CONFIRM1_URL = 'framework/img/avatar.png'
             CONFIRM2_URL = 'framework/img/avatar.png'
             CONFIRM3_URL = 'framework/img/avatar.png'
-            if(STATUS_CONFIRM[value.TYPE] == undefined){
+            if (STATUS_CONFIRM[value.TYPE] == undefined) {
                 STATUS_CONFIRM[value.TYPE] = []
             }
             STATUS_CONFIRM[value.TYPE][value.MODEL] = 'TECHNICIAN'
@@ -589,7 +592,7 @@ function confirmData() {
     console.log(dataConfirm)
 
     $.ajax({
-        url: "php/ajax_query_visual_model_confirm.php",
+        url: "php/ajax_query_visual_line_confirm.php",
         type: "POST",
         dataType: "json",
         data: dataConfirm,
@@ -644,7 +647,7 @@ function dispose() {
     }
 
     $.ajax({
-        url: "php/ajax_query_visual_model_dispose.php",
+        url: "php/ajax_query_visual_line_dispose.php",
         type: "POST",
         dataType: "json",
         data: dataDispose,
