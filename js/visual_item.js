@@ -27,10 +27,12 @@ var dataSearch = {
     SHIFT: SHIFT,
     PERIOD: PERIOD
 }
-
-var fileVisual = 'visual_line.html'
-if (CENTER != null) {
+console.log(CENTER)
+var fileVisual = ''
+if (CENTER != null && CENTER != 'null' && CENTER != "") {
     fileVisual = 'visual_model.html'
+}else{
+    fileVisual = 'visual_line.html'
 }
 
 $("#btnBackPage").attr('href', fileVisual + '?COUNTRY=' + COUNTRY + '&FACTORY=' + FACTORY + '&BIZ=' + BIZ + '&CENTER=' + CENTER + '&LINE=' + LINE + '&START_DATE=' + START_DATE + '&END_DATE=' + END_DATE + '&SHIFT=' + SHIFT + '&PERIOD=' + PERIOD + '&TYPE=' + TYPE + '&MODEL=' + MODEL + '&dataFunc=loadDatatableDefault')

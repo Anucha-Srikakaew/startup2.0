@@ -127,7 +127,7 @@ foreach ($arrQueryLineName as $key => $objResult) {
     }
 
     if ($TYPE == 'PRODUCTION') {
-        $link = '<a href="visual_line.html?COUNTRY=' . $COUNTRY . '&FACTORY=' . $FACTORY . '&BIZ=' . $BIZ . '&CENTER=&LINE=' . $LINE . '&START_DATE=' . $start_date . '&END_DATE=' . $end_date . '&SHIFT=' . $SHIFT . '&PERIOD=' . $PERIOD . '"><h4><b>' . $LINE . '</b></h4></a>';
+        $link = '<a href="visual_line.html?COUNTRY=' . $COUNTRY . '&FACTORY=' . $FACTORY . '&BIZ=' . $BIZ . '&LINE=' . $LINE . '&START_DATE=' . $start_date . '&END_DATE=' . $end_date . '&SHIFT=' . $SHIFT . '&PERIOD=' . $PERIOD . '"><h4><b>' . $LINE . '</b></h4></a>';
     } else {
         $link = '<a href="visual2.html?CENTER=' . $LINE . '&BIZ=' . $BIZ . '&PERIOD=' . $PERIOD . '"><h4><b>' . $LINE . '</b></h4></a>';
     }
