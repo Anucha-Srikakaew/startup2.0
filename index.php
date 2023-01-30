@@ -21,6 +21,14 @@
 
 <body>
 
+    <!-- <script>
+        window.onload = function() {
+            // similar behavior as clicking on a link
+            window.location.href = "http://43.72.52.52/startup2.0/";
+        }
+    </script> -->
+
+
     <section>
         <div class="row align-items-center h-100 text-center">
 

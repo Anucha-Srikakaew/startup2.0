@@ -1,21 +1,4 @@
 <?php
-
-ini_set('display_errors', 1);
-error_reporting(~0);
-
-$serverName	  	= "43.72.52.51";
-$userName	  	= "inno";
-$userPassword	= "1234";
-$dbName	  		= "startup2_0";
-
-$con = mysqli_connect($serverName, $userName, $userPassword, $dbName);
-mysqli_query($con, "SET CHARACTER SET UTF8");
-
-if (mysqli_connect_errno()) {
-	echo "Database Connect Failed : " . mysqli_connect_error();
-	exit();
-}
-
 // MSSQL MEMBER STTC
 $serverName = "43.72.52.158";
 $database = "STTC_HUMAN_RESOURCE";
@@ -34,3 +17,12 @@ try {
 } catch (PDOException $e) {
 	die("Error connecting to SQL Server: " . $e->getMessage());
 }
+
+$stmt = $conn->prepare("SELECT [GID] ,[ENID] ,[EMP_NAME_TH] ,[EMP_NAME_EN] ,
+[EMP_LEVEL] ,[EMP_POSITION] ,[CENTER] ,[DIVISION] ,[DEPARTMENT],
+[EMP_STATUS] ,[PLANT] ,[PLANT_EN] ,[RFID]
+FROM [STTC_HUMAN_RESOURCE].[dbo].[V_EMPLOYEE_COMBIN_PLANTE]
+WHERE [ENID]=:ENID");
+$stmt->execute(['ENID' => '22210063']);
+$row = $stmt->fetchAll();
+print_r($row);

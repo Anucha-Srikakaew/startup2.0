@@ -104,7 +104,7 @@ $sql = "SELECT DISTINCT `LINE`
         ORDER BY ID DESC";
 $query = mysqli_query($con, $sql);
 $rowItemMaster = mysqli_fetch_all($query, MYSQLI_ASSOC);
-
+// echo count($arrQueryLineName);
 $data = array();
 foreach ($arrQueryLineName as $key => $objResult) {
     $LINE = $objResult["LINE"];
@@ -189,6 +189,10 @@ foreach ($arrQueryLineName as $key => $objResult) {
     if(count($data) == 2){
         $output[] = array_merge($data[0], $data[1]);
         $data = array();
+    }else if(count($arrQueryLineName) == $i){
+        $output[] = array_merge($data[0], array(
+            '', '', '', ''
+        ));
     }
     $i++;
 }
