@@ -81,7 +81,8 @@ if (!empty($_FILES["excel_file"])) {
             $url = 'http://43.72.52.239/STARTUP_photo_body/photo_By_item/uploadphoto.php';
             $data = array(
                 'name' => $valDB['PICTURE'],
-                'img' => $imageContents
+                'img' => $imageContents,
+                'from' => 'Excel'
             );
             $options = array(
                 'http' => array(
