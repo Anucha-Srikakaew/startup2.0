@@ -72,11 +72,12 @@ function checkLogin() {
                 var btnMember = '<a href="member.html" type="button" class="btn btn-dark form-control">MEMBER</a><br><br>'
                 var btnTime = '<a href="time.html" type="button" class="btn btn-dark form-control">TIME</a><br><br>'
                 var btnlLine = '<a href="line.html" type="button" class="btn btn-dark form-control">LINE</a><br><br>'
+                var btnSortItem = '<a href="item-sort.html" type="button" class="btn btn-dark form-control">SORT ITEM</a><br><br>'
 
                 if (result.STARTUP_EMP_TYPE == 'TECH') {
                     btn = btnStartup
-                } else if (result.STARTUP_EMP_TYPE == 'PIC') {
-                    btn = btnStartup + btnItem + btnMember + btnTime + btnlLine
+                } else if (result.STARTUP_EMP_TYPE == 'PIC' || result.STARTUP_EMP_TYPE == 'ADMIN') {
+                    btn = btnStartup + btnItem + btnSortItem + btnMember + btnTime + btnlLine
                 } else {
                     btn = '<b>CONFIRM</b>'
                 }

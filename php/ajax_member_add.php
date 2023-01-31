@@ -11,14 +11,15 @@ $response = array(
 $typeQuery = $_POST['typeQuery'];
 if ($typeQuery == 'select') {
         $memberId = $_POST['memberID'];
-        $sql_member = "SELECT [GID] ,[ENID] ,
-        [EMP_NAME_TH] ,[EMP_NAME_EN] ,[EMP_LEVEL] ,
-        [EMP_POSITION] ,[CENTER] ,[DIVISION] ,
-        [DEPARTMENT] ,[EMP_STATUS] ,[PLANT] ,[RFID]
-        FROM [STTC_HUMAN_RESOURCE].[dbo].[V_EMPLOYEE_COMBIN_PLANTE] 
-        WHERE [RFID] = '$memberId' OR [ENID] = '$memberId'";
-        $query_member = sqlsrv_query($con158, $sql_member);
-        $row_member = sqlsrv_fetch_array($query_member, MYSQLI_NUM);
+
+        $stmt = $con158->prepare("SELECT [GID] ,[ENID] ,[EMP_NAME_TH] ,[EMP_NAME_EN] ,
+        [EMP_LEVEL] ,[EMP_POSITION] ,[CENTER] ,[DIVISION] ,[DEPARTMENT],
+        [EMP_STATUS] ,[PLANT] ,[PLANT_EN] ,[RFID]
+        FROM [STTC_HUMAN_RESOURCE].[dbo].[V_EMPLOYEE_COMBIN_PLANTE]
+        WHERE [ENID]=:ENID OR [RFID]=:RFID");
+        $stmt->execute(['ENID' => $memberId, 'RFID' => $memberId]);
+        $row_member = $stmt->fetchAll()[0];
+
         $response['data'] = $row_member;
         $response['response'] = true;
         $response['message'] = 'query.';
