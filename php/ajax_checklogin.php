@@ -36,7 +36,7 @@ if (isset($_POST['username']) && isset($_POST['username'])) {
         [EMP_STATUS] ,[PLANT] ,[PLANT_EN] ,[RFID]
         FROM [STTC_HUMAN_RESOURCE].[dbo].[V_EMPLOYEE_COMBIN_PLANTE]
         WHERE [ENID]=:ENID");
-        $stmt->execute(['ENID' => '22210063']);
+        $stmt->execute(['ENID' => $row['MEMBER_ID']]);
         $row2 = $stmt->fetchAll()[0];
 
         if (isset($row2)) {
