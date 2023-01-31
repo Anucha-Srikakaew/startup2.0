@@ -83,10 +83,7 @@ if ($startup == true && $check == '1') {
         AND `FACTORY` = '$FACTORY'
         AND `BIZ` = '$BIZ'
         AND `LINE` = '$LINE'
-        AND `TYPE` = '$TYPE'
-        AND `MODEL` = '$MODEL'
-        AND `SHIFT_DATE` = '$SHIFT_DATE'
-        AND `SHIFT` = '$SHIFT'
+        $QUERY_WHERE
         AND `PERIOD` = '$PERIOD'
         AND `STATUS` = 'NO PRODUCTION';";
         $sql_line_center = "SELECT * FROM `startup_line` WHERE `LINE` = '$LINE'";
@@ -158,10 +155,7 @@ if ($startup == true && $check == '1') {
         AND `FACTORY` = '$FACTORY'
         AND `BIZ` = '$BIZ'
         AND `LINE` = '$LINE'
-        AND `TYPE` = '$TYPE'
-        AND `MODEL` = '$MODEL'
-        AND `SHIFT_DATE` = '$SHIFT_DATE'
-        AND `SHIFT` = '$SHIFT'
+        $QUERY_WHERE
         AND `PERIOD` = '$PERIOD'
         AND `STATUS` = 'NO PRODUCTION';";
         foreach ($row as $data) {

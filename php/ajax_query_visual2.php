@@ -94,7 +94,7 @@ $rowItem = mysqli_fetch_all($query, MYSQLI_ASSOC);
 $sql = "SELECT `MODEL`, `CONFIRM1`,`CONFIRM2`,`CONFIRM3`, `STATUS`
             FROM `$tbl_time` 
             WHERE $WHERE_STARTUP
-            ORDER BY ID DESC";
+            ORDER BY CONFIRM3 ASC";
 $query = mysqli_query($con, $sql);
 $rowTime = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
@@ -137,15 +137,15 @@ foreach ($arrQueryLineName as $objResult) {
                         $status .= '<p>GOOD</p>';
                     } else {
                         $status = '<p><img src="framework/img/Ylight.png" width="50"></p>';
-                        $status .= '<p>PRODUCTION</p>';
+                        $status .= '<p>PROD.</p>';
                     }
                 } else {
                     $status = '<p><img src="framework/img/Ylight.png" width="50"></p>';
-                    $status .= '<p>SUPERVISIOR</p>';
+                    $status .= '<p>SUP.</p>';
                 }
             } else {
                 $status = '<p><img src="framework/img/Ylight.png" width="50"></p>';
-                $status .= '<p>TECHNICIAN</p>';
+                $status .= '<p>TECH.</p>';
             }
         } else {
             if (searchForId($MODEL, $rowItemMaster, 'MODEL') != '' || is_numeric(searchForId($MODEL, $rowItemMaster, 'MODEL')) == 1) {
