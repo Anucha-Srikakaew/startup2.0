@@ -153,19 +153,19 @@ foreach ($arrQueryLineName as $objResult) {
                 $TOTAL = '--';
                 $status = '<p><img src="framework/img/Rlight.png" width="50"></p>';
                 $status .= '<p>****</p>';
-                $TOTAL = '<h4 class="text-secondary">NO STARTUP</h4>';
+                $TOTAL = '<h5 class="text-secondary"><b>NO STARTUP</b></h5>';
             } else {
                 $PASS = '--';
                 $TOTAL = '--';
                 $status = '<p><img src="framework/img/Rlight.png" width="50"></p>';
                 $status .= '<p>****</p>';
-                $TOTAL = '<h4 class="text-secondary">NO ITEM</h4>';
+                $TOTAL = '<h5 class="text-secondary"><b>NO ITEM</b></h5>';
             }
         }
     } else {
         $status = '<p><img src="framework/img/Wlight.png" width="50"></p>';
         $status .= '<p>****</p>';
-        $TOTAL = '<h4 class="text-secondary">NO PRODUCTION</h4>';
+        $TOTAL = '<h5 class="text-secondary"><b>NO PRODUCTION</b></h5>';
     }
 
     if ($i % 2 == 0 && $i > 0) {

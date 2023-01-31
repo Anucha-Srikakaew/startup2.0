@@ -159,19 +159,19 @@ foreach ($arrQueryLineName as $key => $objResult) {
                 $TOTAL = '--';
                 $status = '<p><img src="framework/img/Rlight.png" width="50"></p>';
                 $status .= '<p>****</p>';
-                $TOTAL = '<h4 class="text-secondary">NO STARTUP</h4>';
+                $TOTAL = '<h5 class="text-secondary"><b>NO STARTUP</b></h5>';
             } else {
                 $PASS = '--';
                 $TOTAL = '--';
                 $status = '<p><img src="framework/img/Rlight.png" width="50"></p>';
                 $status .= '<p>****</p>';
-                $TOTAL = '<h4 class="text-secondary">NO ITEM</h4>';
+                $TOTAL = '<h5 class="text-secondary"><b>NO ITEM</b></h5>';
             }
         }
     } else {
         $status = '<p><img src="framework/img/Wlight.png" width="50"></p>';
         $status .= '<p>****</p>';
-        $TOTAL = '<h4 class="text-secondary">NO PRODUCTION</h4>';
+        $TOTAL = '<h5 class="text-secondary"><b>NO PRODUCTION</b></h5>';
     }
 
     if ($i % 2 == 0) {
@@ -186,10 +186,10 @@ foreach ($arrQueryLineName as $key => $objResult) {
         $data[] = $sub;
     }
 
-    if(count($data) == 2){
+    if (count($data) == 2) {
         $output[] = array_merge($data[0], $data[1]);
         $data = array();
-    }else if(count($arrQueryLineName) == $i){
+    } else if (count($arrQueryLineName) == $i) {
         $output[] = array_merge($data[0], array(
             '', '', '', ''
         ));

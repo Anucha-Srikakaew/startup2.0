@@ -150,17 +150,18 @@ function loadDatatableDefault() {
                             var MODEL = value.MODEL
                             var STATUS = '';
                             if (FAIL > 0) {
-                                STATUS = 'FAIL'
+                                STATUS = 'TECHNICIAN'
                                 strClass = 'text-center table-danger'
                             } else {
                                 if (BLANK > 0) {
-                                    STATUS = 'BLANK'
+                                    STATUS = 'TECHNICIAN'
                                     strClass = 'text-center table-warning'
                                 } else {
-                                    STATUS = 'PASS'
+                                    STATUS = STATUS_CONFIRM[TYPE][MODEL]
                                     strClass = 'text-center table-success'
                                 }
                             }
+
                             var row = [
                                 '<a href="#" onclick="loadDatatable(this.name, this.id)" name="' + TYPE + '" id="' + MODEL + '"><h5><b class="text-primary">' + TYPE + '</b></h5></a>',
                                 MODEL,
@@ -168,7 +169,7 @@ function loadDatatableDefault() {
                                 FAIL,
                                 BLANK,
                                 TOTAL,
-                                STATUS_CONFIRM[TYPE][MODEL],
+                                STATUS,
                             ];
                             table.row.add(row).draw().nodes().to$().addClass(strClass);
                         })
@@ -230,7 +231,7 @@ function loadDatatable(type, model) {
                     var strClass
                     table.clear().draw()
                     $(table.column(0).header()).text('PROCESS')
-                    $(table.column(6).header()).text('PROCESS')
+                    $(table.column(6).header()).text('STATUS')
                     table.column(1).visible(false)
                     $.each(obj, function (key, value) {
 
@@ -327,8 +328,8 @@ function showDataMemberTxT(obj) {
 
     if (obj.length == 0) {
         TECHNICIAN += '<div class="col-md-6"><br>' +
-            '<div class="card border-light bg-light shadow-sm">' +
-            '<div class="card-body shadow-sm">' +
+            '<div class="card border-light bg-light">' +
+            '<div class="card-body">' +
             '<h5></h5>' +
             '<h6></h6>' +
             '<img class="rounded-circle" src="framework/img/avatar.png" height="90px" width="90px" aria-label="For screen readers">' +
@@ -340,8 +341,8 @@ function showDataMemberTxT(obj) {
             '</div>'
 
         MFE += '<div class="col-md-6"><br>' +
-            '<div class="card border-light bg-light shadow-sm">' +
-            '<div class="card-body shadow-sm">' +
+            '<div class="card border-light bg-light">' +
+            '<div class="card-body">' +
             '<h5></h5>' +
             '<h6></h6>' +
             '<img class="rounded-circle" src="framework/img/avatar.png" height="90px" width="90px" aria-label="For screen readers">' +
@@ -353,8 +354,8 @@ function showDataMemberTxT(obj) {
             '</div>'
 
         PRODUCTION += '<div class="col-md-6"><br>' +
-            '<div class="card border-light bg-light shadow-sm">' +
-            '<div class="card-body shadow-sm">' +
+            '<div class="card border-light bg-light">' +
+            '<div class="card-body">' +
             '<h5></h5>' +
             '<h6></h6>' +
             '<img class="rounded-circle" src="framework/img/avatar.png" height="90px" width="90px" aria-label="For screen readers">' +
@@ -379,6 +380,7 @@ function showDataMemberTxT(obj) {
             if (STATUS_CONFIRM[value.TYPE] == undefined) {
                 STATUS_CONFIRM[value.TYPE] = []
             }
+            
             STATUS_CONFIRM[value.TYPE][value.MODEL] = 'TECHNICIAN'
             if (value.CONFIRM1 != null && value.CONFIRM1 != '') {
                 CONFIRM1_URL = URLIMG + value.CONFIRM1 + '.JPG'

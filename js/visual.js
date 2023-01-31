@@ -80,18 +80,18 @@ var table = $('#example').DataTable({
         $('td:eq(5)', row).css('font-weight', 'bold');
         $('td:eq(6)', row).css('font-weight', 'bold');
         if ((typeof data[6]) == 'string') {
-            $('td:eq(4)', row).addClass('table-active')
-            $('td:eq(5)', row).addClass('table-active')
-            $('td:eq(6)', row).addClass('table-active')
-            $('td:eq(7)', row).addClass('table-active')
+            // $('td:eq(4)', row).addClass('table-active')
+            // $('td:eq(5)', row).addClass('table-active')
+            // $('td:eq(6)', row).addClass('table-active')
+            // $('td:eq(7)', row).addClass('table-active')
             $('td:eq(6)', row).attr('colspan', 2);
             $('td:eq(5)', row).css('display', 'none');
         }
         if ((typeof data[2]) == 'string') {
-            $('td:eq(0)', row).addClass('table-active')
-            $('td:eq(1)', row).addClass('table-active')
-            $('td:eq(2)', row).addClass('table-active')
-            $('td:eq(3)', row).addClass('table-active')
+            // $('td:eq(0)', row).addClass('table-active')
+            // $('td:eq(1)', row).addClass('table-active')
+            // $('td:eq(2)', row).addClass('table-active')
+            // $('td:eq(3)', row).addClass('table-active')
             $('td:eq(2)', row).attr('colspan', 2);
             $('td:eq(1)', row).css('display', 'none');
         }
