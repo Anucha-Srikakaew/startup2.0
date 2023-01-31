@@ -93,7 +93,7 @@ $rowItem = mysqli_fetch_all($query, MYSQLI_ASSOC);
 $sql = "SELECT `LINE`, `CONFIRM1`,`CONFIRM2`,`CONFIRM3`, `STATUS`
             FROM `$tbl_time` 
             WHERE $WHERE_STARTUP
-            -- GROUP BY `LINE`
+            GROUP BY `LINE`
             ORDER BY `CONFIRM3` ASC";
 $query = mysqli_query($con, $sql);
 $rowTime = mysqli_fetch_all($query, MYSQLI_ASSOC);
@@ -104,7 +104,7 @@ $sql = "SELECT DISTINCT `LINE`
         ORDER BY ID DESC";
 $query = mysqli_query($con, $sql);
 $rowItemMaster = mysqli_fetch_all($query, MYSQLI_ASSOC);
-// echo count($arrQueryLineName);
+
 $data = array();
 foreach ($arrQueryLineName as $key => $objResult) {
     $LINE = $objResult["LINE"];
