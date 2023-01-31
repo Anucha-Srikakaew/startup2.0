@@ -379,6 +379,7 @@ function showDataMemberTxT(obj) {
             '</div>'
     } else {
         $.each(obj, function (key, value) {
+            console.log(value.MODEL)
             if (strModel.search(value.MODEL) == -1) {
                 if (key == 0) {
                     strModel += value.MODEL
@@ -575,6 +576,9 @@ memberIdDispose.addEventListener("keypress", function (event) {
 var memberIdConfirm = document.getElementById("memberIdConfirm");
 // Execute a function when the user presses a key on the keyboard
 memberIdConfirm.addEventListener("keypress", function (event) {
+    console.log(STATUS_CONFIRM)
+    console.log(TYPE)
+    console.log(MODEL)
     // If the user presses the "Enter" key on the keyboard
     if (event.key === "Enter") {
         // Cancel the default action, if needed

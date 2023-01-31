@@ -244,7 +244,7 @@ function editData(id) {
                 $("#imgEdit").attr("src", 'http://43.72.52.239/STARTUP_photo_body/photo_By_item/photo/' + value)
             } else {
                 console.log('sssss')
-                $("#imgEdit").attr("src", 'framework/img/no-image-vector.jpg')
+                $("#imgEdit").attr("src", 'framework/img/http://43.72.52.239/mdc_photo/station_photo/default/none.jpg')
             }
         } else {
             $('#edit' + key).val(value)

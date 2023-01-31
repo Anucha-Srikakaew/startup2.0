@@ -376,8 +376,22 @@ if ($startup == true && $check == '1') {
             $response['message'] = "Failed to connect to MySQL: " . $con->error;
         }
     } else {
-        $response['response'] = true;
-        $response['message'] = 'Startup haved data.';
+        $sql = "DELETE FROM `startup_time`
+        WHERE `COUNTRY` = '$COUNTRY'
+        AND `FACTORY` = '$FACTORY'
+        AND `BIZ` = '$BIZ'
+        AND `LINE` = '$LINE'
+        $QUERY_WHERE
+        AND `PERIOD` = '$PERIOD'
+        AND `STATUS` = 'NO PRODUCTION';";
+
+        if (mysqli_multi_query($con, $sql)) {
+            $response['response'] = true;
+            $response['message'] = 'Startup haved data.';
+        } else {
+            $response['response'] = false;
+            $response['message'] = "Failed to connect to MySQL: " . $con->error;
+        }
     }
 }
 

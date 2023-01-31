@@ -83,7 +83,7 @@ $.ajax({
                 var picture, input = '', cls = 'text-center ', valueInput = ''
 
                 if (value.PICTURE == '') {
-                    picture = '<img width="60%" src="framework/img/no-image-vector.jpg" alt="">'
+                    picture = '<img width="60%" src="framework/img/http://43.72.52.239/mdc_photo/station_photo/default/none.jpg" alt="">'
                 } else {
                     picture = '<img width="60%" src="http://43.72.52.239/STARTUP_photo_body/photo_By_item/photo/' + value.PICTURE + '" alt="">'
                 }

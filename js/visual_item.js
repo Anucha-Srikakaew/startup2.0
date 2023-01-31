@@ -27,7 +27,7 @@ var dataSearch = {
     SHIFT: SHIFT,
     PERIOD: PERIOD
 }
-console.log(CENTER)
+
 var fileVisual = ''
 if (CENTER != null && CENTER != 'null' && CENTER != "") {
     fileVisual = 'visual_model.html'
@@ -75,11 +75,11 @@ $.ajax({
     dataType: "json",
     data: dataSearch,
     success: function (json) {
-        console.log(json)
         var tblData = [], carousel_item, table = []
         $.each(json, function (key, value) {
-            var idProcess = key.replace(/[$/&!+=.() ]/g, '') + value[0]['ID']
-            // '<h4 class="text-center"><b>PROCESS : ' + key + '</b></h4>' +
+            var idProcess = key.replace(/[$/&!+=.?:\\(rn) ]/g, '').replace(/(?:\\[rn]|[\r\n]+)+/g, "") + value[0]['ID']
+            // idProcess = idProcess.replace(/(?:\\[rn])+/g, "")
+
             processNameArr[idProcess] = key
 
             carousel_item = '<div class="carousel-item bg-light" id="carousel-item-' + idProcess + '">' +
@@ -106,13 +106,12 @@ $.ajax({
             tblData[idProcess] = []
             var rows = []
             $.each(value, function (keyTbl, valueTbl) {
-                console.log(valueTbl)
                 var value1 = ''
 
                 if (valueTbl.PICTURE != null && valueTbl.PICTURE != '') {
                     IMG_SRC = '<img width="100%" src="http://43.72.52.239/STARTUP_photo_body/photo_By_item/photo/' + valueTbl.PICTURE + '" alt="">'
                 } else {
-                    IMG_SRC = '<img width="60%" src="framework/img/no-image-vector.jpg" alt="">'
+                    IMG_SRC = '<img width="60%" src="http://43.72.52.239/mdc_photo/station_photo/default/none.jpg" alt="">'
                 }
 
                 if (valueTbl.SPEC == 'PHOTO') {
@@ -140,10 +139,6 @@ $.ajax({
                 paging: false,
                 searching: false,
                 createdRow: function (row, data, dataIndex) {
-                    // console.log(row)
-                    // .addClass()
-
-                    // console.log($('td:eq(6)', row).text())
                     var strClass = '';
                     var strStatus = $('td:eq(5)', row).text()
                     if (strStatus == 'FAIL') {
@@ -158,8 +153,8 @@ $.ajax({
             })
             table['table-' + idProcess].rows.add(rows).draw().nodes().to$().addClass('strClass');
 
-            if (idProcess == PROCESS.replace(/[$/&!+=. ]/g, '') + value[0]['ID']) {
-                homeProcess = PROCESS.replace(/[$/&!+=. ]/g, '') + value[0]['ID']
+            if (idProcess == PROCESS.replace(/[$/&!+=.?:\\(rn) ]/g, '').replace(/(?:\\[rn]|[\r\n]+)+/g, "") + value[0]['ID']) {
+                homeProcess = PROCESS.replace(/[$/&!+=.?:\\(rn) ]/g, '').replace(/(?:\\[rn]|[\r\n]+)+/g, "") + value[0]['ID']
                 $('#carousel-item-' + homeProcess).addClass('active')
             }
         })
