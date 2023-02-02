@@ -127,43 +127,56 @@ function typeName(LINE) {
             'LINE': LINE
         },
         success: function (result) {
-            console.log(result)
+            SHIFT_DATE = result.SHIFT_DATE
+
+            if (FACTORY == 'STTB') {
+                var SHIFT_DATE_SHOW = new Date(SHIFT_DATE);
+                SHIFT_DATE_SHOW.setDate(SHIFT_DATE_SHOW.getDate() - 1);
+                SHIFT_DATE_SHOW = formatDate(SHIFT_DATE_SHOW)
+                SHIFT_DATE = SHIFT_DATE_SHOW
+            }
+            
+            var SHIFT_DATE_SHOW = SHIFT_DATE
+
+            if (PERIOD == 'DAY') {
+                var SHIFT_DATE_SHOW = new Date(SHIFT_DATE);
+                SHIFT_DATE_SHOW.setDate(SHIFT_DATE_SHOW.getDate() + 1);
+                SHIFT_DATE_SHOW = formatDate(SHIFT_DATE_SHOW)
+            } else {
+                var SHIFT_DATE_SHOW = SHIFT_DATE;
+            }
 
             var today = new Date();
             if (today.getHours() >= 8 && today.getHours() <= 20) {
                 SHIFT = 'DAY'
+                SHIFT_SHOW = 'NIGHT'
             } else {
                 SHIFT = 'NIGHT'
+                SHIFT_SHOW = 'DAY'
             }
 
-            currentDate = new Date(result.SHIFT_DATE);
+            currentDate = new Date(SHIFT_DATE);
             startDate = new Date(currentDate.getFullYear(), 0, 1);
-            var days = Math.floor((currentDate - startDate) /
-                (24 * 60 * 60 * 1000));
-
+            var days = Math.floor((currentDate - startDate) / (24 * 60 * 60 * 1000));
             var weekNumber = Math.ceil(days / 7);
 
-            // Display the calculated result      
-            console.log("Week number of " + currentDate +
-                " is :   " + weekNumber);
-
+            // Display the calculated result
             if (PERIOD == 'SHIFT') {
                 $("#SubStartup").text(
-                    'SHIFT DATE: ' + result.SHIFT_DATE +
-                    ' /SHIFT: ' + SHIFT
+                    '** STARTUP FOR SHIFT DATE: ' + SHIFT_DATE_SHOW +
+                    ' / SHIFT: ' + SHIFT_SHOW + ' **'
                 )
             } else if (PERIOD == 'DAY') {
                 $("#SubStartup").text(
-                    'SHIFT DATE: ' + result.SHIFT_DATE
+                    '** STARTUP FOR SHIFT DATE: ' + SHIFT_DATE_SHOW + ' **'
                 )
             } else if (PERIOD == 'WEEK') {
                 $("#SubStartup").text(
-                    'WEEK: ' + result.SHIFT_DATE.split('-')[0] + '-W' + weekNumber
+                    '** STARTUP FOR WEEK: ' + SHIFT_DATE.split('-')[0] + '-W' + weekNumber + ' **'
                 )
             }
 
-            SHIFT_DATE = result.SHIFT_DATE
-            WEEK = result.SHIFT_DATE.split('-')[0] + '-W' + weekNumber
+            WEEK = SHIFT_DATE.split('-')[0] + '-W' + weekNumber
         }
     })
 

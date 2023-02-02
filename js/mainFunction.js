@@ -88,7 +88,7 @@ function checkLogin() {
                     'data-bs-toggle="dropdown"' +
                     'data-bs-auto-close="outside"' +
                     'aria-expanded="false">' +
-                    'Mr. Anucha Srilakaew &nbsp; &nbsp;' +
+                    'Hi, ' + result.STARTUP_EMP_NAME + ' &nbsp; &nbsp;' +
                     '<img src="http://43.72.228.147/smart/pages/assets/media/internal/internal3.png"' +
                     'alt=""' +
                     'width="110"' +

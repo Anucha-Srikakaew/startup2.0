@@ -28,4 +28,7 @@ FROM `target_shift`
 WHERE `COUNTRY` ="' . $COUNTRY . '" AND `FACTORY`="' . $FACTORY . '" AND `BIZ`="' . $BIZ . '" AND `LINE`="' . $LINE . '"';
 $query = mysqli_query($con, $sql);
 $output = mysqli_fetch_array($query, MYSQLI_ASSOC);
+
+$sql_target = "";
+
 echo json_encode($output);

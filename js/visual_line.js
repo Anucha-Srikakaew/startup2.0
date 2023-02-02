@@ -70,10 +70,9 @@ if (FACTORY == 'STTC') {
     var URLIMG = 'http://43.72.228.147/attend/img_opt/';
 }
 
-console.log(START_DATE)
-var dateArr = START_DATE.split('-')
-var date_pust_1 = parseFloat(dateArr[2]) + 1
-var dateLocation = dateArr[0] + '-' + dateArr[1] + '-' + date_pust_1;
+var dateLocation = new Date(START_DATE);
+dateLocation.setDate(dateLocation.getDate() + 1);
+dateLocation = formatDate(dateLocation)
 console.log(dateLocation)
 
 var dataSearch = {
@@ -143,7 +142,7 @@ function loadDatatableDefault() {
                             '--',
                             '--',
                         ];
-                        
+
                         table.row.add(row).draw().nodes().to$().addClass('text-center');
                     } else {
                         $.each(obj, function (key, value) {
@@ -165,7 +164,13 @@ function loadDatatableDefault() {
                                     STATUS = 'TECHNICIAN'
                                     strClass = 'text-center table-warning'
                                 } else {
-                                    STATUS = STATUS_CONFIRM[TYPE][MODEL]
+
+                                    if (STATUS_CONFIRM[TYPE] != undefined) {
+                                        STATUS = STATUS_CONFIRM[TYPE][MODEL]
+                                    } else {
+                                        STATUS = ''
+                                    }
+
                                     strClass = 'text-center table-success'
                                 }
                             }
@@ -378,7 +383,7 @@ function showDataMemberTxT(obj) {
             '</div>'
     } else {
         $.each(obj, function (key, value) {
-            console.log(value.MODEL)
+            // console.log(value.MODEL)
             if (strModel.search(value.MODEL) == -1) {
                 if (key == 0) {
                     strModel += value.MODEL
@@ -419,6 +424,8 @@ function showDataMemberTxT(obj) {
                 STATUS = 'CONFIRM3'
                 STATUS_CONFIRM[value.TYPE][value.MODEL] = 'COMPLETE'
             }
+
+            // console.log(STATUS_CONFIRM)
 
             var name1 = '<br>',
                 tabk1 = '<br>',

@@ -13,8 +13,8 @@ $COUNTRY = $_POST['COUNTRY'];
 $FACTORY = $_POST['FACTORY'];
 
 $sql = "SELECT `ID`, `COUNTRY`, `FACTORY`, `BIZ`, `LINE`, `TARGET1`, `TARGET2`, `TARGET3`, `START_TIME_SHIFT_DAY`, `START_TIME_SHIFT_NIGHT`, `TARGET_TIME_SHIFT_DAY`, `TARGET_TIME_SHIFT_NIGHT`, `SHIFT_DATE` 
-FROM `target_shift` 
-WHERE `COUNTRY` ='$COUNTRY' AND `FACTORY`='$FACTORY' AND `BIZ`='$BIZ'";
+FROM `target_shift` ";
+// WHERE `COUNTRY` ='$COUNTRY' AND `FACTORY`='$FACTORY' AND `BIZ`='$BIZ'";
 $query = mysqli_query($con, $sql);
 $output = mysqli_fetch_all($query, MYSQLI_ASSOC);
 echo json_encode($output);

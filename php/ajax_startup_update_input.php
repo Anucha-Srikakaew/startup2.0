@@ -26,4 +26,5 @@ if (mysqli_multi_query($con, $sql)) {
     $response['response'] = false;
     $response['message'] = "Failed to connect to MySQL: " . $con->error;
 }
+
 echo json_encode($response);

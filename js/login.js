@@ -26,11 +26,11 @@ $("#login").click(function () {
                         })
                     } else {
                         if (result.STARTUP_EMP_TYPE == 'TECH') {
-                            window.location.href = 'startup_c.html?COUNTRY=' + COUNTRYmain + '&FACTORY=' + FACTORYmain + '&BIZ=' + BIZmain + '&PERIOD=' + PERIODmain + ''
+                            window.location.href = 'startup_c.html?COUNTRY=' + result.STARTUP_EMP_COUNTRY + '&FACTORY=' + result.STARTUP_EMP_FACTORY + '&BIZ=' + result.STARTUP_EMP_BIZ + '&PERIOD=' + PERIODmain + ''
                         } else if (result.STARTUP_EMP_TYPE == 'PIC') {
-                            window.location.href = 'visual.html'
+                            window.location.href = 'visual.html?' + result.STARTUP_EMP_COUNTRY + '&FACTORY=' + result.STARTUP_EMP_FACTORY + '&BIZ=' + result.STARTUP_EMP_BIZ
                         } else {
-                            window.location.href = 'visual.html'
+                            window.location.href = 'visual.html?' + result.STARTUP_EMP_COUNTRY + '&FACTORY=' + result.STARTUP_EMP_FACTORY + '&BIZ=' + result.STARTUP_EMP_BIZ
                         }
                     }
                 }

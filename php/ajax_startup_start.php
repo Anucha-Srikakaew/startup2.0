@@ -95,7 +95,8 @@ if ($startup == true && $check == '1') {
             $CENTER = '';
         }
 
-        $DATE_TORQUE = date("Y-m-d", strtotime("+1 days", strtotime($START_DATE)));
+        // $DATE_TORQUE = date("Y-m-d", strtotime("+1 days", strtotime($START_DATE)));
+        $DATE_TORQUE = date("Y-m-d");
 
         $PERIOD_DATA = 'DAY';
         $sql_select_process = "SELECT * FROM `tbl_torque_process_register` WHERE `LINENAME` LIKE '$LINE%$CENTER%($MODEL)%'";
@@ -300,7 +301,8 @@ if ($startup == true && $check == '1') {
         }
 
         $PERIOD_DATA = 'DAY';
-        $DATE_TORQUE = date("Y-m-d", strtotime("+1 days", strtotime($START_DATE)));
+        // $DATE_TORQUE = date("Y-m-d", strtotime("+1 days", strtotime($START_DATE)));
+        $DATE_TORQUE = date("Y-m-d");
         $sql_select_process = "SELECT * FROM `tbl_torque_process_register` WHERE `LINENAME` LIKE '$LINE%$CENTER%($MODEL)%'";
         $query_select_process = mysqli_query($con56, $sql_select_process);
         while ($row_select_process = mysqli_fetch_array($query_select_process, MYSQLI_ASSOC)) {

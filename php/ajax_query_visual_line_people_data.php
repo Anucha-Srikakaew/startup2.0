@@ -50,51 +50,52 @@ if ($PERIOD == 'SHIFT' || $PERIOD == 'DAY') {
     }
 }
 
+$WHERE = "AND `COUNTRY` = '$COUNTRY' 
+AND `FACTORY` = '$FACTORY' 
+AND `BIZ` = '$BIZ' 
+AND `LINE` = '$LINE' 
+AND `PERIOD` = '$PERIOD' 
+AND `SHIFT_DATE` BETWEEN '$START_DATE' AND '$END_DATE'";
+
 $sql = "SELECT 
-`$tbl_time`.`ID`,  
-`$tbl_time`.`COUNTRY`,  
-`$tbl_time`.`FACTORY`,  
-`$tbl_time`.`BIZ`,  
-`$tbl_time`.`LINE`,  
-`$tbl_time`.`TYPE`,  
-`$tbl_time`.`MODEL`,  
-`$tbl_time`.`REMARK`,  
-`$tbl_time`.`SHIFT_DATE`,  
-`$tbl_time`.`SHIFT`,  
-`$tbl_time`.`PERIOD`,  
-`$tbl_time`.`STATUS`,  
-`$tbl_time`.`STARTTIME`,  
-`$tbl_time`.`CONFIRM1`,  
-`$tbl_time`.`DATETIME1`,  
-`$tbl_time`.`CONFIRM2`,  
-`$tbl_time`.`DATETIME2`,  
-`$tbl_time`.`CONFIRM3`,
-`$tbl_time`.`DATETIME3`,
-`$tbl_time`.`TAKT`,
-`$tbl_time`.`RESULT`,
+tblMain.`ID`,  
+tblMain.`COUNTRY`,  
+tblMain.`FACTORY`,  
+tblMain.`BIZ`,  
+tblMain.`LINE`,  
+tblMain.`TYPE`,  
+tblMain.`MODEL`,  
+tblMain.`REMARK`,  
+tblMain.`SHIFT_DATE`,  
+tblMain.`SHIFT`,  
+tblMain.`PERIOD`,  
+tblMain.`STATUS`,  
+tblMain.`STARTTIME`,  
+tblMain.`CONFIRM1`,  
+tblMain.`DATETIME1`,  
+tblMain.`CONFIRM2`,  
+tblMain.`DATETIME2`,  
+tblMain.`CONFIRM3`,
+tblMain.`DATETIME3`,
+tblMain.`TAKT`,
+tblMain.`RESULT`,
 TBL1.NAME_CONFIRM1,
 TBL2.NAME_CONFIRM2,
 TBL3.NAME_CONFIRM3,
 TIMESTAMPDIFF(MINUTE, STARTTIME, DATETIME1) AS TAKT1,
 TIMESTAMPDIFF(MINUTE, DATETIME1, DATETIME2) AS TAKT2,
 TIMESTAMPDIFF(MINUTE, DATETIME2, DATETIME3) AS TAKT3
-FROM `$tbl_time` 
+FROM (SELECT * FROM `$tbl_time` WHERE `COUNTRY` = '$COUNTRY' $WHERE) AS tblMain
     LEFT JOIN ( 
         SELECT `NAME` AS NAME_CONFIRM1, `MEMBER_ID` FROM `member` ) AS TBL1 
-        ON TBL1.`MEMBER_ID` = `$tbl_time`.`CONFIRM1` 
+        ON TBL1.`MEMBER_ID` = tblMain.`CONFIRM1` 
     LEFT JOIN ( 
         SELECT `NAME` AS NAME_CONFIRM2, `MEMBER_ID` FROM `member` ) AS TBL2 
-        ON TBL2.`MEMBER_ID` = `$tbl_time`.`CONFIRM2` 
+        ON TBL2.`MEMBER_ID` = tblMain.`CONFIRM2` 
     LEFT JOIN ( 
         SELECT `NAME` AS NAME_CONFIRM3, `MEMBER_ID` FROM `member` ) AS TBL3 
-        ON TBL3.`MEMBER_ID` = `$tbl_time`.`CONFIRM3`
-WHERE `COUNTRY` = '$COUNTRY'
-AND `FACTORY` = '$FACTORY'
-AND `BIZ` = '$BIZ'
-AND `LINE` = '$LINE'
-AND `PERIOD` = '$PERIOD'
-AND `SHIFT_DATE` BETWEEN '$START_DATE' AND '$END_DATE'
-GROUP BY `ID`";
+        ON TBL3.`MEMBER_ID` = tblMain.`CONFIRM3`
+WHERE `COUNTRY` = '$COUNTRY' $WHERE";
 $query = mysqli_query($con, $sql);
 $row = mysqli_fetch_all($query, MYSQLI_ASSOC);
 

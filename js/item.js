@@ -414,6 +414,7 @@ $("#fileData, #fileDataPicture").change(function () {
     }
 
     var file_data = $("#" + this.id).prop('files')[0];
+    console.log(file_data)
     var form_data = new FormData();
     form_data.append("excel_file", file_data);
     form_data.append("table", 'item');
