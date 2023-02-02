@@ -20,6 +20,19 @@ if ($typeQuery == 'select') {
         $stmt->execute(['ENID' => $memberId, 'RFID' => $memberId]);
         $row_member = $stmt->fetchAll()[0];
 
+        if(empty($row_member)){
+                $stmt = $con158->prepare("SELECT [ID] ,[GID],[ENID],[EMP_NAME_TH],[EMP_NAME_EN],
+                [EMP_GENDER],[EMP_LEVEL],[EMP_POSITION],[CENTER],
+                [DIVISION],[DEPARTMENT],[COSTCENTER],[JOIN_DATE],
+                [RESIGN_DATE],[EMP_STATUS],[NATIONALITY],[EMP_TYPE],[EMP_ETC],
+                [REMARK1],[REMARK2],[REMARK3],[UPDATE_DATE],[EMP_GENDER_EN],
+                [EMP_STATUS_EN],[NATIONALITY_EN],[END_CONTRACT],[PLANT],[PLANT_COST]
+                  FROM [STTC_HUMAN_RESOURCE].[dbo].[TBL_MANPOW_MASTER_BANGKADI]
+                WHERE [ENID]=:ENID");
+                $stmt->execute(['ENID' => $memberId]);
+                $row_member = $stmt->fetchAll()[0];
+        }
+
         $response['data'] = $row_member;
         $response['response'] = true;
         $response['message'] = 'query.';

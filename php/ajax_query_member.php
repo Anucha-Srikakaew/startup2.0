@@ -2,6 +2,9 @@
 include('../connect.php');
 date_default_timezone_set("Asia/Bangkok");
 
+$FACTORY = $_POST['FACTORY'];
+$TYPE = $_POST['TYPE'];
+
 $sql = "SELECT `ID`, 
         `COUNTRY`, 
         `FACTORY`, 
@@ -14,7 +17,7 @@ $sql = "SELECT `ID`,
         `BIZ`, 
         `LastUpdate` 
         FROM `member` 
-        WHERE 1";
+        WHERE `FACTORY` LIKE '%$FACTORY%' AND `TYPE` LIKE '%$TYPE%'";
 
 $query = mysqli_query($con, $sql);
 $row = mysqli_fetch_all($query, MYSQLI_ASSOC);

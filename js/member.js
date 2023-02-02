@@ -9,16 +9,12 @@ var table = $('#example').DataTable({
         { data: 'ID' }
     ],
     createdRow: function (row, data, dataIndex) {
-
-        console.log(UrlExists(url))
-        var img = ''
-        var url = 'http://43.72.228.147/attend/img_opt/' + data.MEMBER_ID + '.jpg';
-        if (UrlExists('http://43.72.228.147/attend/img_opt/' + data.MEMBER_ID + '.jpg')) {
-            img = url
+        if (data.FACTORY == 'STTC') {
+            url = 'http://43.72.52.159/ATTENd/IMG_opt/' + data.MEMBER_ID + '.jpg'
         } else {
-            img = 'http://43.72.52.159/ATTENd/IMG_opt/' + data.MEMBER_ID + '.jpg'
+            url = 'http://43.72.228.147/attend/img_opt/' + data.MEMBER_ID + '.jpg'
         }
-        var img2 = '<img src="' + img + '" alt="" width="70%">'
+        var img2 = '<img src="' + url + '" alt="" width="70%">'
         $('td:eq(0)', row).empty()
         $('td:eq(0)', row).append(img2)
 
@@ -28,27 +24,28 @@ var table = $('#example').DataTable({
     }
 })
 
-function UrlExists(url) {
-    var http = new XMLHttpRequest();
-    http.open('HEAD', url, false);
-    http.send();
-    if (http.status != 404)
-        return true;
-    else
-        return false;
+var dataSearch = {
+    FACTORY: '',
+    TYPE: '',
+}
+search(dataSearch)
+function search(dataSearch) {
+    $.ajax({
+        url: "php/ajax_query_member.php",
+        type: "POST",
+        dataType: "json",
+        data: dataSearch,
+        async: false,
+        success: function (json) {
+            table.clear().draw()
+            table.rows.add(json).draw().nodes().to$().addClass("text-center")
+        }
+    })
 }
 
-$.ajax({
-    url: "php/ajax_query_member.php",
-    type: "POST",
-    dataType: "json",
-    // data: dataSearch,
-    async: false,
-    success: function (json) {
-        console.log(json)
-        table.clear().draw()
-        table.rows.add(json).draw().nodes().to$().addClass("text-center")
-    }
+$('select').change(function () {
+    dataSearch[this.id] = this.value
+    search(dataSearch)
 })
 
 function del(id) {
@@ -100,8 +97,8 @@ myModalEl.addEventListener('shown.bs.modal', function (event) {
     memberidAdd = ''
     nameAdd = ''
     typeAdd = ''
-    $("#FACTORYAdd").val('STTC')
-    $("#TYPEAdd").val('TECH')
+    // $("#FACTORYAdd").val()
+    // $("#TYPEAdd").val()
     $("#member_id").val('')
     $("#imgMemberAdd").attr('src', '')
 })
@@ -123,7 +120,7 @@ $("#member_id").on('keyup keypress blur change', function () {
             console.log(json)
             if (json.data != null) {
                 memberidAdd = json.data.ENID
-                nameAdd = json.data.ENID
+                nameAdd = json.data.EMP_NAME_EN
                 typeAdd = $("#TYPEAdd").val()
                 $("#imgMemberAdd").attr('src', 'http://43.72.52.159/ATTENd/IMG_opt/' + json.data.ENID + '.jpg')
             }
@@ -141,7 +138,7 @@ function save() {
             'FACTORY': $("#FACTORYAdd").val(),
             'MEMBER_ID': memberidAdd,
             'NAME': nameAdd,
-            'TYPE': typeAdd,
+            'TYPE': $("#TYPEAdd").val(),
         },
         success: function (json) {
             if (json.response == true) {

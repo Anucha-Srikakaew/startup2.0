@@ -19,8 +19,8 @@ if (mysqli_connect_errno()) {
 // MSSQL MEMBER STTC
 $serverName = "43.72.52.158";
 $database = "STTC_HUMAN_RESOURCE";
-$uid = 'mfe';
-$pwd = 'mfeP@ssw0rd';
+$uid = 'mfd';
+$pwd = 'sttcP@ssw0rd';
 try {
 	$con158 = new PDO(
 		"sqlsrv:server=$serverName;Database=$database",
