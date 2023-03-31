@@ -45,7 +45,7 @@ var table = $('#example').DataTable({
         $('td:eq(4)', row).empty()
         $('td:eq(4)', row).append(data.SHIFT_DATE)
 
-        var btn = '<button disabled class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="Edit(this.name)" name="' + data.ID + '"><i class="fas fa-edit"></i></button>'
+        var btn = '<button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="Edit(this.name)" name="' + data.ID + '"><i class="fas fa-edit"></i></button>'
         $('td:eq(5)', row).empty()
         $('td:eq(5)', row).append(btn)
     }

@@ -13,10 +13,10 @@ $sql = 'UPDATE `item` SET';
 $i = 0;
 foreach ($_POST as $key => $value) {
     if ($key != 'ID') {
-        if ($i != 0) {
+        if ($i == 0) {
             $sql .= "`$key`='$value'";
         } else {
-            $sql .= "`$key`='$value'";
+            $sql .= ",`$key`='$value'";
         }
     }
     $i++;
@@ -28,6 +28,6 @@ if (mysqli_query($con, $sql)) {
     $response['message'] = 'Complete.';
 } else {
     $response['response'] = false;
-    $response['message'] = "Failed to query to MySQL: " . $con->error;
+    $response['message'] = "Failed to query to MySQL: " . $con->error . ' Str Sql: ' . $sql;
 }
 echo json_encode($response);

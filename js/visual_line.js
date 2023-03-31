@@ -164,6 +164,7 @@ function loadDatatableDefault() {
                                     STATUS = 'TECHNICIAN'
                                     strClass = 'text-center table-warning'
                                 } else {
+                                    console.log(STATUS_CONFIRM)
 
                                     if (STATUS_CONFIRM[TYPE] != undefined) {
                                         STATUS = STATUS_CONFIRM[TYPE][MODEL]

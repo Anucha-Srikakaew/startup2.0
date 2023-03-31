@@ -88,6 +88,10 @@ $.ajax({
                     picture = '<img width="60%" src="http://43.72.52.239/STARTUP_photo_body/photo_By_item/photo/' + value.PICTURE + '" alt="">'
                 }
 
+                if (value.SPEC == '') {
+                    console.log(value)
+                }
+
                 if (value.SPEC == 'OK' || value.SPEC == 'NG' || value.SPEC == 'JUDGEMENT') {
                     input = '<select name="VALUE1" id="' + value.ID + '" class="form-select">' +
                         '<option value="OK">OK</option>' +
@@ -107,6 +111,8 @@ $.ajax({
                     input = '<input type="date" class="form-control" name="VALUE1" id="' + value.ID + '">'
                 } else if (value.SPEC == 'VALUE') {
                     input = '<input type="number" step="any" class="form-control" name="VALUE1" id="' + value.ID + '">'
+                } else if (value.SPEC == '') {
+                    input = '<b class="text-warning">SPEC BLANK (ITEM ID : ' + value.ID + ').</b>'
                 }
 
                 if (value.JUDGEMENT == 'FAIL') {

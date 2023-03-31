@@ -11,7 +11,7 @@ $response = array(
     "data" => array(),
     "message" => "No data post",
 );
-
+// echo json_encode($_FILES);
 
 if (!empty($_FILES["excel_file"])) {
 
@@ -52,92 +52,104 @@ if (!empty($_FILES["excel_file"])) {
         array_shift($worksheetArray);
 
         foreach ($worksheetArray as $key => $value) {
-            $valDB = array_combine($column, $value);
+            $loopUnArr = array_key_last($value) - 15;
+            for ($i = 0; $i < array_key_last($value); $i++) {
+                if(array_key_last($value) > 15){
+                    unset($value[array_key_last($value)]);
+                }
+            }
+            if (array_key_last($value) == 15) {
+                $valDB = array_combine($column, $value);
 
-            $worksheet1 = $object->getActiveSheet();
-            $drawing = $worksheet1->getDrawingCollection()[$key];
+                $worksheet1 = $object->getActiveSheet();
+                $drawing = $worksheet1->getDrawingCollection()[$key];
 
-            if ($drawing instanceof PHPExcel_Worksheet_MemoryDrawing) {
-                ob_start();
-                call_user_func(
-                    $drawing->getRenderingFunction(),
-                    $drawing->getImageResource()
+                if ($drawing instanceof PHPExcel_Worksheet_MemoryDrawing) {
+                    ob_start();
+                    call_user_func(
+                        $drawing->getRenderingFunction(),
+                        $drawing->getImageResource()
+                    );
+
+                    $imageContents = ob_get_contents();
+                    ob_end_clean();
+                    $extension = 'png';
+                } else {
+                    $zipReader = fopen($drawing->getPath(), 'r');
+                    $imageContents = '';
+
+                    while (!feof($zipReader)) {
+                        $imageContents .= fread($zipReader, 1024);
+                    }
+                    fclose($zipReader);
+                    $extension = $drawing->getExtension();
+                }
+
+                $valDB['PICTURE'] = $max_id . '.' . $extension;
+                $url = 'http://43.72.52.239/STARTUP_photo_body/photo_By_item/uploadphoto.php';
+                $data = array(
+                    'name' => $valDB['PICTURE'],
+                    'img' => $imageContents,
+                    'from' => 'Excel'
+                );
+                $options = array(
+                    'http' => array(
+                        'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                        'method'  => 'POST',
+                        'content' => http_build_query($data),
+                    )
                 );
 
-                $imageContents = ob_get_contents();
-                ob_end_clean();
-                $extension = 'png';
-            } else {
-                $zipReader = fopen($drawing->getPath(), 'r');
-                $imageContents = '';
+                $context  = stream_context_create($options);
+                $result = file_get_contents($url, false, $context);
 
-                while (!feof($zipReader)) {
-                    $imageContents .= fread($zipReader, 1024);
+                $valDB['ID'] = $max_id;
+
+                if ($valDB['BIZ'] != 'IM') {
+                    $error_biz[$row - 1] = 'BIZ';
+                    $biz = $error_biz;
+                    $row_error[] = $row - 1;
+                    $query_db = '';
                 }
-                fclose($zipReader);
-                $extension = $drawing->getExtension();
+
+                $sql .= "INSERT INTO `item` ( `ID`, `FACTORY`,`BIZ`, `LINE`, `TYPE`, `DRAWING`, `MODEL`, `PROCESS`, `JIG_NAME`, `PICTURE`, `ITEM`, `SPEC_DES`, `MIN`, `MAX`, `SPEC`, `PIC`, `PERIOD`, `LastUpdate` ) VALUES (
+                        '" . $valDB['ID'] . "',
+                        '" . $valDB['FACTORY'] . "',
+                        '" . $valDB['BIZ'] . "',
+                        '" . $valDB['LINE'] . "',
+                        '" . $valDB['TYPE'] . "',
+                        '" . $valDB['DRAWING'] . "',
+                        '" . $valDB['MODEL'] . "',
+                        '" . $valDB['PROCESS'] . "',
+                        '" . $valDB['JIG_NAME'] . "',
+                        '" . $valDB['PICTURE'] . "',
+                        '" . $valDB['ITEM'] . "',
+                        '" . $valDB['SPEC_DES'] . "',
+                        '" . $valDB['MIN'] . "',
+                        '" . $valDB['MAX'] . "',
+                        '" . $valDB['SPEC'] . "',
+                        '" . $valDB['PIC'] . "',
+                        '" . $valDB['PERIOD'] . "',
+                        NOW()
+                        );";
+                $max_id++;
             }
-
-            $valDB['PICTURE'] = $max_id . '.' . $extension;
-            $url = 'http://43.72.52.239/STARTUP_photo_body/photo_By_item/uploadphoto.php';
-            $data = array(
-                'name' => $valDB['PICTURE'],
-                'img' => $imageContents,
-                'from' => 'Excel'
-            );
-            $options = array(
-                'http' => array(
-                    'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-                    'method'  => 'POST',
-                    'content' => http_build_query($data),
-                )
-            );
-
-            $context  = stream_context_create($options);
-            $result = file_get_contents($url, false, $context);
-
-            $valDB['ID'] = $max_id;
-
-            if ($valDB['BIZ'] != 'IM') {
-                $error_biz[$row - 1] = 'BIZ';
-                $biz = $error_biz;
-                $row_error[] = $row - 1;
-                $query_db = '';
-            }
-
-            $sql .= "INSERT INTO `item` ( `ID`, `FACTORY`,`BIZ`, `LINE`, `TYPE`, `DRAWING`, `MODEL`, `PROCESS`, `JIG_NAME`, `PICTURE`, `ITEM`, `SPEC_DES`, `MIN`, `MAX`, `SPEC`, `PIC`, `PERIOD`, `LastUpdate` ) VALUES (
-                    '" . $valDB['ID'] . "',
-                    '" . $valDB['FACTORY'] . "',
-                    '" . $valDB['BIZ'] . "',
-                    '" . $valDB['LINE'] . "',
-                    '" . $valDB['TYPE'] . "',
-                    '" . $valDB['DRAWING'] . "',
-                    '" . $valDB['MODEL'] . "',
-                    '" . $valDB['PROCESS'] . "',
-                    '" . $valDB['JIG_NAME'] . "',
-                    '" . $valDB['PICTURE'] . "',
-                    '" . $valDB['ITEM'] . "',
-                    '" . $valDB['SPEC_DES'] . "',
-                    '" . $valDB['MIN'] . "',
-                    '" . $valDB['MAX'] . "',
-                    '" . $valDB['SPEC'] . "',
-                    '" . $valDB['PIC'] . "',
-                    '" . $valDB['PERIOD'] . "',
-                    NOW()
-                    );";
-
-            $max_id++;
         }
 
-        if (mysqli_multi_query($con, $sql)) {
-            while (mysqli_more_results($con)) {
-                mysqli_next_result($con);
+        if ($sql != '') {
+            if (mysqli_multi_query($con, $sql)) {
+                while (mysqli_more_results($con)) {
+                    mysqli_next_result($con);
+                }
+                $response['response'] = true;
+                $response['message'] = 'Complete.';
+            } else {
+                $response['response'] = false;
+                $response['message'] = "Failed to query to MySQL: " . $con->error;
             }
-            $response['response'] = true;
-            $response['message'] = 'Complete.';
         } else {
             $response['response'] = false;
-            $response['message'] = "Failed to query to MySQL: " . $con->error;
+            $response['message'] = "Can not upload data please contact system team.";
         }
     }
 }

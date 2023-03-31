@@ -16,6 +16,19 @@ if (mysqli_connect_errno()) {
 	exit();
 }
 
+$serverName	  	= "43.72.52.84";
+$userName	  	= "inno";
+$userPassword	= "1234";
+$dbName	  		= "di_cl";
+
+$con84 = mysqli_connect($serverName, $userName, $userPassword, $dbName);
+mysqli_query($con84, "SET CHARACTER SET UTF8");
+
+if (mysqli_connect_errno()) {
+	echo "Database Connect Failed : " . mysqli_connect_error();
+	exit();
+}
+
 // MSSQL MEMBER STTC
 $serverName = "43.72.52.158";
 $database = "STTC_HUMAN_RESOURCE";

@@ -3,6 +3,8 @@ include('../connect.php');
 // include("../connect84.php");
 date_default_timezone_set("Asia/Bangkok");
 
+// echo json_encode($_POST);
+
 ////////////IP ADRESS////////////////
 //whether ip is from share internet
 if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
@@ -94,6 +96,8 @@ $strSQL = "SELECT * FROM `member` WHERE MEMBER_ID = '$MEMBER' AND COUNTRY = '$CO
 $objQuery = mysqli_query($con, $strSQL);
 $objResult = mysqli_fetch_array($objQuery);
 
+// echo json_encode($objResult);
+
 $NAME = $objResult['NAME'];
 $MEMBER_TYPE = $objResult['TYPE'];
 $MEMBER_ID = $objResult['MEMBER_ID'];
@@ -134,15 +138,15 @@ if (($CONFIRM == 'CONFIRM2') && ($MEMBER_TYPE == 'SUP.T' or $MEMBER_TYPE == 'ENG
     // $objQuery = mysqli_query($con, $strSQL);
 
     ////// UPDATE GOOD STARTUP TO 84 MONITOR ///////////
-    // if ($PERIOD == 'DAY' ) {
-    //     // SELECT * FROM tbl_startup_check ORDER BY `data_id` DESC
-    //     $strSQL = "INSERT INTO `di_cl`.`tbl_startup_check` 
-    //     (`data_id` , `shift_date` , `for_model` ,`line` ,`result` ,`shift` , `rec_date`)
-    //     VALUES 
-    //     (NULL , '$START_DATE', '$BIZ', '$LINE', 'GOOD', 'A', NOW()),
-    //     (NULL , '$START_DATE', '$BIZ', '$LINE', 'GOOD', 'B', NOW())";
-    //      mysqli_query($con84, $strSQL);
-    // }
+    if ($PERIOD == 'DAY' ) {
+        // SELECT * FROM tbl_startup_check ORDER BY `data_id` DESC
+        $strSQL = "INSERT INTO `di_cl`.`tbl_startup_check` 
+        (`data_id` , `shift_date` , `for_model` ,`line` ,`result` ,`shift` , `rec_date`)
+        VALUES 
+        (NULL , '$START_DATE', '$BIZ', '$LINE', 'GOOD', 'A', NOW()),
+        (NULL , '$START_DATE', '$BIZ', '$LINE', 'GOOD', 'B', NOW())";
+         mysqli_query($con84, $strSQL);
+    }
 
     /////// TEXT SHOW ON SCREEN ///////////////////////
     $response['response'] = true;

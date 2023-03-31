@@ -11,18 +11,17 @@ $response = array(
 
 $ID = $_POST['ID'];
 $WHERE = " WHERE `ID` = '$ID'";
-$sql = 'UPDATE `target_shift` SET';
+$sql = 'UPDATE `target_shift` SET ';
 $i = 0;
-
 foreach ($_POST as $key => $value) {
     if ($key != 'ID') {
-        if ($i != 0) {
+        if ($i == 0) {
             $sql .= "`$key`='$value'";
-        } else {
-            $sql .= "`$key`='$value'";
+        } else if ($i > 0) {
+            $sql .= ", `$key`='$value'";
         }
+        $i++;
     }
-    $i++;
 }
 
 $sql = $sql . $WHERE;
@@ -32,7 +31,7 @@ if (mysqli_query($con, $sql)) {
     $response['message'] = 'Query startup complete.';
 } else {
     $response['response'] = false;
-    $response['message'] = "Failed to connect to MySQL: " . $con->error;
+    $response['message'] = "Failed to connect to MySQL: " . $con->error . ' : ' . $sql;
 }
 
 echo json_encode($response);

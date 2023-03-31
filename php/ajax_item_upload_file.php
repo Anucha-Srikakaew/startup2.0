@@ -52,7 +52,7 @@ if (!empty($_FILES["excel_file"])) {
             for ($row = $RowSkip; $row <= $highestRow; $row++) {
                 for ($column_number = 0; $column_number < $count_column; $column_number++) {
                     $data_in_file = mysqli_real_escape_string($connect, $worksheet->getCellByColumnAndRow($column_number, $row)->getValue());
-                    $check_value_excel[$column_number] = $data_in_file;
+                    $check_value_excel[$column_number] = trim($data_in_file);
                 }
 
                 $value_excel = array_combine($column_name, $check_value_excel);

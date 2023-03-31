@@ -42,7 +42,7 @@ if ($typeQuery == 'select') {
         $NAME = $_POST['NAME'];
         $TYPE = $_POST['TYPE'];
         $sql = "INSERT INTO `member`(
-                `FACTORY`, 
+                `FACTORY`,
                 `MEMBER_ID`, 
                 `NAME`, 
                 `PASSWORD`, 
@@ -53,7 +53,7 @@ if ($typeQuery == 'select') {
                 `LastUpdate`
                 ) 
         VALUES (
-                '$FACTORY', 
+                '$FACTORY',
                 '$MEMBER_ID', 
                 '$NAME', 
                 '$MEMBER_ID', 

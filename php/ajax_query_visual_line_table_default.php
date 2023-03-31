@@ -57,8 +57,8 @@ AND `LINE` = '$LINE'
 AND `PERIOD` = '$PERIOD' 
 AND `SHIFT_DATE` BETWEEN '$START_DATE' AND '$END_DATE'";
 $sql = "SELECT 
-        tblMain.TYPE,
-        tblMain.MODEL,
+        TRIM(tblMain.TYPE) AS `TYPE`,
+        TRIM(tblMain.MODEL) AS `MODEL`,
         tblPASS.PASS,
         tblFAIL.FAIL,
         tblBLANK.BLANK,
