@@ -139,6 +139,7 @@ if (($CONFIRM == 'CONFIRM2') && ($MEMBER_TYPE == 'SUP.T' or $MEMBER_TYPE == 'ENG
 
     ////// UPDATE GOOD STARTUP TO 84 MONITOR ///////////
     if ($PERIOD == 'DAY' ) {
+        $START_DATE = date("Y-m-d", strtotime("+1 day",strtotime($START_DATE)));
         // SELECT * FROM tbl_startup_check ORDER BY `data_id` DESC
         $strSQL = "INSERT INTO `di_cl`.`tbl_startup_check` 
         (`data_id` , `shift_date` , `for_model` ,`line` ,`result` ,`shift` , `rec_date`)

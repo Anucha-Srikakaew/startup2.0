@@ -346,23 +346,25 @@ if ($startup == true && $check == '1') {
                                 AND `MODEL` = '$MODEL'
                                 AND `TYPE` = '$TYPE'
                                 AND`PROCESS` = '$PROCESSID'
-                                AND`SHIFT_DATE` = '$START_DATE'
-                                AND `SHIFT` = '$SHIFT';";
+                                $QUERY_WHERE;";
             $objQuery = mysqli_query($con, $strSQL);
             $objResult = mysqli_fetch_array($objQuery);
 
             if (isset($objResult)) {
                 $sql .= "UPDATE `startup_item` SET `VALUE1`='$RESULT_TORQUE',`JUDGEMENT`='$JUDGEMENT'
-                                WHERE  `COUNTRY`= '$COUNTRY'
-                                AND `FACTORY` = '$FACTORY'
-                                AND `BIZ` = '$BIZ'
-                                AND `PERIOD` = '$PERIOD'
-                                AND `LINE` = '$LINE'
-                                AND `MODEL` = '$MODEL'
-                                AND `TYPE` = '$TYPE'
-                                AND`PROCESS` = '$PROCESSID'
-                                AND`SHIFT_DATE` = '$START_DATE'
-                                AND `SHIFT` = '$SHIFT';";
+                        WHERE  `COUNTRY`= '$COUNTRY'
+                        AND `FACTORY` = '$FACTORY'
+                        AND `BIZ` = '$BIZ'
+                        AND `PERIOD` = '$PERIOD'
+                        AND `LINE` = '$LINE'
+                        AND `MODEL` = '$MODEL'
+                        AND `TYPE` = '$TYPE'
+                        AND`PROCESS` = '$PROCESSID'
+                        $QUERY_WHERE;";
+
+                // if ($PROCESSID == 'SHOP 5.9/2') {
+                //     echo $sql;
+                // }
             } else {
                 $sql .= "INSERT INTO `startup_item`
             (`ID`, `COUNTRY`, `FACTORY`, `BIZ`,  `LINE`, `TYPE`, `DRAWING`, `MODEL`, `PROCESS`, `JIG_NAME`, `PICTURE`, `ITEM`, `SPEC_DES`, `MIN`, `MAX`, `SPEC`, `VALUE1`, `VALUE2`, `JUDGEMENT`, `REMARK`, `SHIFT_DATE`,`SHIFT`,`PERIOD`, `RESULT`, `LastUpdate`) 
