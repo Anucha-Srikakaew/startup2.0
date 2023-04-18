@@ -83,7 +83,7 @@ $.ajax({
                 var picture, input = '', cls = 'text-center ', valueInput = ''
 
                 if (value.PICTURE == '') {
-                    picture = '<img width="60%" src="framework/img/http://43.72.52.239/mdc_photo/station_photo/default/none.jpg" alt="">'
+                    picture = '<img width="60%" src="http://43.72.52.239/mdc_photo/station_photo/default/none.jpg" alt="">'
                 } else {
                     picture = '<img width="60%" src="http://43.72.52.239/STARTUP_photo_body/photo_By_item/photo/' + value.PICTURE + '" alt="">'
                 }
@@ -94,6 +94,7 @@ $.ajax({
 
                 if (value.SPEC == 'OK' || value.SPEC == 'NG' || value.SPEC == 'JUDGEMENT') {
                     input = '<select name="VALUE1" id="' + value.ID + '" class="form-select">' +
+                        '<option value="' + value.VALUE1 + '">' + value.VALUE1 + '</option>' +
                         '<option value="OK">OK</option>' +
                         '<option value="NG">NG</option>' +
                         '</select>'
@@ -110,7 +111,13 @@ $.ajax({
                 } else if (value.SPEC == 'DATE') {
                     input = '<input type="date" class="form-control" name="VALUE1" id="' + value.ID + '">'
                 } else if (value.SPEC == 'VALUE') {
-                    input = '<input type="number" step="any" class="form-control" name="VALUE1" id="' + value.ID + '">'
+                    if (value.JUDGEMENT != 'FAIL') {
+                        input = '<input type="number" step="any" class="form-control" name="VALUE1" id="' + value.ID + '">'
+                        input += '<br><input type="number" step="any" class="form-control" name="VALUE2" id="' + value.ID + '" style="display: none;">'
+                    } else {
+                        input = '<input disabled type="number" step="any" class="form-control" name="VALUE1" id="' + value.ID + '">'
+                        input += '<br><input type="number" step="any" class="form-control" name="VALUE2" id="' + value.ID + '">'
+                    }
                 } else if (value.SPEC == '') {
                     input = '<b class="text-warning">SPEC BLANK (ITEM ID : ' + value.ID + ').</b>'
                 }
@@ -131,18 +138,22 @@ $.ajax({
                 table.draw(true)
                 $('#tr' + value.ID).addClass(cls)
 
-                $('#' + value.ID).val(value.VALUE1)
+                $("input[id='" + value.ID + "'][name='VALUE1']").val(value.VALUE1)
+                $("input[id='" + value.ID + "'][name='VALUE2']").val(value.VALUE2)
+
+                console.log(value)
 
                 specArr[value.ID] = {
                     'MIN': value.MIN,
                     'MAX': value.MAX,
                     'SPEC_DES': value.SPEC_DES,
                     'SPEC': value.SPEC,
+                    'JUDGEMENT': value.JUDGEMENT,
                 }
             })
 
             $('input,select').on('keyup change', function (e) {
-                setElement(this)
+                setElement(this, e.handleObj.type)
             });
         } else {
             window.location.href = "startup_c.html"
@@ -153,7 +164,8 @@ $.ajax({
 })
 
 var id = '', value = '', type = '', judgment = ''
-function setElement(elem) {
+function setElement(elem, strEvent) {
+    console.log(elem)
     id = elem.id
     value = elem.value
     type = elem.type
@@ -161,8 +173,8 @@ function setElement(elem) {
     if (value != '') {
         if (type == 'number') {
             value = parseFloat(value)
-            console.log(parseFloat(specArr[id].MIN))
-            console.log(parseFloat(specArr[id].MAX))
+            // console.log(parseFloat(specArr[id].MIN))
+            // console.log(parseFloat(specArr[id].MAX))
             console.log(value)
             if (value >= parseFloat(specArr[id].MIN) && value <= parseFloat(specArr[id].MAX)) {
                 judgment = 'PASS'
@@ -184,11 +196,22 @@ function setElement(elem) {
                 judgment = 'FAIL'
             }
         }
-    } else {
+    } else if (elem.name != 'VALUE2') {
         judgment = 'BLANK'
     }
 
-    updateInput(id, 'VALUE1', value, judgment)
+    if (judgment == '') {
+        judgment = specArr[id].JUDGEMENT
+    }
+
+    console.log(judgment)
+
+    if (judgment == 'FAIL' && strEvent == 'change' && elem.name == 'VALUE1' && specArr[id].SPEC == 'VALUE') {
+        $("#" + id).attr("disabled", 'disabled')
+        $("input[name='VALUE2'][id='" + id + "']").css("display", "block")
+    }
+
+    updateInput(id, elem.name, value, judgment)
 }
 
 function updateInput(id, column, value, judgment) {
