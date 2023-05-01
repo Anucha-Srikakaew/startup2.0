@@ -115,7 +115,6 @@ function lineName() {
 }
 
 function typeName(LINE) {
-
     $.ajax({
         url: "php/ajax_target.php",
         type: "POST",
@@ -135,7 +134,7 @@ function typeName(LINE) {
                 SHIFT_DATE_SHOW = formatDate(SHIFT_DATE_SHOW)
                 SHIFT_DATE = SHIFT_DATE_SHOW
             }
-            
+
             var SHIFT_DATE_SHOW = SHIFT_DATE
 
             if (PERIOD == 'DAY') {
@@ -294,77 +293,88 @@ function noProduction() {
 }
 
 function startupCheck() {
-    if (LINE != '' && LINE != undefined) {
-        if (TYPE != '' && TYPE != undefined) {
-            if ($('#MODEL').val() != '' && $('#MODEL').val() != undefined) {
-                $.ajax({
-                    url: "php/ajax_startup_start.php",
-                    type: "POST",
-                    dataType: "json",
-                    data: {
-                        'PERIOD': PERIOD,
-                        'LINE': LINE,
-                        'TYPE': TYPE,
-                        'MODEL': $('#MODEL').val(),
-                        'COUNTRY': COUNTRY,
-                        'FACTORY': FACTORY,
-                        'BIZ': BIZ,
-                        'STARTUP_EMP_ID': STARTUP_EMP_ID,
-                        'SHIFT_DATE': SHIFT_DATE,
-                        'SHIFT': SHIFT,
-                        'WEEK': WEEK,
-                    },
-                    success: function (result) {
-                        console.log(result)
-                        if (result.response == true) {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Sucess...',
-                                text: 'Go to startup check.',
-                            }).then(function () {
-                                START_DATE = result.data.START_DATE
-                                END_DATE = result.data.END_DATE
-                                SHIFT = result.data.SHIFT
-                                window.location.href = 'startup.html?' +
-                                    'COUNTRY=' + COUNTRY +
-                                    '&FACTORY=' + FACTORY +
-                                    '&BIZ=' + BIZ +
-                                    '&PERIOD=' + PERIOD +
-                                    '&START_DATE=' + START_DATE +
-                                    '&END_DATE=' + END_DATE +
-                                    '&SHIFT=' + SHIFT +
-                                    '&LINE=' + LINE +
-                                    '&TYPE=' + TYPE +
-                                    '&MODEL=' + $('#MODEL').val()
-                            })
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Oops...',
-                                text: 'System error.',
-                            })
+    console.log(STARTUP_EMP_ID)
+    if (STARTUP_EMP_ID != '' && STARTUP_EMP_ID != undefined) {
+        if (LINE != '' && LINE != undefined) {
+            if (TYPE != '' && TYPE != undefined) {
+                if ($('#MODEL').val() != '' && $('#MODEL').val() != undefined) {
+                    $.ajax({
+                        url: "php/ajax_startup_start.php",
+                        type: "POST",
+                        dataType: "json",
+                        data: {
+                            'PERIOD': PERIOD,
+                            'LINE': LINE,
+                            'TYPE': TYPE,
+                            'MODEL': $('#MODEL').val(),
+                            'COUNTRY': COUNTRY,
+                            'FACTORY': FACTORY,
+                            'BIZ': BIZ,
+                            'STARTUP_EMP_ID': STARTUP_EMP_ID,
+                            'SHIFT_DATE': SHIFT_DATE,
+                            'SHIFT': SHIFT,
+                            'WEEK': WEEK,
+                        },
+                        success: function (result) {
+                            console.log(result)
+                            if (result.response == true) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Sucess...',
+                                    text: 'Go to startup check.',
+                                }).then(function () {
+                                    START_DATE = result.data.START_DATE
+                                    END_DATE = result.data.END_DATE
+                                    SHIFT = result.data.SHIFT
+                                    window.location.href = 'startup.html?' +
+                                        'COUNTRY=' + COUNTRY +
+                                        '&FACTORY=' + FACTORY +
+                                        '&BIZ=' + BIZ +
+                                        '&PERIOD=' + PERIOD +
+                                        '&START_DATE=' + START_DATE +
+                                        '&END_DATE=' + END_DATE +
+                                        '&SHIFT=' + SHIFT +
+                                        '&LINE=' + LINE +
+                                        '&TYPE=' + TYPE +
+                                        '&MODEL=' + $('#MODEL').val()
+                                })
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: 'System error.',
+                                })
+                            }
                         }
-                    }
-                })
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Oops...',
+                        text: 'Please select model name.',
+                    })
+                }
             } else {
                 Swal.fire({
                     icon: 'info',
                     title: 'Oops...',
-                    text: 'Please select model name.',
+                    text: 'Please select type.',
                 })
             }
         } else {
             Swal.fire({
                 icon: 'info',
                 title: 'Oops...',
-                text: 'Please select type.',
+                text: 'Please select line name.',
             })
         }
     } else {
         Swal.fire({
             icon: 'info',
             title: 'Oops...',
-            text: 'Please select line name.',
+            text: 'Please login.',
+        }).then(function () {
+            window.location.href = "login.html"
         })
     }
 }

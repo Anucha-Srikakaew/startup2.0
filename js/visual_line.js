@@ -214,6 +214,7 @@ function loadDatatableDefault() {
 }
 
 function loadDatatable(type, model) {
+    console.log(type)
     dataFunc = 'loadDatatable'
     $("#TECHNICIAN, #MFE, #PRODUCTION").slideUp("slow");
     $("#TECHNICIAN, #MFE, #PRODUCTION").empty()
@@ -230,6 +231,7 @@ function loadDatatable(type, model) {
             MODEL: model
         },
         success: function (obj) {
+            console.log(obj)
             showDataMemberTxT(obj)
 
             var STATUS_CONFIRM_BTN = true
